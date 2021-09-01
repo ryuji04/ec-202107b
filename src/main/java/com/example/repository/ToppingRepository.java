@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.example.domain.Topping;
 
@@ -14,6 +15,7 @@ import com.example.domain.Topping;
  * 
  * @author nayuta
  */
+@Repository
 public class ToppingRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate template;
