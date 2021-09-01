@@ -19,7 +19,7 @@ public class ShowItemController {
 
 	@RequestMapping("all")
 	public String showList(Model model) {
-		List<Item> itemList = showItemService.showList();
+		List<List<Item>> itemList = showItemService.showList();
 		model.addAttribute("itemList", itemList);
 
 		return "item_list_coffee";
@@ -27,7 +27,7 @@ public class ShowItemController {
 
 	@RequestMapping("like-name")
 	public String searchByLikeName(String name, Model model) {
-		List<Item> itemList = showItemService.searchByLikeName(name);
+		List<List<Item>> itemList = showItemService.searchByLikeName(name);
 		if(itemList.size() == 0) {
 			model.addAttribute("blankMessage", "該当する商品がありません");
 			itemList = showItemService.showList();
