@@ -59,8 +59,6 @@ public class LoginUserController {
 		
 		session.setAttribute("user", user);
 		
-		System.out.println("form.getEmail()+form.getPassword():"+form.getPassword()+form.getPassword());
-		System.out.println("user"+user);
 		if (user == null) {
 			model.addAttribute("error", "メールアドレスまたはパスワードが間違っています");
 			return toLogin();
