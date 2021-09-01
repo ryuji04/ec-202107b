@@ -36,6 +36,13 @@ public class ShowItemController {
 		return "item_list_coffee";
 	}
 	
+	/**
+	 * 並び替えを行うメソッドを.
+	 * 
+	 * @param model 並び替えしたアイテムをリクエストスコープに入れる
+	 * @param arrangeItem　降順(Mサイズ価格)または昇順(Mサイズ価格)を決める引数
+	 * @return　並び替え後のアイテムリスト
+	 */
 	@RequestMapping("sort-item")
 	public String arrangeInDesc(Model model,String arrangeItem) {
 		

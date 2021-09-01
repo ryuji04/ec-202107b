@@ -51,6 +51,11 @@ public class ShowItemService {
 		return totalItemList;
 	}
 
+	/**
+	 * アイテム商品を降順に並び替える.
+	 * 
+	 * @return 並び替え後のアイテム商品リスト
+	 */
 	public List<List<Item>> arrangeInDesc() {
 		List<List<Item>> totalItemList = new ArrayList<>();
 		List<Item> divideItemList = new ArrayList<>();
@@ -68,6 +73,11 @@ public class ShowItemService {
 		return totalItemList;
 	}
 	
+	/**
+	 * イテム商品を昇順に並び替える.
+	 * 
+	 * @return　並び替え後のアイテム商品リスト
+	 */
 	public List<List<Item>> arrangeInAsc() {
 		List<List<Item>> totalItemList = new ArrayList<>();
 		List<Item> divideItemList = new ArrayList<>();
