@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.repository.ItemRepository;
 import com.example.repository.ToppingRepository;
 
 /**
@@ -11,6 +12,6 @@ public class ShowItemDetailService {
 	// ToppingRepositoryをインスタンス化
 	private ToppingRepository toppingRepository;
 	// ItemRepositoryをインスタンス化
-	// private ItemRepository itemRepository;
+	private ItemRepository itemRepository;
 
 }
