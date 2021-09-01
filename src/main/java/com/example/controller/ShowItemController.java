@@ -44,7 +44,7 @@ public class ShowItemController {
 	 * @return　並び替え後のアイテムリスト
 	 */
 	@RequestMapping("sort-item")
-	public String arrangeInDesc(Model model,String arrangeItem) {
+	public String arrangeItem(Model model,String arrangeItem) {
 		
 		List<List<Item>>itemList;
 		
