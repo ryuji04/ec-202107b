@@ -10,10 +10,10 @@ public class OrderTopping {
 
 	/** ID */
 	private Integer id;
-	/** トッピングのID */
+	/** トッピングID */
 	private Integer toppingId;
-	/** 注文商品のID */
-	private Integer OrderItemId;
+	/** 注文商品ID */
+	private Integer orderItemId;
 	/** トッピング */
 	private Topping topping;
 
@@ -34,11 +34,11 @@ public class OrderTopping {
 	}
 
 	public Integer getOrderItemId() {
-		return OrderItemId;
+		return orderItemId;
 	}
 
 	public void setOrderItemId(Integer orderItemId) {
-		OrderItemId = orderItemId;
+		this.orderItemId = orderItemId;
 	}
 
 	public Topping getTopping() {
@@ -51,7 +51,7 @@ public class OrderTopping {
 
 	@Override
 	public String toString() {
-		return "OrderTopping [id=" + id + ", toppingId=" + toppingId + ", OrderItemId=" + OrderItemId + ", topping="
+		return "OrderTopping [id=" + id + ", toppingId=" + toppingId + ", orderItemId=" + orderItemId + ", topping="
 				+ topping + "]";
 	}
 
