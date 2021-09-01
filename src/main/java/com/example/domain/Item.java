@@ -2,15 +2,29 @@ package com.example.domain;
 
 import java.util.List;
 
+/**
+ * Item情報を表すドメイン.
+ *
+ * @author hayato.saishu
+ *
+ */
 public class Item {
 
+	/** ID */
 	private Integer id;
+	/**　名前 */
 	private String name;
+	/**　商品説明 */
 	private String description;
+	/**　Mサイズの価格 */
 	private Integer priceM;
+	/**　Lサイズの価格 */
 	private Integer priceL;
+	/**　画像のパス */
 	private String imagePath;
+	/**　削除フラグ */
 	private Boolean deleted;
+	/**　トッピングのリスト */
 	private List<Topping> toppingList;
 
 	public Item() {
