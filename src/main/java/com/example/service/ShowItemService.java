@@ -16,17 +16,51 @@ public class ShowItemService {
 
 	@Autowired
 	private ItemRepository itemRepository;
-	
-	public List<List<Item>> showList(){
+
+	public List<List<Item>> showList() {
 		List<List<Item>> totalItemList = new ArrayList<>();
 		List<Item> divideItemList = new ArrayList<>();
 		List<Item> itemList = itemRepository.findAll();
 		int roopCount = 0;
-		
-		for(Item item : itemList) {
+
+		for (Item item : itemList) {
 			divideItemList.add(item);
 			roopCount++;
-			if(roopCount % 3 == 0) {
+			if (roopCount % 3 == 0) {
+				totalItemList.add(divideItemList);
+				divideItemList = new ArrayList<>();
+			}
+		}
+		return totalItemList;
+	}
+
+	public List<List<Item>> searchByLikeName(String name) {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
+		List<Item> itemList = itemRepository.findByLikeName(name);
+		int roopCount = 0;
+
+		for (Item item : itemList) {
+			divideItemList.add(item);
+			roopCount++;
+			if (roopCount % 3 == 0) {
+				totalItemList.add(divideItemList);
+				divideItemList = new ArrayList<>();
+			}
+		}
+		return totalItemList;
+	}
+
+	public List<List<Item>> arrangeInDesc() {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
+		List<Item> itemList = itemRepository.arrangeInDesc();
+		int roopCount = 0;
+
+		for (Item item : itemList) {
+			divideItemList.add(item);
+			roopCount++;
+			if (roopCount % 3 == 0) {
 				totalItemList.add(divideItemList);
 				divideItemList = new ArrayList<>();
 			}
@@ -34,16 +68,16 @@ public class ShowItemService {
 		return totalItemList;
 	}
 	
-	public List<List<Item>> searchByLikeName(String name){
+	public List<List<Item>> arrangeInAsc() {
 		List<List<Item>> totalItemList = new ArrayList<>();
 		List<Item> divideItemList = new ArrayList<>();
-		List<Item> itemList = itemRepository.findByLikeName(name);
+		List<Item> itemList = itemRepository.arrangeInAsc();
 		int roopCount = 0;
-		
-		for(Item item : itemList) {
+
+		for (Item item : itemList) {
 			divideItemList.add(item);
 			roopCount++;
-			if(roopCount % 3 == 0) {
+			if (roopCount % 3 == 0) {
 				totalItemList.add(divideItemList);
 				divideItemList = new ArrayList<>();
 			}

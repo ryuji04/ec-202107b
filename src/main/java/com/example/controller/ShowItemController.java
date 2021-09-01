@@ -35,4 +35,24 @@ public class ShowItemController {
 		model.addAttribute("itemList", itemList);
 		return "item_list_coffee";
 	}
+	
+	@RequestMapping("sort-item")
+	public String arrangeInDesc(Model model,String arrangeItem) {
+		
+		List<List<Item>>itemList;
+		
+		
+		if("1".equals(arrangeItem)) {
+			itemList=showItemService.arrangeInDesc();
+			model.addAttribute("itemList",itemList);
+		}else if("2".equals(arrangeItem)) {
+			itemList=showItemService.arrangeInAsc();
+			model.addAttribute("itemList",itemList);
+		}
+		
+		
+		
+		return "item_list_coffee";
+	}
+	
 }
