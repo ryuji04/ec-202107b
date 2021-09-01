@@ -55,12 +55,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getZipCode() {
+	public String getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipCode(String zipCode) {
-		this.zipcode = zipCode;
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 
 	public String getAddress() {
