@@ -30,6 +30,11 @@ public class ItemRepository {
 		return item;
 	};
 
+	/**
+	 * アイテム情報を全件表示します.
+	 * 
+	 * @return アイテム情報のリスト
+	 */
 	public List<Item> findAll() {
 		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY id;";
 
@@ -38,6 +43,12 @@ public class ItemRepository {
 		return itemList;
 	}
 
+	/**
+	 * 名前検索でアイテム情報を表示する.
+	 * 
+	 * @param name 名前
+	 * @return アイテム情報のリスト
+	 */
 	public List<Item> findByLikeName(String name) {
 		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name　LIKE :name ORDER BY id;";
 
