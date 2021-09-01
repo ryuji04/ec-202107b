@@ -22,9 +22,13 @@ public class ShowItemDetailController {
 
 	@RequestMapping("")
 	public String showItemDetail(Integer id, Model model) {
-		
+		Item testItem = showItemDetailService.showItemDetailService(1);
+
+		System.out.println(testItem);
+		System.out.println(testItem.getToppingList());
+
 		System.out.println(id);
-		
+
 		Item item = showItemDetailService.showItemDetailService(id);
 
 		model.addAttribute("item", item);
