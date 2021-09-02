@@ -40,8 +40,8 @@
 						<a href="cart_list.html" class="navbar-link">ショッピングカート</a>&nbsp;&nbsp;
 						<a href="order_history.html" class="navbar-link">注文履歴</a>&nbsp;&nbsp;
 						<!-- ログイン後、「ログイン」ボタンを非表示にする -->
-						<span sec:authorize="!isAuthenticated()"><a href="login.html" class="navbar-link"
-							th:if="${session.user==null}">ログイン</a>&nbsp;&nbsp;</span>
+						<span sec:authorize="!isAuthenticated"><a href="login.html" class="navbar-link"
+							th:if="${session.user==null}">ログイン</a></span>&nbsp;&nbsp;
 						<!-- ログインアウト後、「ログアウト」ボタンを非表示にする -->
 						<a href="item_list_pizza.html" th:href="@{/login-user/logout}"
 							th:if="${session.user!=null}" class="navbar-link">ログアウト</a>

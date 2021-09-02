@@ -11,7 +11,7 @@ import com.example.domain.Item;
 import com.example.service.ShowItemService;
 
 @Controller
-@RequestMapping("show-item")
+@RequestMapping("/show-item")
 public class ShowItemController {
 
 	@Autowired
@@ -23,7 +23,7 @@ public class ShowItemController {
 	 * @param model モデル
 	 * @return 商品情報のリスト
 	 */
-	@RequestMapping("all")
+	@RequestMapping("/all")
 	public String showList(Model model) {
 		List<List<Item>> itemList = showItemService.showList();
 		model.addAttribute("itemList", itemList);
@@ -38,7 +38,7 @@ public class ShowItemController {
 	 * @param model　モデル
 	 * @return　商品情報のリスト
 	 */
-	@RequestMapping("like-name")
+	@RequestMapping("/like-name")
 	public String searchByLikeName(String name, Model model) {
 		List<List<Item>> itemList = showItemService.searchByLikeName(name);
 		if(itemList.size() == 0) {
@@ -56,7 +56,7 @@ public class ShowItemController {
 	 * @param arrangeItem　降順(Mサイズ価格)または昇順(Mサイズ価格)を決める引数
 	 * @return　並び替え後のアイテムリスト
 	 */
-	@RequestMapping("sort-item")
+	@RequestMapping("/sort-item")
 	public String arrangeItem(Model model,String arrangeItem) {
 		
 		List<List<Item>>itemList;

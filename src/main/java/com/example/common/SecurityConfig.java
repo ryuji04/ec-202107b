@@ -28,31 +28,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/fonts/**");
+		web.ignoring().antMatchers("/css/**", "/img_coffee/**", "/js/**", "/fonts/**");
 
 	}
 	
 	@Override
-	protected void configure(HttpSecurity http) throws Exception{
+	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/login-user", "/register-user/to-insert", "/show-item/all", "/show-item-detail/detail",
+			.antMatchers("/login-user/to-login", "/register-user/to-insert", "/show-item/all", "/show-item-detail/detail",
 						"/register-user/insert").permitAll()
 //			.antMatchers("/user/**").hasRole("USER")
 			.anyRequest().authenticated();
 		
 		http.formLogin()
-			.loginPage("/login-user")
-			.loginProcessingUrl("/login-user/login")
-//			.failureUrl("/login-user=true")
-			.defaultSuccessUrl("/show-item/all", false)
+			.loginPage("/login-user/to-login")
+			.loginProcessingUrl("/login")
+			.failureUrl("/login-user/to-login?error=true")
+			.defaultSuccessUrl("/show-item/all", true)
 			.usernameParameter("email")
 			.passwordParameter("password");
 		
 		http.logout()
-			.logoutRequestMatcher(new AntPathRequestMatcher("/login-user/logout"))
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))
 			.logoutSuccessUrl("/login-user")
 			.deleteCookies("JSESSIONID")
-			.invalidateHttpSession(true);
+			.invalidateHttpSession(false);
 	}
 
 	/**
