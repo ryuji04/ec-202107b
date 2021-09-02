@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ピザ屋のネット注文</title>
+<title>コーヒー屋のネット注文</title>
 <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
 <link href="../static/css/piza.css" th:href="@{/css/piza.css}" rel="stylesheet">
 <!--[if lt IE 9]>
@@ -25,8 +25,11 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="item_list_pizza.html"> <!-- 企業ロゴ --> <img
-						alt="main log" src="../static/img_coffee/header_logo.png" height="35">
+					
+					<a class="navbar-brand" href="item_list_pizza.html">
+					<!-- 企業ロゴ -->
+					<img alt="main log" src="../static/img_coffee/header_logo.png" th:src="@{/img_coffee/header_logo.png}" height="35">
+
 					</a>
 				</div>
 
@@ -37,9 +40,11 @@
 						<a href="cart_list.html" class="navbar-link">ショッピングカート</a>&nbsp;&nbsp;
 						<a href="order_history.html" class="navbar-link">注文履歴</a>&nbsp;&nbsp;
 						<!-- ログイン後、「ログイン」ボタンを非表示にする -->
-						<a href="login.html" class="navbar-link" th:if="${session.user==null}" >ログイン</a>&nbsp;&nbsp;
+						<a href="login.html" class="navbar-link"
+							th:if="${session.user==null}">ログイン</a>&nbsp;&nbsp;
 						<!-- ログインアウト後、「ログアウト」ボタンを非表示にする -->
-						<a href="item_list_pizza.html" th:href="@{/login-user/logout}" th:if="${session.user!=null}" class="navbar-link">ログアウト</a>
+						<a href="item_list_pizza.html" th:href="@{/login-user/logout}"
+							th:if="${session.user!=null}" class="navbar-link">ログアウト</a>
 					</p>
 				</div>
 				<!-- /.navbar-collapse -->
@@ -56,33 +61,39 @@
 						<div class="panel-title">商品を検索する</div>
 					</div>
 					<div class="alert alert-danger" th:if="${blankMessage}">
-			   			<p th:text="${blankMessage}"></p>
-			    	</div>
+						<p th:text="${blankMessage}"></p>
+					</div>
 					<div class="panel-body">
-						<form method="post" action="#" th:action="@{/show-item/like-name}" class="form-horizontal">
+						<form method="post" action="#" th:action="@{/show-item/like-name}"
+							class="form-horizontal">
 							<div class="form-group">
 								<label for="code" class="control-label col-sm-2">商品名</label>
 								<div class="col-sm-9">
 									<input type="text" name="name" id="code"
-										class="form-control input-sm" />
+										class="form-control input-sm" autocomplete="name"
+										list="itemList" />
 								</div>
+								<datalist id="itemList" th:each="divideItemList:${itemList}">
+									<option th:each="item:${divideItemList}"
+										th:value="${item.name}"></option>
+								</datalist>
 							</div>
 							<div class="text-center">
 								<button type="submit" value="検索" class="btn btn-primary">検索</button>
 								<button type="reset" value="クリア" class="btn btn-default">クリア</button>
 							</div>
 						</form>
-							
-							<!-- 商品を並び変えるコードを記述 -->
-							<form method="post" action="item_list_coffee" th:action="@{/show-item/sort-item}" class="form-horizontal">
+
+						<!-- 商品を並び変えるコードを記述 -->
+						<form method="post" action="item_list_coffee"
+							th:action="@{/show-item/sort-item}" class="form-horizontal">
 							<button class="sortButton">並替え</button>
-							<br>
-							<select name="arrangeItem">
-							<option value="1">降順:Mサイズ価格</option>
-							<option value="2">昇順:Mサイズ価格</option>
+							<br> <select name="arrangeItem">
+								<option value="1">降順:Mサイズ価格</option>
+								<option value="2">昇順:Mサイズ価格</option>
 							</select>
-							</form> 
-							
+						</form>
+
 					</div>
 				</div>
 			</div>
@@ -96,14 +107,20 @@
 					<tbody>
 
 						<tr th:each="divideItemList:${itemList}">
-							<th th:each="item:${divideItemList}">
-								<a href="item_detail.html" th:href="@{/show-item-detail/detail?id=} + ${item.id}">
-									<img src="../static/img_coffee/1.jpg" th:src="@{/img_coffee/} + ${item.imagePath}" 
-										class="img-responsive img-rounded item-img-center" width="200" height="600">
-								</a><br>
-								<a href="item_detail.html" th:href="@{/show-item-detail/detail?id=} + ${item.id}" th:text="${item.name}" >じゃがバターベーコン</a><br>
-								<span class="price">&nbsp;М&nbsp;</span>&nbsp;<span th:text="${item.priceM}">&nbsp;&nbsp;1,380円(税抜)</span>&nbsp;円(税抜)<br>
-								<span class="price">&nbsp;Ｌ</span>&nbsp;<span th:text="${item.priceL}">&nbsp;&nbsp;2,380円(税抜)</span>&nbsp;円(税抜)<br>
+							<th th:each="item:${divideItemList}"><a
+								href="item_detail.html"
+								th:href="@{/show-item-detail/detail?id=} + ${item.id}"> <img
+									src="../static/img_coffee/1.jpg"
+									th:src="@{/img_coffee/} + ${item.imagePath}"
+									class="img-responsive img-rounded item-img-center" width="200"
+									height="600">
+							</a><br> <a href="item_detail.html"
+								th:href="@{/show-item-detail/detail?id=} + ${item.id}"
+								th:text="${item.name}">じゃがバターベーコン</a><br> <span
+								class="price">&nbsp;М&nbsp;</span>&nbsp;<span
+								th:text="${item.priceM}">&nbsp;&nbsp;1,380円(税抜)</span>&nbsp;円(税抜)<br>
+								<span class="price">&nbsp;Ｌ</span>&nbsp;<span
+								th:text="${item.priceL}">&nbsp;&nbsp;2,380円(税抜)</span>&nbsp;円(税抜)<br>
 							</th>
 							<!-- <th>
 								<a href="item_detail.html">
@@ -143,7 +160,7 @@
 								<span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円(税抜)<br>
 							</th>
 						</tr>-->
-						<!--<tr>
+							<!--<tr>
 
 							<th>
 								<a href="item_detail.html">
@@ -210,7 +227,8 @@
 		</div>
 	</div>
 	<!-- end container -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
 </body>
 </html>

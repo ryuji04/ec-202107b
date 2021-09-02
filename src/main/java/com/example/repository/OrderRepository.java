@@ -138,4 +138,65 @@ public class OrderRepository {
 		}
 		return orderList.get(0);
 	}
+
+	/**
+	 * 注文前のOrderを取得するメソッド.
+	 * 
+	 * @param id ID
+	 * @return 注文前のOrder
+	 */
+	public Order findById(Integer id) {
+		// SQL文作成
+		String findByIdSql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, delivery_time, payment_method"
+				+ " FROM orders WHERE id = :id; ORDER BY id DESC";
+
+		// プレースホルダー埋め込み
+		SqlParameterSource params = new MapSqlParameterSource().addValue("id", id);
+
+		// 実行
+		List<Order> orderList = template.query(findByIdSql, params, ORDER_ROW_MAPPER);
+
+		return orderList.get(0);
+	}
+
+	/**
+	 * 注文画面の入力情報を格納.
+	 * 
+	 * @param order 注文画面の入力情報
+	 */
+	public void upDate(Order order) {
+		// SQL文作成
+		String upDateSql = "UPDATE orders SET "
+				+ "destination_name=:destination_name, destination_email=:destination_email, destination_zipcode=:destination_zipcode, destination_address=:destination_address, "
+				+ "destination_tel=:destination_tel, delivery_time=:delivery_time, payment_method=:payment_method;";
+
+		// プレースホルダー埋め込み
+		SqlParameterSource params = new BeanPropertySqlParameterSource(order);
+
+		// 実行
+		template.update(upDateSql, params);
+	}
+
+	/** 以下、削除の可能性あり */
+	/**
+	 * Order_statusを1(未入金)にする.
+	 */
+	public void upDateStatus1() {
+		// SQL文作成
+		String upDateStatus1Sql = "UPDATE orders SET status = 1;";
+
+		// 実行
+		template.query(upDateStatus1Sql, ORDER_ROW_MAPPER);
+	}
+
+	/**
+	 * Order_statusを2(入金済)にする.
+	 */
+	public void upDateStatus2() {
+		// SQL文作成
+		String upDateStatus1Sql = "UPDATE orders SET status = 2;";
+
+		// 実行
+		template.query(upDateStatus1Sql, ORDER_ROW_MAPPER);
+	}
 }
