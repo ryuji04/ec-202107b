@@ -60,7 +60,7 @@ public class ItemRepository {
 	}
 
 	/**
-	 * <<<<<<< HEAD 詳細商品情報を取得するメソッド.
+	 * 詳細商品情報を取得するメソッド.
 	 * 
 	 * @param id 商品ID
 	 * @return １つの商品詳細情報
