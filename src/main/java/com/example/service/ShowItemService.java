@@ -16,34 +16,43 @@ public class ShowItemService {
 
 	@Autowired
 	private ItemRepository itemRepository;
-	
-	public List<List<Item>> showList(){
+
+	public List<List<Item>> showList() {
 		List<List<Item>> totalItemList = new ArrayList<>();
 		List<Item> divideItemList = new ArrayList<>();
 		List<Item> itemList = itemRepository.findAll();
 		int roopCount = 0;
-		
-		for(Item item : itemList) {
+
+		for (Item item : itemList) {
 			divideItemList.add(item);
 			roopCount++;
-			if(roopCount % 3 == 0) {
+			if (roopCount % 3 == 0) {
 				totalItemList.add(divideItemList);
 				divideItemList = new ArrayList<>();
 			}
 		}
 		return totalItemList;
 	}
-	
-	public List<List<Item>> searchByLikeName(String name){
+
+	public List<List<Item>> searchByLikeName(String name) {
 		List<List<Item>> totalItemList = new ArrayList<>();
 		List<Item> divideItemList = new ArrayList<>();
 		List<Item> itemList = itemRepository.findByLikeName(name);
 		int roopCount = 0;
-		
-		for(Item item : itemList) {
+
+		for (Item item : itemList) {
 			divideItemList.add(item);
 			roopCount++;
-			if(roopCount % 3 == 0) {
+
+			if (itemList.size() == 1) {
+				totalItemList.add(divideItemList);
+			} else if (itemList.size() == 2) {
+				if (roopCount == 2) {
+					totalItemList.add(divideItemList);
+				}
+			}
+
+			if (roopCount % 3 == 0) {
 				totalItemList.add(divideItemList);
 				divideItemList = new ArrayList<>();
 			}
