@@ -73,4 +73,6 @@ public class RegisterUserController {
 		registerUserService.insert(user);
 		return "redirect:/login-user";
 	}
+	
+	
 }
