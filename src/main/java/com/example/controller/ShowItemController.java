@@ -17,6 +17,12 @@ public class ShowItemController {
 	@Autowired
 	private ShowItemService showItemService;
 
+	/**
+	 * 商品を全件表示する.
+	 * 
+	 * @param model モデル
+	 * @return 商品情報のリスト
+	 */
 	@RequestMapping("all")
 	public String showList(Model model) {
 		List<List<Item>> itemList = showItemService.showList();
@@ -25,6 +31,13 @@ public class ShowItemController {
 		return "item_list_coffee";
 	}
 
+	/**
+	 * 名前検索により商品情報を表示する.
+	 * 
+	 * @param name 商品名
+	 * @param model　モデル
+	 * @return　商品情報のリスト
+	 */
 	@RequestMapping("like-name")
 	public String searchByLikeName(String name, Model model) {
 		List<List<Item>> itemList = showItemService.searchByLikeName(name);
