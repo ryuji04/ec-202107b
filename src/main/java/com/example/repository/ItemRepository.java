@@ -50,7 +50,7 @@ public class ItemRepository {
 	 * @return アイテム情報のリスト
 	 */
 	public List<Item> findByLikeName(String name) {
-		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name　LIKE :name ORDER BY id;";
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name LIKE :name ORDER BY id;";
 
 		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
 
@@ -60,7 +60,7 @@ public class ItemRepository {
 	}
 
 	/**
-	 * 詳細商品情報を取得するメソッド.
+	 * <<<<<<< HEAD 詳細商品情報を取得するメソッド.
 	 * 
 	 * @param id 商品ID
 	 * @return １つの商品詳細情報
@@ -79,4 +79,32 @@ public class ItemRepository {
 
 		return item;
 	}
+
+	/**
+	 * アイテム情報を降順(価格)に並べ替える.
+	 * 
+	 * @return 降順(価格)に並んだアイテム情報リスト
+	 */
+
+	public List<Item> arrangeInDesc() {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY price_m desc;";
+
+		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
+
+		return itemList;
+	}
+
+	/**
+	 * アイテム情報を昇順(価格)に並べ替える.
+	 * 
+	 * @return 昇順(価格)に並んだアイテム情報リスト
+	 */
+	public List<Item> arrangeInAsc() {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY price_m;";
+
+		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
+
+		return itemList;
+	}
+
 }

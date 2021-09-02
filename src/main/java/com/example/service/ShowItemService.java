@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,82 @@ public class ShowItemService {
 
 	@Autowired
 	private ItemRepository itemRepository;
-	
-	public List<Item> showList(){
+
+	public List<List<Item>> showList() {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
 		List<Item> itemList = itemRepository.findAll();
-		return itemList;
+		int roopCount = 0;
+
+		for (Item item : itemList) {
+			divideItemList.add(item);
+			roopCount++;
+			if (roopCount % 3 == 0) {
+				totalItemList.add(divideItemList);
+				divideItemList = new ArrayList<>();
+			}
+		}
+		return totalItemList;
+	}
+
+	public List<List<Item>> searchByLikeName(String name) {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
+		List<Item> itemList = itemRepository.findByLikeName(name);
+		int roopCount = 0;
+
+		for (Item item : itemList) {
+			divideItemList.add(item);
+			roopCount++;
+			if (roopCount % 3 == 0) {
+				totalItemList.add(divideItemList);
+				divideItemList = new ArrayList<>();
+			}
+		}
+		return totalItemList;
+	}
+
+	/**
+	 * アイテム商品を降順に並び替える.
+	 * 
+	 * @return 並び替え後のアイテム商品リスト
+	 */
+	public List<List<Item>> arrangeInDesc() {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
+		List<Item> itemList = itemRepository.arrangeInDesc();
+		int roopCount = 0;
+
+		for (Item item : itemList) {
+			divideItemList.add(item);
+			roopCount++;
+			if (roopCount % 3 == 0) {
+				totalItemList.add(divideItemList);
+				divideItemList = new ArrayList<>();
+			}
+		}
+		return totalItemList;
 	}
 	
-	public List<Item> searchByLikeName(String name){
-		List<Item> itemList = itemRepository.findByLikeName(name);
-		
-		return itemList;
+	/**
+	 * イテム商品を昇順に並び替える.
+	 * 
+	 * @return　並び替え後のアイテム商品リスト
+	 */
+	public List<List<Item>> arrangeInAsc() {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
+		List<Item> itemList = itemRepository.arrangeInAsc();
+		int roopCount = 0;
+
+		for (Item item : itemList) {
+			divideItemList.add(item);
+			roopCount++;
+			if (roopCount % 3 == 0) {
+				totalItemList.add(divideItemList);
+				divideItemList = new ArrayList<>();
+			}
+		}
+		return totalItemList;
 	}
 }

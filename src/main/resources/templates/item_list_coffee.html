@@ -55,6 +55,9 @@
 					<div class="panel-heading">
 						<div class="panel-title">商品を検索する</div>
 					</div>
+					<div class="alert alert-danger" th:if="${blankMessage}">
+			   			<p th:text="${blankMessage}"></p>
+			    	</div>
 					<div class="panel-body">
 						<form method="post" action="#" th:action="@{/show-item/like-name}" class="form-horizontal">
 							<div class="form-group">
@@ -69,6 +72,17 @@
 								<button type="reset" value="クリア" class="btn btn-default">クリア</button>
 							</div>
 						</form>
+							
+							<!-- 商品を並び変えるコードを記述 -->
+							<form method="post" action="item_list_coffee" th:action="@{/show-item/sort-item}" class="form-horizontal">
+							<button class="sortButton">並替え</button>
+							<br>
+							<select name="arrangeItem">
+							<option value="1">降順:Mサイズ価格</option>
+							<option value="2">昇順:Mサイズ価格</option>
+							</select>
+							</form> 
+							
 					</div>
 				</div>
 			</div>
@@ -80,8 +94,9 @@
 				class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
 				<table class="table table-striped item-list-table">
 					<tbody>
-						<tr th:each="item:${itemList}">
-							<th>
+
+						<tr th:each="divideItemList:${itemList}">
+							<th th:each="item:${divideItemList}">
 								<a href="item_detail.html" th:href="@{/show-item-detail/detail?id=} + ${item.id}">
 									<img src="../static/img_coffee/1.jpg" th:src="@{/img_coffee/} + ${item.imagePath}" 
 										class="img-responsive img-rounded item-img-center" width="200" height="600">

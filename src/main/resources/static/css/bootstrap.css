@@ -10,6 +10,38 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+/* ここからsortBottonについての記述します */
+button.sortButton{
+  display: block;
+  height: 30px;
+  width: 80px;
+  text-decoration: none;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 20px;
+  color: #fff;
+  -webkit-box-shadow: 1px 1px 1px #e9e9e9;
+  -moz-box-shadow: 1px 1px 1px #e9e9e9;
+  box-shadow: 1px 1px 1px #e9e9e9;
+  background: #fa7e01;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fa7e01), to(#fb9d3e));
+  background: -moz-linear-gradient(top, #fa7e01, #fb9d3e);
+  background: -o-linear-gradient(top, #fa7e01, #fb9d3e);
+  background: -ms-linear-gradient(top, #fa7e01, #fb9d3e);
+  background: linear-gradient(top, #fa7e01, #fb9d3e);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fa7e01', endColorstr='#fb9d3e');
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fa7e01', endColorstr='#fb9d3e')";
+ 
+}
+button.sortButton{  /* クリックした時 */
+  -ms-transform: translateY(2px);
+  -webkit-transform: translateY(2px);
+  transform: translateY(2px);
+  box-shadow: none;
+}
+/* sortBottonについての記述はここまでです */
+
 body {
   margin: 0;
 }
@@ -6323,3 +6355,10 @@ button.close {
     display: none !important;
   }
 }
+
+
+
+
+
+
+
