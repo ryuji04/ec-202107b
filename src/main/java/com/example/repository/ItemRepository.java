@@ -60,10 +60,32 @@ public class ItemRepository {
 	}
 
 	/**
+	 * 詳細商品情報を取得するメソッド.
+	 * 
+	 * @param id 商品ID
+	 * @return １つの商品詳細情報
+	 */
+	public Item findById(Integer id) {
+		Item item = new Item();
+
+		// SQL文の作成
+		String findByIdsql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE id = :id;";
+
+		// プレースホルダに実数を格納
+		SqlParameterSource params = new MapSqlParameterSource().addValue("id", id);
+
+		// 実行
+		item = template.queryForObject(findByIdsql, params, ITEM_ROW_MAPPER);
+
+		return item;
+	}
+
+	/**
 	 * アイテム情報を降順(価格)に並べ替える.
 	 * 
 	 * @return 降順(価格)に並んだアイテム情報リスト
 	 */
+
 	public List<Item> arrangeInDesc() {
 		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY price_m desc;";
 
@@ -71,7 +93,7 @@ public class ItemRepository {
 
 		return itemList;
 	}
-	
+
 	/**
 	 * アイテム情報を昇順(価格)に並べ替える.
 	 * 
