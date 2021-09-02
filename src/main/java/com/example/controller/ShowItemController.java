@@ -35,4 +35,31 @@ public class ShowItemController {
 		model.addAttribute("itemList", itemList);
 		return "item_list_coffee";
 	}
+	
+	/**
+	 * 並び替えを行うメソッドを.
+	 * 
+	 * @param model 並び替えしたアイテムをリクエストスコープに入れる
+	 * @param arrangeItem　降順(Mサイズ価格)または昇順(Mサイズ価格)を決める引数
+	 * @return　並び替え後のアイテムリスト
+	 */
+	@RequestMapping("sort-item")
+	public String arrangeItem(Model model,String arrangeItem) {
+		
+		List<List<Item>>itemList;
+		
+		
+		if("1".equals(arrangeItem)) {
+			itemList=showItemService.arrangeInDesc();
+			model.addAttribute("itemList",itemList);
+		}else if("2".equals(arrangeItem)) {
+			itemList=showItemService.arrangeInAsc();
+			model.addAttribute("itemList",itemList);
+		}
+		
+		
+		
+		return "item_list_coffee";
+	}
+	
 }
