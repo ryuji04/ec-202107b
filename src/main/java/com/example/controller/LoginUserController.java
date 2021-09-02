@@ -1,5 +1,11 @@
 package com.example.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.savedrequest.SavedRequest;
+
 //import javax.servlet.http.HttpSession;
 
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +37,8 @@ public class LoginUserController {
 //	@Autowired
 //	private LoginUserService loginUserService;
 //
-//	@Autowired
-//	private HttpSession session;
+	@Autowired
+	private HttpSession session;
 
 	/**
 	 * ログイン画面へ遷移.
@@ -40,7 +46,17 @@ public class LoginUserController {
 	 * @return　ログイン画面
 	 */
 	@RequestMapping("/to-login")
-	public String toLogin(Model model, @RequestParam(required = false) String error)  {
+	public String toLogin(Model model, @RequestParam(required = false) String error
+							/*, HttpServletRequest request, HttpSession session*/)  {
+//		
+//		session = request.getSession(false);
+//		if(session != null) {
+//			SavedRequest savedRequest = (SavedRequest) session.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+//			if(savedRequest != null) {
+//				return savedRequest.getRedirectUrl();
+//			}
+//		}
+		
 		System.err.println("login error:" + error);
 		if(error != null) {
 			System.err.println("login failed");
