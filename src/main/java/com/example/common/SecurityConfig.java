@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration // 設定用のクラス
 @EnableWebSecurity // Spring Securityのウェブ用の機能を利用する
@@ -29,6 +30,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/fonts/**");
 
+	}
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception{
+		http.authorizeRequests()
+			.antMatchers("/login-user", "/register-user/to-insert", "/show-item/all", "/show-item-detail/detail",
+						"/register-user/insert").permitAll()
+//			.antMatchers("/user/**").hasRole("USER")
+			.anyRequest().authenticated();
+		
+		http.formLogin()
+			.loginPage("/login-user")
+			.loginProcessingUrl("/login-user/login")
+//			.failureUrl("/login-user=true")
+			.defaultSuccessUrl("/show-item/all", false)
+			.usernameParameter("email")
+			.passwordParameter("password");
+		
+		http.logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/login-user/logout"))
+			.logoutSuccessUrl("/login-user")
+			.deleteCookies("JSESSIONID")
+			.invalidateHttpSession(true);
 	}
 
 	/**
@@ -57,15 +81,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-	}
-
-	/**
-	 * SpringSecurityのログイン画面を表示させないメソッド.
-	 *
-	 */
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().permitAll();
 	}
 
 }
