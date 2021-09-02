@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.Order;
@@ -64,4 +67,40 @@ public class OrderRepository {
 		}
 		return orderList;
 	};
+	
+	/**
+	 * 渡した注文情報を保存する.
+	 * 
+	 * @param order 注文情報
+	 * @return 保存した注文情報
+	 */
+	public Order insert(Order order) {
+		SqlParameterSource param = new BeanPropertySqlParameterSource(order);
+		String sql = "INSERT INTO orders(user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, "
+				+ "destination_address, destination_tel, delivery_time, payment_method) VALUES "
+				+ "(:userId, :status, :totalPrice, :orderDate, :destinationName, :destinationEmail, :destinationZipcode, :destinationAddress, :destinationTel, "
+				+ ":deliveryTime, :paymentMethod);";
+		template.update(sql, param);
+		return order;
+	}
+	
+	/**
+	 * ユーザーIDとステータスから注文情報を取得する.
+	 * 
+	 * @param userId ユーザーID
+	 * @param status 注文ステータス
+	 * @return 注文情報
+	 */
+	public Order findByUserIdAndStatus(Integer userId, Integer status) {
+		//formかなんかで送信された情報に入っているuserIdとstatusを元にOrderがあるかどうか探し出す
+		String sql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email,"
+				+ " destination_zipcode, destination_address, destination_tel, payment_method, user, order_item_list FROM "
+				+ "orders WHERE user_id = :userId AND status = :status ORDER BY id;";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId).addValue("status", status);
+		List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
+		if (orderList.size() == 0) {
+			return null;
+		}
+		return orderList.get(0);
+	}
 }
