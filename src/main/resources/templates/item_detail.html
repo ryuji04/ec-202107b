@@ -52,8 +52,7 @@
 		<div class="row">
 			<div class="col-xs-offset-2 col-xs-8" th:each="item:${itemDetail}">
 			<!-- 商品IDをhiddenでitemIdにセット -->
-			<input type="hidden" th:field="*{itemId}" th:value="${item.id}">
-			<input type="hidden" th:field="*{item}" th:value="${item}">
+			<input type="hidden" name="itemId" th:field="*{itemId}" th:value="${item.id}">
 
 				<h3 class="text-center">商品詳細</h3>
 				<div class="row">

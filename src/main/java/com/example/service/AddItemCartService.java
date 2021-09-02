@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,9 +39,8 @@ public class AddItemCartService {
 	 * @param form 注文商品追加時に使用するフォーム
 	 */
 	public void add(AddItemCartForm form, Integer userId, Integer status) {
-		//OrderがあってもなくてもOrderItem,OrderToppingはインサートする必要あるからインスタンス化しておく
+		//OrderがあってもなくてもOrderItemはインサートする必要あるからインスタンス化しておく
 		OrderItem orderItem = new OrderItem();
-		OrderTopping orderTopping = new OrderTopping();
 		
 		Order returnOrder = orderRepository.findByUserIdAndStatus(userId, status);
 		
@@ -61,23 +62,32 @@ public class AddItemCartService {
 			orderItemRepository.insert(orderItem);
 			
 			//OrderToppingのinsert
-			orderTopping.setOrderItemId(orderItem.getId());
-			//ここ！
-			//orderTopping.setToppingId();
-			orderToppingRepository.insert(orderTopping);
+			List<Integer> toppingList = form.getToppingList();
+			for( Integer topping : toppingList ) {
+				OrderTopping orderTopping = new OrderTopping();
+				orderTopping.setOrderItemId(orderItem.getId());
+				orderTopping.setToppingId(topping);
+				orderToppingRepository.insert(orderTopping);
+			}
 			
 		} else {
 			//Order見つかったらOrderToppingとOrderItemのみinsertする
+			
+			//OrderItemのinsert
 			orderItem.setOrderId(returnOrder.getId());
 			orderItem.setItemId(form.getItemId());
 			orderItem.setQuantity(form.getQuantity());
 			orderItem.setSize(form.getSize());
 			OrderItem returnOrderItem = orderItemRepository.insert(orderItem);
-			orderTopping.setOrderItemId(returnOrderItem.getId());
 			
-			//ここ！
-			//orderTopping.setToppingId();
-			orderToppingRepository.insert(orderTopping);
+			//OrderToppingのinsert
+			List<Integer> toppingList = form.getToppingList();
+			for( Integer topping : toppingList ) {
+				OrderTopping orderTopping = new OrderTopping();
+				orderTopping.setOrderItemId(returnOrderItem.getId());
+				orderTopping.setToppingId(topping);
+				orderToppingRepository.insert(orderTopping);
+			}
 		}
 	}
 }

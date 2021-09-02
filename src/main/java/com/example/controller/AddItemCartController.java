@@ -33,7 +33,7 @@ public class AddItemCartController {
 	 * @return フォーム
 	 */
 	@ModelAttribute
-	public AddItemCartForm setUpAddItemCartForm() {
+	public AddItemCartForm setUpForm() {
 		return new AddItemCartForm();
 	}
 	
@@ -45,10 +45,15 @@ public class AddItemCartController {
 	 */
 	@RequestMapping("/add-item")
 	public String add(AddItemCartForm form) {
-		//sessionからUser情報とってきてuser.idみたいな形でidだけ取り出したい
+		//sessionからUser情報とってきてuserのidを取り出す
 		User user = (User)session.getAttribute("user");
-		addItemCartService.add(form, user.getId(), 0);
-		//カート内表示画面
-		return "redirect:/";
+		if( user == null ) {
+			//sessionにuser情報が入っていなかったら仮のsessionIDを発行してuseridとしてセットする
+			int dummyId = Integer.parseInt(session.getId());
+			addItemCartService.add(form, dummyId, 0);
+		} else {
+			addItemCartService.add(form, user.getId(), 0);
+		}
+		return "redirect:/cart_list";
 	}
 }
