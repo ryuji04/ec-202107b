@@ -73,4 +73,12 @@ public class RegisterUserController {
 		registerUserService.insert(user);
 		return "redirect:/login-user";
 	}
+	
+	
+	 public byte[] hash(String plainText) throws NoSuchAlgorithmException {
+	        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256"); //①
+
+	        byte[] b = plainText.getBytes(); //② 
+	        return messageDigest.digest(b);  //③
+	    }
 }

@@ -13,11 +13,11 @@ import com.example.domain.Item;
 
 @Repository
 public class ItemRepository {
-	
+
 	@Autowired
 	private NamedParameterJdbcTemplate template;
 
-	private static final RowMapper<Item> ITEM_ROW_MAPPER = (rs, i) ->{
+	private static final RowMapper<Item> ITEM_ROW_MAPPER = (rs, i) -> {
 		Item item = new Item();
 		item.setId(rs.getInt("id"));
 		item.setName(rs.getString("name"));
@@ -26,36 +26,63 @@ public class ItemRepository {
 		item.setPriceL(rs.getInt("price_l"));
 		item.setImagePath(rs.getString("image_path"));
 		item.setDeleted(rs.getBoolean("deleted"));
-		
+
 		return item;
 	};
-	
+
 	/**
 	 * アイテム情報を全件表示します.
 	 * 
 	 * @return アイテム情報のリスト
 	 */
-	public List<Item> findAll(){
+	public List<Item> findAll() {
 		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY id;";
-		
+
 		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
-		
+
 		return itemList;
 	}
-	
+
 	/**
 	 * 名前検索でアイテム情報を表示する.
 	 * 
 	 * @param name 名前
 	 * @return アイテム情報のリスト
 	 */
-	public List<Item> findByLikeName(String name){
-		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name LIKE :name ORDER BY id;"; 
-		
+	public List<Item> findByLikeName(String name) {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name LIKE :name ORDER BY id;";
+
 		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
-		
+
 		List<Item> itemList = template.query(sql, param, ITEM_ROW_MAPPER);
-		
+
 		return itemList;
 	}
+
+	/**
+	 * アイテム情報を降順(価格)に並べ替える.
+	 * 
+	 * @return 降順(価格)に並んだアイテム情報リスト
+	 */
+	public List<Item> arrangeInDesc() {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY price_m desc;";
+
+		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
+
+		return itemList;
+	}
+	
+	/**
+	 * アイテム情報を昇順(価格)に並べ替える.
+	 * 
+	 * @return 昇順(価格)に並んだアイテム情報リスト
+	 */
+	public List<Item> arrangeInAsc() {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY price_m;";
+
+		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
+
+		return itemList;
+	}
+
 }

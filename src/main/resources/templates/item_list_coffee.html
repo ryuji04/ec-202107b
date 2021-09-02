@@ -72,6 +72,17 @@
 								<button type="reset" value="クリア" class="btn btn-default">クリア</button>
 							</div>
 						</form>
+							
+							<!-- 商品を並び変えるコードを記述 -->
+							<form method="post" action="item_list_coffee" th:action="@{/show-item/sort-item}" class="form-horizontal">
+							<button class="sortButton">並替え</button>
+							<br>
+							<select name="arrangeItem">
+							<option value="1">降順:Mサイズ価格</option>
+							<option value="2">昇順:Mサイズ価格</option>
+							</select>
+							</form> 
+							
 					</div>
 				</div>
 			</div>
