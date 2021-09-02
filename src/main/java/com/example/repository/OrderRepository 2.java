@@ -11,11 +11,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import com.example.domain.Item;
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
-import com.example.domain.OrderTopping;
-import com.example.domain.Topping;
+import com.example.domain.User;
 
 /**
  * ordersテーブルを操作するリポジトリ.
@@ -33,13 +31,14 @@ public class OrderRepository {
 	= (rs) -> {
 		List<Order> orderList = new ArrayList<>();
 		List<OrderItem> orderItemList = null;
-		List<OrderTopping> orderToppingList = null;
-		List<Topping> toppingList = null;
 		int idNumber = 0;
 		while (rs.next()) {
 			int nowIdNumber = rs.getInt("id");
 			if (idNumber != nowIdNumber) {
 				Order order = new Order();
+				// OrderのuserId使ってOrderのドメインにUserの値詰めたい
+				// User user = new User();
+				// order.setUser();
 				order.setId(rs.getInt("id"));
 				order.setUserId(rs.getInt("userId"));
 				order.setStatus(rs.getInt("status"));
@@ -56,49 +55,15 @@ public class OrderRepository {
 				order.setOrderItemList(orderItemList);
 				orderList.add(order);
 			}
-			if(rs.getInt("oi_id") != 0) {
+			if(rs.getInt("order_item_id") != 0) {
 				OrderItem orderItem = new OrderItem();
 				orderItem.setId(rs.getInt("oi_id"));
 				orderItem.setItemId(rs.getInt("oi_item_id"));
 				orderItem.setOrderId(rs.getInt("oi_order_id"));
 				orderItem.setQuantity(rs.getInt("oi_quantity"));
-				String size = rs.getString("oi_size");
-				char[] c = size.toCharArray();
-				orderItem.setSize(c[0]);
-				orderToppingList = new ArrayList<>();
-				orderItem.setOrderToppingList(orderToppingList);
-				orderItemList.add(orderItem);
+				// 注文商品のサイズをCharacter型でsetしたいけどキャストできないしgetString()しかない
+				// orderItem.setSize((Character)(rs.getString("oi_size")));
 			}
-			
-			if(rs.getInt("ot_id") != 0 ) {
-				OrderTopping orderTopping = new OrderTopping();
-				orderTopping.setId(rs.getInt("ot_id"));
-				orderTopping.setToppingId(rs.getInt("ot_topping_id"));
-				orderTopping.setOrderItemId(rs.getInt("ot_order_item_id"));
-				orderToppingList.add(orderTopping);
-			}
-			
-			if(rs.getInt("i_id") != 0) {
-				Item item = new Item();
-				item.setId(rs.getInt("i_id"));
-				item.setName(rs.getString("i_name"));
-				item.setDescription(rs.getString("i_description"));
-				item.setPriceM(rs.getInt("i_price_m"));
-				item.setPriceL(rs.getInt("i_price_l"));
-				item.setImagePath(rs.getString("i_image_path"));
-				item.setDeleted(rs.getBoolean("i_deleted"));
-			}
-			
-			if(rs.getInt("t_id") != 0) {
-				Topping topping = new Topping();
-				topping.setId(rs.getInt("t_id"));
-				topping.setName(rs.getString("t_name"));
-				topping.setPriceM(rs.getInt("t_price_m"));
-				topping.setPriceL(rs.getInt("t_price_l"));
-				toppingList = new ArrayList<>();
-				toppingList.add(topping);
-			}
-			idNumber = nowIdNumber;
 		}
 		return orderList;
 	};
