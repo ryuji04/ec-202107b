@@ -51,6 +51,52 @@ public class ShowItemService {
 					totalItemList.add(divideItemList);
 				}
 			}
+			divideItemList.add(item);
+			roopCount++;
+			if (roopCount % 3 == 0) {
+				totalItemList.add(divideItemList);
+				divideItemList = new ArrayList<>();
+			}
+		}
+		return totalItemList;
+	}
+
+	/**
+	 * アイテム商品を降順に並び替える.
+	 * 
+	 * @return 並び替え後のアイテム商品リスト
+	 */
+	public List<List<Item>> arrangeInDesc() {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
+		List<Item> itemList = itemRepository.arrangeInDesc();
+		int roopCount = 0;
+
+		for (Item item : itemList) {
+			divideItemList.add(item);
+			roopCount++;
+			if (roopCount % 3 == 0) {
+				totalItemList.add(divideItemList);
+				divideItemList = new ArrayList<>();
+			}
+		}
+		return totalItemList;
+	}
+	
+	/**
+	 * アイテム商品を昇順に並び替える.
+	 * 
+	 * @return　並び替え後のアイテム商品リスト
+	 */
+	public List<List<Item>> arrangeInAsc() {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
+		List<Item> itemList = itemRepository.arrangeInAsc();
+		int roopCount = 0;
+
+		for (Item item : itemList) {
+			divideItemList.add(item);
+			roopCount++;
 
 			if (roopCount % 3 == 0) {
 				totalItemList.add(divideItemList);
