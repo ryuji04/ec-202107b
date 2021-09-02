@@ -14,25 +14,27 @@ import com.example.service.ShowItemDetailService;
  * @author nayuta
  */
 @Controller
-@RequestMapping("show-item-detail")
+@RequestMapping("/show-item-detail")
 public class ShowItemDetailController {
-	// ShowItemDetailServiceをインスタンス化
+	// ShowItemDetailServiceをインスタン
 	@Autowired
 	private ShowItemDetailService showItemDetailService;
 
-	@RequestMapping("")
+	/**
+	 * 商品の詳細情報取得.
+	 * 
+	 * @param id 商品ID
+	 * @param model Requestスコープ
+	 * @return 商品の詳細情報
+	 */
+	@RequestMapping("/detail")
 	public String showItemDetail(Integer id, Model model) {
-		Item testItem = showItemDetailService.showItemDetailService(1);
+		Item itemDetail = showItemDetailService.showItemDetailService(id);
 
-		System.out.println(testItem);
-		System.out.println(testItem.getToppingList());
-
-		System.out.println(id);
-
-		Item item = showItemDetailService.showItemDetailService(id);
-
-		model.addAttribute("item", item);
+		model.addAttribute("itemDetail", itemDetail);
 
 		return "item_detail.html";
 	}
+	
+	
 }

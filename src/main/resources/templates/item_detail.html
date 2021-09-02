@@ -49,19 +49,19 @@
 
 		<form action="cart_list.html">
 		<div class="row">
-			<div class="col-xs-offset-2 col-xs-8">
+			<div class="col-xs-offset-2 col-xs-8" th:each="item:${itemDetail}">
 
 				<h3 class="text-center">商品詳細</h3>
 				<div class="row">
 					<div class="col-xs-5">
-						<img src="../static/img_pizza/1.jpg" class="img-responsive img-rounded item-img-center">
+						<img src="../static/img_pizza/1.jpg" th:src="@{/img_coffee/} + ${item.imagePath}" class="img-responsive img-rounded item-img-center">
 					</div>
 
 					<div class="col-xs-5">
 						<div class="bs-component">
-							<h4>じゃがバターベーコン</h4> <br>
+							<h4 th:text="${item.name}">じゃがバターベーコン</h4> <br>
 							<br>
-							<p>マイルドな味付けのカレーに大きくカットしたポテトをのせた、バターとチーズの風味が食欲をそそるお子様でも楽しめる商品です。</p>
+							<p th:text="${item.description}">マイルドな味付けのカレーに大きくカットしたポテトをのせた、バターとチーズの風味が食欲をそそるお子様でも楽しめる商品です。</p>
 						</div>
 					</div>
 				</div><br>
@@ -74,14 +74,12 @@
 								</div>
 								<div class="col-sm-12">
 									<label class="radio-inline">
-										<input type="radio"
-											name="responsibleCompany" checked="checked">
-										<span class="price">&nbsp;М&nbsp;</span>&nbsp;&nbsp;1,380円(税抜)
+										<input type="radio" name="responsibleCompany" checked="checked" th:value="${mSize}">
+										<span class="price">&nbsp;М&nbsp;</span>&nbsp;&nbsp;<span th:text="${item.priceM}">1,380円(税抜)</span>円(税抜)
 									</label>
 									<label class="radio-inline">
-										<input type="radio"
-											name="responsibleCompany">
-										<span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円(税抜)
+										<input type="radio" name="responsibleCompany" th:value="${lSize}">
+										<span class="price">&nbsp;Ｌ&nbsp;</span>&nbsp;&nbsp;<span th:text="${item.priceL}">2,380円(税抜)</span>円（税抜）
 									</label>
 								</div>
 							</div>
@@ -99,11 +97,13 @@
 										<span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
 									</label>
 								</div>
-								<div class="col-sm-12">
+								<div class="col-sm-12" th:each="topping:${item.toppingList}">
 									<label class="checkbox-inline">
-										<input type="checkbox" value="">オニオン
+											<input type="checkbox"><span th:text="${topping.name}"></span>オニオン												
 									</label>
-									<label class="checkbox-inline">
+									
+									
+<!-- 									<label class="checkbox-inline">
 										<input type="checkbox" value="">チーズ
 									</label>
 									<label class="checkbox-inline">
@@ -123,7 +123,7 @@
 									</label>
 									<label class="checkbox-inline">
 										<input type="checkbox" value="">あらびきソーセージ
-									</label>
+									</label> -->
 								</div>
 							</div>
 						</div>
@@ -157,13 +157,13 @@
 					</div>
 				</div>
 				<br>
-				<div class="row">
+<!-- 				<div class="row">
 					<div class="col-xs-offset-2 col-xs-10">
 						<div class="form-group">
 							<span id="total-price">この商品金額：38,000 円(税抜)</span>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="row">
 					<div class="col-xs-offset-2 col-xs-3">
 						<div class="form-group">
