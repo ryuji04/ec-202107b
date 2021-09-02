@@ -49,7 +49,7 @@ public class AddItemCartService {
 			Order order = new Order();
 			order.setUserId(userId);
 			order.setStatus(status);
-			//ここnotnullだったから書いたけど絶対0じゃないと思う
+			//OrderItemのgetSubTotal()を使う
 			order.setTotalPrice(0);
 			orderRepository.insert(order);
 			
