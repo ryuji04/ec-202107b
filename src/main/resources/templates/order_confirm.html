@@ -1,4 +1,4 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
@@ -78,7 +78,57 @@
 								</div>
 							</th>
 						</tr>
-						<tr>
+						<!-- <tr th:each="orderItem:${order.orderItemList}">
+							<td>
+								<div class="center">
+									<img src="../static/img_pizza/1.jpg" th:href="@{/css/} + ${orderItem.item.imagePath}"
+										class="img-responsive img-rounded item-img-center" width="100" height="300"><br>
+									<span th:text="${orderItem.item.name}">じゃがバターベーコン</span>
+								</div>
+							</td>
+							<td>
+								<span class="price" th:text="${orderItem.size}">&nbsp;Ｌ</span>&nbsp;<span th:text="${orderItem.item.price} + ${orderItem.size}">&nbsp;2,380円
+								&nbsp;</span>&nbsp;<span th:text="${orderItem.quantity}">1個</span>
+							</td>
+							<td th:each="orderTopping:${orderItem.orderToppingList}">
+								<ul>
+									<li th:text="${orderTopping.topping.name} + ${orderTopping.topping.price} +${orderItem.size}">ピーマン300円</li>
+									<!-- <li>オニオン300円</li>
+									<li>あらびきソーセージ300円</li>
+								</ul>
+							</td>
+							<td>
+								<div class="text-center">
+									3,280円
+								</div>
+							</td>
+						</tr> -->
+						<tr th:each="orderItem:${order.orderItemList}">
+							<td>
+								<div class="center">
+									<img src="../static/img_pizza/1.jpg"
+										class="img-responsive img-rounded item-img-center" width="100" height="300"><br>
+									<span>じゃがバターベーコン</span>
+								</div>
+							</td>
+							<td>
+								<span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
+								&nbsp;&nbsp;1個
+							</td>
+							<td>
+								<ul>
+									<li>ピーマン300円</li>
+									<li>オニオン300円</li>
+									<li>あらびきソーセージ300円</li>
+								</ul>
+							</td>
+							<td>
+								<div class="text-center">
+									3,280円
+								</div>
+							</td>
+						</tr>
+						<!-- <tr>
 							<td>
 								<div class="center">
 									<img src="../static/img_pizza/1.jpg"
@@ -102,57 +152,7 @@
 									3,280円
 								</div>
 							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="center">
-									<img src="../static/img_pizza/1.jpg"
-										class="img-responsive img-rounded item-img-center" width="100" height="300"><br>
-									じゃがバターベーコン
-								</div>
-							</td>
-							<td>
-								<span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-								&nbsp;&nbsp;1個
-							</td>
-							<td>
-								<ul>
-									<li>ピーマン300円</li>
-									<li>オニオン300円</li>
-									<li>あらびきソーセージ300円</li>
-								</ul>
-							</td>
-							<td>
-								<div class="text-center">
-									3,280円
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="center">
-									<img src="../static/img_pizza/1.jpg"
-										class="img-responsive img-rounded item-img-center" width="100" height="300"><br>
-									じゃがバターベーコン
-								</div>
-							</td>
-							<td>
-								<span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-								&nbsp;&nbsp;1個
-							</td>
-							<td>
-								<ul>
-									<li>ピーマン300円</li>
-									<li>オニオン300円</li>
-									<li>あらびきソーセージ300円</li>
-								</ul>
-							</td>
-							<td>
-								<div class="text-center">
-									3,280円
-								</div>
-							</td>
-						</tr>
+						</tr>-->
 					</tbody>
 				</table>
 			</div>

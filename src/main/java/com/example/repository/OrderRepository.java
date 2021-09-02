@@ -48,11 +48,14 @@ public class OrderRepository {
 	 */
 	public Order findById(Integer id) {
 		// SQL文作成
-		String findByIdSql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, delivery_time, payment_method"
-				+ " FROM orders WHERE id = :id; ORDER BY id DESC";
+//		String findByIdSql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, delivery_time, payment_method"
+//				+ " FROM orders WHERE id = :id; ORDER BY id DESC";
+		
+		String findByIdSql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, destination_tel, delivery_time, payment_method FROM orders WHERE id=:id ORDER BY id;";
 
 		// プレースホルダー埋め込み
-		SqlParameterSource params = new MapSqlParameterSource().addValue("id", id);
+//		SqlParameterSource params = new MapSqlParameterSource().addValue("id", id);
+		SqlParameterSource params = new MapSqlParameterSource().addValue("id", 1);
 
 		// 実行
 		Order order = template.queryForObject(findByIdSql, params, ORDER_ROW_MAPPER);
