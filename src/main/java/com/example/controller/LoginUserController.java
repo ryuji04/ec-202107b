@@ -36,7 +36,7 @@ public class LoginUserController {
 	/**
 	 * ログイン画面へ遷移.
 	 * 
-	 * @return　ログイン画面
+	 * @return ログイン画面
 	 */
 	@RequestMapping("")
 	public String toLogin() {
@@ -46,19 +46,18 @@ public class LoginUserController {
 	/**
 	 * ログインチェックをするメソッド.
 	 * 
-	 * @param form ログイン情報のフォームクラス
+	 * @param form  ログイン情報のフォームクラス
 	 * @param model エラー文を格納するためのリクエストスコープ
 	 * 
-	 * @return　メールアドレスとパスワードが正常⇒商品一覧に遷移
-	 * 　　　　　　　メールアドレスまたはパスワードが異なる⇒ログイン画面に遷移
+	 * @return メールアドレスとパスワードが正常⇒商品一覧に遷移 メールアドレスまたはパスワードが異なる⇒ログイン画面に遷移
 	 */
 	@RequestMapping("login")
-	public String loginUser(LoginUserForm form,Model model) {
+	public String loginUser(LoginUserForm form, Model model) {
 
 		User user = loginUserService.login(form.getEmail(), form.getPassword());
-		
+
 		session.setAttribute("user", user);
-		
+
 		if (user == null) {
 			model.addAttribute("error", "メールアドレスまたはパスワードが間違っています");
 			return toLogin();
@@ -78,4 +77,13 @@ public class LoginUserController {
 		session.invalidate();
 		return "redirect:/login-user";
 	}
+
+// 5xx画面表示のtest用
+@RequestMapping("test")
+	public void test() {
+		System.out.println("エラー開始");
+		int i=2%0;
+		System.out.println(i);
+		System.out.println("エラー終了");
+		}
 }
