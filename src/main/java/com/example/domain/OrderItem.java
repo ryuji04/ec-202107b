@@ -80,6 +80,8 @@ public class OrderItem {
 	public void setOrderToppingList(List<OrderTopping> orderToppingList) {
 		this.orderToppingList = orderToppingList;
 	}
+	
+	//getSubTotal();
 
 	@Override
 	public String toString() {

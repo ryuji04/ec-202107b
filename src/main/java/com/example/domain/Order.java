@@ -152,6 +152,14 @@ public class Order {
 	public void setOrderItemList(List<OrderItem> orderItemList) {
 		this.orderItemList = orderItemList;
 	}
+	
+	public int getTax() {
+		return (int)(totalPrice * 0.1);
+	}
+	
+	public int getCalcTotalPrice() {
+		return getTax() + totalPrice;
+	}
 
 	@Override
 	public String toString() {
