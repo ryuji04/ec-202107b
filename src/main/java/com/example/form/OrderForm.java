@@ -8,9 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * ユーザー情報登録時に使用するクラス.
+ * 注文登録時に使用するクラス.
  * 
- * @author okahikari
+ * @author okahikari,nayuta
  * 
  */
 public class OrderForm {
