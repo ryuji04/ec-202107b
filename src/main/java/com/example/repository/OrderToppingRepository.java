@@ -1,6 +1,8 @@
 package com.example.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -20,6 +22,9 @@ public class OrderToppingRepository {
 	
 	@Autowired
 	private NamedParameterJdbcTemplate template;
+	
+	private static final RowMapper<OrderTopping> ORDER_TOPPING_ROW_MAPPER
+	= new BeanPropertyRowMapper<>(OrderTopping.class);
 	
 	/**
 	 * 注文トッピング情報を挿入する.

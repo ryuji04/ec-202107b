@@ -1,7 +1,6 @@
 package com.example.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -26,7 +25,17 @@ public class OrderItemRepository {
 	private NamedParameterJdbcTemplate template;
 	
 	private static final RowMapper<OrderItem> ORDER_ITEM_ROW_MAPPER
-	= new BeanPropertyRowMapper<>(OrderItem.class);
+	= (rs, i) -> {
+		OrderItem orderItem = new OrderItem();
+		orderItem.setId(rs.getInt("id"));
+		orderItem.setItemId(rs.getInt("item_id"));
+		orderItem.setOrderId(rs.getInt("order_id"));
+		orderItem.setQuantity(rs.getInt("quantity"));
+		String size = rs.getString("size");
+		char[] c = size.toCharArray();
+		orderItem.setSize(c[0]);
+		return orderItem;
+	};
 	
 	/**
 	 * 注文商品情報を挿入する.
@@ -56,10 +65,10 @@ public class OrderItemRepository {
 	}
 	
 	/**
-	 * IDから注文商品情報を取得する.
+	 * IDから注文商品情報の親の注文IDを取得する.
 	 * 
 	 * @param id 注文商品ID
-	 * @return 注文商品情報
+	 * @return 注文ID情報
 	 */
 	public OrderItem findById(Integer id) {
 		String sql = "SELECT id, item_id, order_id, quantity, size FROM order_items WHERE id = :id;";
