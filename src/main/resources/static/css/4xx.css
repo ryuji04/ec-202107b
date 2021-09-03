@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+
+
+
+.errorImg {/*親div*/
+  position: relative;/*相対配置*/
+  }
+
+.errorImg p {
+  position: absolute;/*絶対配置*/
+  top: 50%;
+  left: 20%;
+} 
+
+.letter{
+	position: absolute;/*絶対配置*/
+  top: 45%;
+  left: 5%;
+  line-height: 1.4;
+	 color: #010079;
+	 font-size:45px;
+  text-shadow: 0 0 5px white;
+  border-left: solid 7px #010079;
+  background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+}
+
+.letter2{
+	position: absolute;/*絶対配置*/
+  top: 55%;
+  line-height: 1.4;
+	 color: #010079;
+	 left: 5%;
+	 font-size:45px;
+  text-shadow: 0 0 5px white;
+  border-left: solid 7px #010079;
+  background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+}
+  
+
+.errorImg img {
+  width: 100%;
+  height:100%;
+  }
+  
