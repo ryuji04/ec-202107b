@@ -56,7 +56,10 @@ public class AddItemCartController {
 			addItemCartService.add(form, user.getId(), 0);
 			System.out.println(user.getId());
 		}
-		//後でショッピングカート内一覧表示するメソッドにredirectするように直す
-		return "redirect:/show-item/all";
+		
+		System.out.println(user.getId());
+		
+		// 後でショッピングカート内一覧表示するメソッドにredirectするように直す
+		return "redirect:/show-item-cart/cart";
 	}
 }
