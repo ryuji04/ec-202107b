@@ -81,7 +81,26 @@ public class OrderItem {
 		this.orderToppingList = orderToppingList;
 	}
 	
-	//getSubTotal();
+	public int getSubTotal() {
+		int itemPrice = 0;
+		int totalToppingPrice = 0;
+		if( size == 'M' ) {
+			itemPrice = item.getPriceM();
+		}
+		if( size == 'L' ) {
+			itemPrice = item.getPriceL();
+		}
+		for( OrderTopping orderTopping : orderToppingList ) {
+			Topping topping = orderTopping.getTopping();
+			if( size == 'M') {
+				totalToppingPrice += topping.getPriceM();
+			}
+			if( size == 'L') {
+				totalToppingPrice += topping.getPriceL();
+			}
+		}
+		return itemPrice + totalToppingPrice;
+	}
 
 	@Override
 	public String toString() {

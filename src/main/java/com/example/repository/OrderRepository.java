@@ -22,7 +22,7 @@ import com.example.domain.Topping;
 /**
  * ordersテーブルを操作するリポジトリ.
  * 
- * @author okahikari
+ * @author okahikari,nayuta
  * 
  */
 @Repository
@@ -183,36 +183,14 @@ public class OrderRepository {
 	public void upDate(Order order) {
 		// SQL文作成
 		String upDateSql = "UPDATE orders SET "
-				+ "destination_name=:destination_name, destination_email=:destination_email, destination_zipcode=:destination_zipcode, destination_address=:destination_address, "
-				+ "destination_tel=:destination_tel, delivery_time=:delivery_time, payment_method=:payment_method;";
+				+ "user_id=:userId, status=:status, total_price=:totalPrice, order_date=:orderDate, "
+				+ "destination_name=:destinationName, destination_email=:destinationEmail, destination_zipcode=:destinationZipcode, destination_address=:destinationAddress, "
+				+ "destination_tel=:destinationTel, delivery_time=:deliveryTime, payment_method=:paymentMethod WHERE id = :id;";
 
 		// プレースホルダー埋め込み
 		SqlParameterSource params = new BeanPropertySqlParameterSource(order);
 
 		// 実行
 		template.update(upDateSql, params);
-	}
-
-	/** 以下、削除の可能性あり */
-	/**
-	 * Order_statusを1(未入金)にする.
-	 */
-	public void upDateStatus1() {
-		// SQL文作成
-		String upDateStatus1Sql = "UPDATE orders SET status = 1;";
-
-		// 実行
-		template.query(upDateStatus1Sql, ORDER_ROW_MAPPER);
-	}
-
-	/**
-	 * Order_statusを2(入金済)にする.
-	 */
-	public void upDateStatus2() {
-		// SQL文作成
-		String upDateStatus1Sql = "UPDATE orders SET status = 2;";
-
-		// 実行
-		template.query(upDateStatus1Sql, ORDER_ROW_MAPPER);
 	}
 }
