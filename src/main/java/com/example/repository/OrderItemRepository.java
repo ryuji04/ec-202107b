@@ -1,5 +1,7 @@
 package com.example.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -72,5 +74,19 @@ public class OrderItemRepository {
 		String sql = "SELECT id, item_id, order_id, quantity, size FROM order_items WHERE id = :id;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		return template.queryForObject(sql, param, ORDER_ITEM_ROW_MAPPER);
+	}
+
+	/**
+	 * orderIdから注文商品情報の親の注文IDを取得する.
+	 * 
+	 * @param id 注文商品ID
+	 * @return 注文ID情報
+	 */
+	public List<OrderItem> findByOrderId(Integer orderId) {
+		String sql = "SELECT id, item_id, order_id, quantity, size FROM order_items WHERE order_id = :order_id;";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("order_id", orderId);
+		List<OrderItem> orderItemList = template.query(sql, param, ORDER_ITEM_ROW_MAPPER);
+
+		return orderItemList;
 	}
 }
