@@ -44,6 +44,12 @@ public class LoginUserController {
 		return "login";
 	}
 
+	/**
+	 * 遷移元のURLからログイン後の遷移先を指定.
+	 * 
+	 * @param request リクエスト
+	 * @return　遷移先のパス
+	 */
 	@RequestMapping("/referer-check")
 	public String refererCheck(HttpServletRequest request) {
 		String url = request.getHeader("referer");
@@ -54,6 +60,8 @@ public class LoginUserController {
 		}
 
 	}
+	
+	//spring securityにログイン処理を任せるため以下をコメントアウト
 //
 //	/**
 //	 * ログインチェックをするメソッド.

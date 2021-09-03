@@ -13,6 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * spring security の設定を行うクラス.
+ * 
+ * @author hayato.saishu
+ *
+ */
 @Configuration // 設定用のクラス
 @EnableWebSecurity // Spring Securityのウェブ用の機能を利用する
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -32,6 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 	
+	/**
+	 * ログインしていないユーザーのアクセス許可範囲の指定と、ログイン処理とログアウト処理する.
+	 * 
+	 *
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
