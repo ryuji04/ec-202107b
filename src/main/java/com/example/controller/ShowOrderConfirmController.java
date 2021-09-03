@@ -10,7 +10,7 @@ import com.example.domain.Order;
 import com.example.service.ShowOrderConfirmService;
 
 @Controller
-@RequestMapping("order-confirm")
+@RequestMapping("/order-confirm")
 public class ShowOrderConfirmController {
 
 	@Autowired
