@@ -1,17 +1,13 @@
-package com.example.domain;
+package com.example.form;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 注文情報を表すドメイン.
- * 
- * @author okahikari
- * 
- */
-public class Order {
+import com.example.domain.OrderItem;
+import com.example.domain.User;
 
+public class OrderForm {
 	/** ID */
 	private Integer id;
 	/** ユーザーID */
@@ -151,14 +147,6 @@ public class Order {
 
 	public void setOrderItemList(List<OrderItem> orderItemList) {
 		this.orderItemList = orderItemList;
-	}
-	
-	public int getTax() {
-		return (int)(totalPrice * 0.1);
-	}
-	
-	public int getCalcTotalPrice() {
-		return getTax() + totalPrice;
 	}
 
 	@Override
