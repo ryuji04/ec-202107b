@@ -48,7 +48,7 @@ public class LoginUserController {
 	 * 遷移元のURLからログイン後の遷移先を指定.
 	 * 
 	 * @param request リクエスト
-	 * @return　遷移先のパス
+	 * @return 遷移先のパス
 	 */
 	@RequestMapping("/referer-check")
 	public String refererCheck(HttpServletRequest request) {
@@ -58,26 +58,8 @@ public class LoginUserController {
 		} else {
 			return "redirect:/show-item/all";
 		}
-
-<<<<<<< HEAD
-=======
-		return "redirect:/show-item/all";
-
 	}
-
-	/**
-	 * ログアウトをするメソッド.
-	 * 
-	 * @return ログイン画面
-	 */
-	@RequestMapping("/logout")
-	public String logout() {
-		session.invalidate();
-		return "redirect:/login-user";
->>>>>>> develop
-	}
-	
-	//spring securityにログイン処理を任せるため以下をコメントアウト
+	// spring securityにログイン処理を任せるため以下をコメントアウト
 //
 //	/**
 //	 * ログインチェックをするメソッド.
@@ -114,4 +96,14 @@ public class LoginUserController {
 //		session.invalidate();
 //		return "redirect:/login-user";
 //	}
+
+// 5xx画面表示のtest用
+	@RequestMapping("test")
+	public void test() {
+		System.out.println("エラー開始");
+		int i = 2 % 0;
+		System.out.println(i);
+		System.out.println("エラー終了");
+	}
+
 }
