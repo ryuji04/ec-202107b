@@ -38,7 +38,7 @@
 						<a href="cart_list.html" class="navbar-link">ショッピングカート</a>&nbsp;&nbsp;
 						<a href="order_history.html" class="navbar-link">注文履歴</a>&nbsp;&nbsp;
 						<!-- ログイン後、「ログイン」ボタンを非表示にする -->
-						<a href="login.html" class="navbar-link" th:if="${session.user==null}">ログイン</a>&nbsp;&nbsp;
+						<a href="login.html" th:href="@{/login-user}" class="navbar-link" th:if="${session.user==null}">ログイン</a>&nbsp;&nbsp;
 						<!-- ログインアウト後、「ログアウト」ボタンを非表示にする -->
 						<a href="item_list_pizza.html" th:href="@{/login-user/logout}" class="navbar-link" th:if="${session.user!=null}">ログアウト</a>
 					</p>
@@ -77,11 +77,11 @@
 								</div>
 								<div class="col-sm-12">
 									<label class="radio-inline">
-										<input type="radio" name="size" checked="checked" th:value="${M}">
+										<input type="radio" name="size" checked="checked" value="M">
 										<span class="price">&nbsp;М&nbsp;</span>&nbsp;&nbsp;<span th:text="${item.priceM}">1,380円(税抜)</span>円(税抜)
 									</label>
 									<label class="radio-inline">
-										<input type="radio" name="size" th:value="${L}">
+										<input type="radio" name="size" value="L">
 										<span class="price">&nbsp;Ｌ&nbsp;</span>&nbsp;&nbsp;<span th:text="${item.priceL}">2,380円(税抜)</span>円（税抜）
 									</label>
 								</div>
@@ -102,7 +102,7 @@
 								</div>
 								<div class="col-sm-12" th:each="topping:${item.toppingList}">
 									<label class="checkbox-inline">
-											<input type="checkbox" name="toppingList" th:value="${topping.id}"><span th:text="${topping.name}"></span>オニオン												
+											<input type="checkbox" name="toppingList" th:value="${topping.id}"><span th:text="${topping.name}"></span>											
 									</label>
 									
 									
