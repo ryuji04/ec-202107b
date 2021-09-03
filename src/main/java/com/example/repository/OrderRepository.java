@@ -144,6 +144,17 @@ public class OrderRepository {
 		}
 		return orderList.get(0);
 	}
+	
+	/**
+	 * 注文情報を削除する.
+	 * 
+	 * @param id 削除する注文情報のID
+	 */
+	public void deleteById(Integer id) {
+		String sql = "DELETE FROM orders WHERE id = :id;";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+		template.update(sql, param);
+	}
 
 	/**
 	 * 注文前のOrderを取得するメソッド.
