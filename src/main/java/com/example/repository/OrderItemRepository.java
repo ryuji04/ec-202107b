@@ -18,10 +18,9 @@ import com.example.domain.OrderItem;
  */
 @Repository
 public class OrderItemRepository {
-	
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+
 	/**
 	 * 注文商品情報を挿入する.
 	 * 
@@ -32,9 +31,10 @@ public class OrderItemRepository {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(orderItem);
 		String sql = "INSERT INTO order_items(item_id, order_id, quantity, size) VALUES (:itemId, :orderId, :quantity, :size);";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		String[] keyColumnNames = {"id"};
+		String[] keyColumnNames = { "id" };
 		template.update(sql, param, keyHolder, keyColumnNames);
 		orderItem.setId(keyHolder.getKey().intValue());
 		return orderItem;
 	}
+
 }

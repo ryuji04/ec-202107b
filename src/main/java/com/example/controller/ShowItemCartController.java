@@ -15,11 +15,13 @@ public class ShowItemCartController {
 	private ShowitemCartService service;
 
 	@RequestMapping("/cart")
-	public String showItemCart(Integer userId, Integer status, Model model) {
-		// status=0の商品を取得
-		Order order = service.showItemCart(userId, status);
+	public String showItemCart(Integer userId, Model model) {
+		System.out.println(userId);
 
-		model.addAttribute(order);
+		// status=0の商品を取得
+		Order order = service.showItemCart(userId, 0);
+
+		model.addAttribute("order", order);
 
 		return "cart_list.html";
 	}

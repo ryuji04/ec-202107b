@@ -34,17 +34,13 @@ public class ShowitemCartService {
 		 * 
 		 * ※SQL文が2回必要…？
 		 */
+		Order order = new Order();
 
-		//
-		if (status == 0) {
-			Order order = new Order();
+		order = repository.findByUserIdAndStatus(userId, status);
+		
+		order.setOrderItemList(orderItemList);
 
-			order = repository.findByUserIdAndStatus(userId, status);
-
-			return order;
-		}
-
-		return null;
+		return order;
 	}
 
 	/** 合計金額を計算するメソッドも必要…？ */
