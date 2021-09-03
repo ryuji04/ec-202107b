@@ -38,7 +38,7 @@ public class OrderToppingRepository {
 	 * @param id 削除する注文トッピングのID
 	 */
 	public void deleteById(Integer id) {
-		String sql = "DELETE FROM order_toppings WHERE id = :id;";
+		String sql = "DELETE FROM order_toppings WHERE order_item_id = :id;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		template.update(sql, param);
 	}

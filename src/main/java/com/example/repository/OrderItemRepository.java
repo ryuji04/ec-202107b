@@ -1,6 +1,8 @@
 package com.example.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -22,6 +24,9 @@ public class OrderItemRepository {
 	
 	@Autowired
 	private NamedParameterJdbcTemplate template;
+	
+	private static final RowMapper<OrderItem> ORDER_ITEM_ROW_MAPPER
+	= new BeanPropertyRowMapper<>(OrderItem.class);
 	
 	/**
 	 * 注文商品情報を挿入する.
@@ -48,5 +53,17 @@ public class OrderItemRepository {
 		String sql = "DELETE FROM order_items WHERE id = :id;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		template.update(sql, param);
+	}
+	
+	/**
+	 * IDから注文商品情報を取得する.
+	 * 
+	 * @param id 注文商品ID
+	 * @return 注文商品情報
+	 */
+	public OrderItem findById(Integer id) {
+		String sql = "SELECT id, item_id, order_id, quantity, size FROM order_items WHERE id = :id;";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+		return template.queryForObject(sql, param, ORDER_ITEM_ROW_MAPPER);
 	}
 }
