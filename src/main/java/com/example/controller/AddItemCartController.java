@@ -20,23 +20,23 @@ import com.example.service.AddItemCartService;
 @Controller
 @RequestMapping("/add-item-cart")
 public class AddItemCartController {
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private AddItemCartService addItemCartService;
-	
+
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
 	 * 
 	 * @return フォーム
 	 */
 	@ModelAttribute
-	public AddItemCartForm setUpAddItemCartForm() {
+	public AddItemCartForm setUpForm() {
 		return new AddItemCartForm();
 	}
-	
+
 	/**
 	 * カートに商品を追加する.
 	 * 
@@ -45,10 +45,17 @@ public class AddItemCartController {
 	 */
 	@RequestMapping("/add-item")
 	public String add(AddItemCartForm form) {
-		//sessionからUser情報とってきてuser.idみたいな形でidだけ取り出したい
-		User user = (User)session.getAttribute("user");
-		addItemCartService.add(form, user.getId(), 0);
-		//カート内表示画面
-		return "redirect:/";
+		// sessionからUser情報とってきてuserのidを取り出す
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			// sessionにuser情報が入っていなかったら仮のsessionIDを発行してuseridとしてセットする
+			// int dummyId = Integer.parseInt(session.getId());
+			int dummyId = 1;
+			addItemCartService.add(form, dummyId, 0);
+		} else {
+			addItemCartService.add(form, user.getId(), 0);
+			System.out.println(user.getId());
+		}
+		return "redirect:/show-item-cart/cart";
 	}
 }

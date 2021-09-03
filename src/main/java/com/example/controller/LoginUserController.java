@@ -63,7 +63,7 @@ public class LoginUserController {
 			return toLogin();
 		}
 
-		return "item_list_coffee";
+		return "redirect:/show-item/all";
 
 	}
 
