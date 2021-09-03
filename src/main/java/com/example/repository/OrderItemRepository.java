@@ -2,6 +2,7 @@ package com.example.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
@@ -31,5 +32,16 @@ public class OrderItemRepository {
 		String sql = "INSERT INTO order_items(item_id, order_id, quantity, size) VALUES (:itemId, :orderId, :quantity, :size);";
 		template.update(sql, param);
 		return orderItem;
+	}
+	
+	/**
+	 * 注文商品情報を削除する.
+	 * 
+	 * @param id 削除する注文商品のID
+	 */
+	public void deleteById(Integer id) {
+		String sql = "DELETE FROM order_items WHERE id = :id;";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+		template.update(sql, param);
 	}
 }
