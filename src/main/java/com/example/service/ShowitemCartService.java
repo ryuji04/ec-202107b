@@ -49,21 +49,16 @@ public class ShowitemCartService {
 	public Order showItemCart(Integer userId, Integer status) {
 		Order order = new Order();
 
-		// ユーザーidとstatus(controller側で0set)でorderを取得
 		order = repository.findByUserIdAndStatus(userId, status);
 
-		// order-DomainのorderItemListにユーザーがカートに入れた商品を格納
 		List<OrderItem> orderItemList = orderItemRepository.findByOrderId(order.getId());
 
-		// OrderItem-DomainのorderToppingListをインスタンス化
 		List<OrderTopping> orderToppingList = new ArrayList<>();
 
-		// ユーザーがカートに入れた商品(orderItemList)をOrderItem-Domain毎に引っ張り出して繰り返し処理
 		for (OrderItem orderItem : orderItemList) {
-			// orderToppingListに、注文商品毎のidを引数にトッピングを格納
+
 			orderToppingList = orderToppingRepository.findByOrderItemId(orderItem.getId());
 
-			//
 			orderItem.setItem(itemRepository.findById(orderItem.getItemId()));
 
 			orderItem.setOrderToppingList(orderToppingList);
@@ -76,7 +71,6 @@ public class ShowitemCartService {
 		}
 
 		order.setOrderItemList(orderItemList);
-		System.out.println(order);
 
 		return order;
 	}
