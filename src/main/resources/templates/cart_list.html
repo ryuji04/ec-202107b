@@ -1,5 +1,5 @@
-	<!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +25,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="item_list_pizza.html">
+					<a class="navbar-brand" href="item_list_pizza.html" th:href="@{/show-item/all}">
 						 <!-- 企業ロゴ -->
 						<img alt="main log" src="../static/../static/img_pizza/header_logo.png" th:src="@{/img_coffee/header_logo.png}" height="35">
 					</a>
@@ -38,9 +38,11 @@
 						<a href="cart_list.html" class="navbar-link">ショッピングカート</a>&nbsp;&nbsp;
 						<a href="order_history.html" class="navbar-link">注文履歴</a>&nbsp;&nbsp;
 						<!-- ログイン後、「ログイン」ボタンを非表示にする -->
-						<a href="login.html" class="navbar-link" th:if="${session.user==null}">ログイン</a>&nbsp;&nbsp;
+						<span sec:authorize="!isAuthenticated"><a href="login.html" 
+										class="navbar-link">ログイン</a></span>&nbsp;&nbsp;
 						<!-- ログインアウト後、「ログアウト」ボタンを非表示にする -->
-						<a href="item_list_pizza.html" th:href="@{/login-user/logout}" th:if="${session.user!=null}" class="navbar-link">ログアウト</a>
+						<span sec:authorize="isAuthenticated"><a href="item_list_pizza.html" 
+								th:href="@{/logout}" class="navbar-link">ログアウト</a></span>
 					</p>
 				</div>
 				<!-- /.navbar-collapse -->
