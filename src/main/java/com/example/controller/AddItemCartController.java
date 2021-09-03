@@ -49,11 +49,14 @@ public class AddItemCartController {
 		User user = (User)session.getAttribute("user");
 		if( user == null ) {
 			//sessionにuser情報が入っていなかったら仮のsessionIDを発行してuseridとしてセットする
-			int dummyId = Integer.parseInt(session.getId());
+			//int dummyId = Integer.parseInt(session.getId());
+			int dummyId = 1;
 			addItemCartService.add(form, dummyId, 0);
 		} else {
 			addItemCartService.add(form, user.getId(), 0);
+			System.out.println(user.getId());
 		}
-		return "redirect:/cart_list";
+		//後でショッピングカート内表示するようなメソッドにredirectしておく
+		return "";
 	}
 }

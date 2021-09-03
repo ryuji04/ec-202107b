@@ -51,21 +51,21 @@ public class AddItemCartService {
 			order.setUserId(userId);
 			order.setStatus(status);
 			//OrderItemのgetSubTotal()を使う
-			order.setTotalPrice(0);
-			orderRepository.insert(order);
+		    order.setTotalPrice(0);
+		    Order returnOrder2 = orderRepository.insert(order);
 			
 			//OrderItemのinsert
 			orderItem.setItemId(form.getItemId());
-			orderItem.setOrderId(order.getId());
+			orderItem.setOrderId(returnOrder2.getId());
 			orderItem.setQuantity(form.getQuantity());
 			orderItem.setSize(form.getSize());
-			orderItemRepository.insert(orderItem);
+			OrderItem returnOrderItem = orderItemRepository.insert(orderItem);
 			
 			//OrderToppingのinsert
 			List<Integer> toppingList = form.getToppingList();
 			for( Integer topping : toppingList ) {
 				OrderTopping orderTopping = new OrderTopping();
-				orderTopping.setOrderItemId(orderItem.getId());
+				orderTopping.setOrderItemId(returnOrderItem.getId());
 				orderTopping.setToppingId(topping);
 				orderToppingRepository.insert(orderTopping);
 			}
