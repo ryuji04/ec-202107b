@@ -57,6 +57,6 @@ public class AddItemCartController {
 			System.out.println(user.getId());
 		}
 		//後でショッピングカート内表示するようなメソッドにredirectしておく
-		return "";
+		return "redirect:/show-item/all";
 	}
 }
