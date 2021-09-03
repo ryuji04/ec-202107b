@@ -59,6 +59,22 @@ public class LoginUserController {
 			return "redirect:/show-item/all";
 		}
 
+<<<<<<< HEAD
+=======
+		return "redirect:/show-item/all";
+
+	}
+
+	/**
+	 * ログアウトをするメソッド.
+	 * 
+	 * @return ログイン画面
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/login-user";
+>>>>>>> develop
 	}
 	
 	//spring securityにログイン処理を任せるため以下をコメントアウト

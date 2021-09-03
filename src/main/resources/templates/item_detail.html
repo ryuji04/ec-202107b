@@ -79,11 +79,11 @@
 								</div>
 								<div class="col-sm-12">
 									<label class="radio-inline">
-										<input type="radio" name="size" checked="checked" th:value="${M}">
+										<input type="radio" name="size" checked="checked" value="M">
 										<span class="price">&nbsp;М&nbsp;</span>&nbsp;&nbsp;<span th:text="${item.priceM}">1,380円(税抜)</span>円(税抜)
 									</label>
 									<label class="radio-inline">
-										<input type="radio" name="size" th:value="${L}">
+										<input type="radio" name="size" value="L">
 										<span class="price">&nbsp;Ｌ&nbsp;</span>&nbsp;&nbsp;<span th:text="${item.priceL}">2,380円(税抜)</span>円（税抜）
 									</label>
 								</div>
@@ -104,7 +104,7 @@
 								</div>
 								<div class="col-sm-12" th:each="topping:${item.toppingList}">
 									<label class="checkbox-inline">
-											<input type="checkbox" name="toppingList" th:value="${topping.id}"><span th:text="${topping.name}"></span>オニオン												
+											<input type="checkbox" name="toppingList" th:value="${topping.id}"><span th:text="${topping.name}"></span>											
 									</label>
 									
 									

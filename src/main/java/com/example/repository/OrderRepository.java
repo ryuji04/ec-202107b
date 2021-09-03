@@ -43,17 +43,17 @@ public class OrderRepository {
 			if (idNumber != nowIdNumber) {
 				Order order = new Order();
 				order.setId(rs.getInt("id"));
-				order.setUserId(rs.getInt("userId"));
+				order.setUserId(rs.getInt("user_id"));
 				order.setStatus(rs.getInt("status"));
-				order.setTotalPrice(rs.getInt("totalPrice"));
-				order.setOrderDate(rs.getDate("orderDate"));
-				order.setDestinationName(rs.getString("destinationName"));
-				order.setDestinationEmail(rs.getString("destinationEmail"));
-				order.setDestinationZipcode(rs.getString("destinationZipcode"));
-				order.setDestinationAddress(rs.getString("destinationAddress"));
-				order.setDestinationTel(rs.getString("destinationTel"));
-				order.setDeliveryTime(rs.getTimestamp("deliveryTime"));
-				order.setPaymentMethod(rs.getInt("paymentMethod"));
+				order.setTotalPrice(rs.getInt("total_price"));
+				order.setOrderDate(rs.getDate("order_date"));
+				order.setDestinationName(rs.getString("destination_name"));
+				order.setDestinationEmail(rs.getString("destination_email"));
+				order.setDestinationZipcode(rs.getString("destination_zipcode"));
+				order.setDestinationAddress(rs.getString("destination_address"));
+				order.setDestinationTel(rs.getString("destination_tel"));
+				order.setDeliveryTime(rs.getTimestamp("delivery_time"));
+				order.setPaymentMethod(rs.getInt("payment_method"));
 				orderItemList = new ArrayList<>();
 				order.setOrderItemList(orderItemList);
 				orderList.add(order);
@@ -84,7 +84,7 @@ public class OrderRepository {
 				Item item = new Item();
 				item.setId(rs.getInt("i_id"));
 				item.setName(rs.getString("i_name"));
-				item.setDescription(rs.getString("i_description"));
+				item.setDescription(rs.getString("i_desctiption"));
 				item.setPriceM(rs.getInt("i_price_m"));
 				item.setPriceL(rs.getInt("i_price_l"));
 				item.setImagePath(rs.getString("i_image_path"));
@@ -130,9 +130,13 @@ public class OrderRepository {
 	 */
 	public Order findByUserIdAndStatus(Integer userId, Integer status) {
 		//formかなんかで送信された情報に入っているuserIdとstatusを元にOrderがあるかどうか探し出す
-		String sql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email,"
-				+ " destination_zipcode, destination_address, destination_tel, payment_method FROM "
-				+ "orders WHERE user_id = :userId AND status = :status ORDER BY id;";
+		String sql = "SELECT o.id, o.user_id, o.status, o.total_price, o.order_date, o.destination_name, o.destination_email, o.destination_zipcode, "
+				+ "o.destination_address, o.destination_tel, o.delivery_time, o.payment_method, oi.id oi_id, oi.item_id oi_item_id, oi.order_id oi_order_id,"
+				+ " oi.quantity oi_quantity, oi.size oi_size, i.id i_id, i.name i_name, i.description i_desctiption, i.price_m i_price_m, i.price_l i_price_l,"
+				+ " i.image_path i_image_path, i.deleted i_deleted,  ot.id ot_id, ot.topping_id ot_topping_id, ot.order_item_id ot_order_item_id, t.id t_id,"
+				+ " t.name t_name, t.price_m t_price_m, t.price_l t_price_l FROM orders AS o LEFT OUTER JOIN order_items AS oi ON o.id = oi.order_id"
+				+ " JOIN items AS i ON oi.item_id = i.id JOIN order_toppings AS ot ON oi.id = ot.order_item_id JOIN toppings AS t ON t.id = ot.topping_id"
+				+ " WHERE user_id = :userId AND status = :status ORDER BY o.id;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId).addValue("status", status);
 		List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
 		if (orderList.size() == 0) {
@@ -149,13 +153,9 @@ public class OrderRepository {
 	 */
 	public Order findById(Integer id) {
 		// SQL文作成
-//		String findByIdSql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, delivery_time, payment_method"
-//				+ " FROM orders WHERE id = :id; ORDER BY id DESC";
-		
 		String findByIdSql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, destination_tel, delivery_time, payment_method FROM orders WHERE id=:id ORDER BY id;";
 
 		// プレースホルダー埋め込み
-//		SqlParameterSource params = new MapSqlParameterSource().addValue("id", id);
 		SqlParameterSource params = new MapSqlParameterSource().addValue("id", 1);
 
 		// 実行
