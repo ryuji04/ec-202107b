@@ -1,23 +1,11 @@
 package com.example.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.savedrequest.SavedRequest;
-
-//import javax.servlet.http.HttpSession;
-
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-//import com.example.domain.LoginUserForm;
-//import com.example.domain.User;
-//import com.example.service.LoginUserService;
 
 /**
  * ログインをする為のコントローラークラス.
@@ -37,32 +25,34 @@ public class LoginUserController {
 //	@Autowired
 //	private LoginUserService loginUserService;
 //
-	@Autowired
-	private HttpSession session;
+//	@Autowired
+//	private HttpSession session;
 
 	/**
 	 * ログイン画面へ遷移.
 	 * 
-	 * @return　ログイン画面
+	 * @return ログイン画面
 	 */
 	@RequestMapping("/to-login")
-	public String toLogin(Model model, @RequestParam(required = false) String error
-							/*, HttpServletRequest request, HttpSession session*/)  {
-//		
-//		session = request.getSession(false);
-//		if(session != null) {
-//			SavedRequest savedRequest = (SavedRequest) session.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
-//			if(savedRequest != null) {
-//				return savedRequest.getRedirectUrl();
-//			}
-//		}
-		
+	public String toLogin(Model model, @RequestParam(required = false) String error) {
+
 		System.err.println("login error:" + error);
-		if(error != null) {
+		if (error != null) {
 			System.err.println("login failed");
 			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが不正です");
 		}
 		return "login";
+	}
+
+	@RequestMapping("/referer-check")
+	public String refererCheck(HttpServletRequest request) {
+		String url = request.getHeader("referer");
+		if ("http://localhost:8080/show-item-cart/cart".equals(url)) {
+			return "redirect:/order/confirm";
+		} else {
+			return "redirect:/show-item/all";
+		}
+
 	}
 //
 //	/**
