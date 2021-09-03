@@ -3,6 +3,9 @@ package com.example.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Order;
@@ -12,13 +15,19 @@ import com.example.service.OrderService;
 /**
  * ordersテーブルを操作するcontroller.
  * 
- * @author nayuta
+ * @author nayuta, okahikari
  */
 @Controller
 @RequestMapping("/order-item")
 public class OrderController {
+	
 	@Autowired
 	private OrderService service;
+	
+	@ModelAttribute
+	public OrderForm setUpForm() {
+		return new OrderForm();
+	}
 
 	@RequestMapping("/index")
 	public String index() {
@@ -26,19 +35,31 @@ public class OrderController {
 	}
 
 	/**
-	 * 注文最終確認画面.
+	 * 注文をする.
 	 * 
 	 * @param form
 	 * @return
 	 */
 	@RequestMapping("/order")
-	public String order(OrderForm form, Model model) {
+	public String order(@Validated OrderForm form ,BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return index();
+		}
 		// orderに情報変更後のorderを格納
 		Order order = service.upDateOrder(form);
-
 		model.addAttribute(order);
-
-		return "redirect:order_finished.html";
+		//後で注文完了画面にいけるようなメソッドにredirectする
+		return "redirect:/order-item/finished-order";
+	}
+	
+	/**
+	 * 注文完了画面に遷移するメソッド.
+	 * 
+	 * @return 注文完了画面
+	 */
+	@RequestMapping("/finished-order")
+	public String finishedOrder() {
+		return "order_finished";
 	}
 
 }
