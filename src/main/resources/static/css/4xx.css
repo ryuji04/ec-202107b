@@ -11,10 +11,33 @@
   position: absolute;/*絶対配置*/
   top: 50%;
   left: 20%;
-  color: #6eb0f9;
-  line-height: 1.4;
-  -webkit-box-reflect: below -10px -webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0) 10%,rgba(0, 0, 0, 0.6));
 } 
+
+.letter{
+	position: absolute;/*絶対配置*/
+  top: 45%;
+  left: 5%;
+  line-height: 1.4;
+	 color: #010079;
+	 font-size:45px;
+  text-shadow: 0 0 5px white;
+  border-left: solid 7px #010079;
+  background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+}
+
+.letter2{
+	position: absolute;/*絶対配置*/
+  top: 55%;
+  line-height: 1.4;
+	 color: #010079;
+	 left: 5%;
+	 font-size:45px;
+  text-shadow: 0 0 5px white;
+  border-left: solid 7px #010079;
+  background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+}
   
 
 .errorImg img {
