@@ -1,12 +1,12 @@
 package com.example.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.domain.LoginUser;
 import com.example.domain.User;
 import com.example.form.AddItemCartForm;
 import com.example.service.AddItemCartService;
@@ -21,8 +21,6 @@ import com.example.service.AddItemCartService;
 @RequestMapping("/add-item-cart")
 public class AddItemCartController {
 
-	@Autowired
-	private HttpSession session;
 
 	@Autowired
 	private AddItemCartService addItemCartService;
@@ -44,9 +42,9 @@ public class AddItemCartController {
 	 * @return カート内一覧表示画面
 	 */
 	@RequestMapping("/add-item")
-	public String add(AddItemCartForm form) {
+	public String add(AddItemCartForm form, @AuthenticationPrincipal LoginUser loginUser) {
 		// sessionからUser情報とってきてuserのidを取り出す
-		User user = (User) session.getAttribute("user");
+		User user = loginUser.getUser();
 		if (user == null) {
 			// sessionにuser情報が入っていなかったら仮のsessionIDを発行してuseridとしてセットする
 			// int dummyId = Integer.parseInt(session.getId());
