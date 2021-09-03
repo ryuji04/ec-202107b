@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.Item;
@@ -111,11 +113,11 @@ public class OrderRepository {
 	 */
 	public Order insert(Order order) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(order);
-		String sql = "INSERT INTO orders(user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, "
-				+ "destination_address, destination_tel, delivery_time, payment_method) VALUES "
-				+ "(:userId, :status, :totalPrice, :orderDate, :destinationName, :destinationEmail, :destinationZipcode, :destinationAddress, :destinationTel, "
-				+ ":deliveryTime, :paymentMethod);";
-		template.update(sql, param);
+		String sql = "INSERT INTO orders(user_id, status, total_price) VALUES (:userId, :status, :totalPrice);";
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		String[] keyColumnNames = {"id"};
+		template.update(sql, param, keyHolder, keyColumnNames);
+		order.setId(keyHolder.getKey().intValue());
 		return order;
 	}
 	
@@ -129,7 +131,7 @@ public class OrderRepository {
 	public Order findByUserIdAndStatus(Integer userId, Integer status) {
 		//formかなんかで送信された情報に入っているuserIdとstatusを元にOrderがあるかどうか探し出す
 		String sql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email,"
-				+ " destination_zipcode, destination_address, destination_tel, payment_method, user, order_item_list FROM "
+				+ " destination_zipcode, destination_address, destination_tel, payment_method FROM "
 				+ "orders WHERE user_id = :userId AND status = :status ORDER BY id;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId).addValue("status", status);
 		List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
