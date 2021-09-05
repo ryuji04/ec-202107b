@@ -1,7 +1,5 @@
 package com.example.form;
 
-import java.util.Date;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -33,9 +31,9 @@ public class OrderForm {
 	@NotBlank(message = "電話番号を入力してください")
 	private String destinationTel;
 	/** 配達日時 */
-	private Date deliveryDate;
+	private String deliveryDate;
 	/** 配達時間 */
-	private Integer deliveryTime;
+	private String deliveryTime;
 	/** 支払方法 */
 	private Integer paymentMethod;
 
@@ -87,11 +85,11 @@ public class OrderForm {
 		this.destinationTel = destinationTel;
 	}
 
-	public Integer getDeliveryTime() {
+	public String getDeliveryTime() {
 		return deliveryTime;
 	}
 
-	public void setDeliveryTime(Integer deliveryTime) {
+	public void setDeliveryTime(String deliveryTime) {
 		this.deliveryTime = deliveryTime;
 	}
 
@@ -103,11 +101,11 @@ public class OrderForm {
 		this.paymentMethod = paymentMethod;
 	}
 
-	public Date getDeliveryDate() {
+	public String getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(Date deliveryDate) {
+	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 

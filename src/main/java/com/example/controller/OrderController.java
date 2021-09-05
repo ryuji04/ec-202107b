@@ -1,7 +1,5 @@
 package com.example.controller;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +33,6 @@ public class OrderController {
 	public OrderForm setUpOrderForm() {
 		return new OrderForm();
 	}
-	
-	@Autowired
-	private OrderService service;
 
 	@RequestMapping("/index")
 	public String index(Model model) {
@@ -52,25 +47,14 @@ public class OrderController {
 	 */
 	@RequestMapping("/order")
 	public String order(@Validated OrderForm form, BindingResult result, Model model) {
-		//注文をするボタンを押された日時
-		Date date = new Date();
-
-		//ユーザー配達希望日時
-		Date deliveryDate = form.getDeliveryDate();
-//		int hour = (int)form.getDeliveryTime();
-//		deliveryDate.setHours(hour);
-//		deliveryDate.setMinutes(0);
-//		deliveryDate.setSeconds(0);
+		Order order = orderService.findById(form.getId());
 		
-		//日時のエラー追加
-		if( (deliveryDate.getTime() - date.getTime()) < 10800000 ) {
-			result.rejectValue("deliveryDate", "", "今から3時間後の日時をご入力ください");
-		}
 		if(result.hasErrors()) {
 			return index(model);
 		}
+		
 		// orderに情報変更後のorderを格納
-		Order order = orderService.upDateOrder(form);
+		order = orderService.upDateOrder(form);
 		model.addAttribute(order);
 		return finishedOrder();
 	}
