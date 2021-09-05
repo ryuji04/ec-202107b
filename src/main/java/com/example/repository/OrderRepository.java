@@ -22,7 +22,7 @@ import com.example.domain.Topping;
 /**
  * ordersテーブルを操作するリポジトリ.
  * 
- * @author okahikari
+ * @author okahikari,nayuta
  * 
  */
 @Repository
@@ -136,7 +136,7 @@ public class OrderRepository {
 				+ " i.image_path i_image_path, i.deleted i_deleted,  ot.id ot_id, ot.topping_id ot_topping_id, ot.order_item_id ot_order_item_id, t.id t_id,"
 				+ " t.name t_name, t.price_m t_price_m, t.price_l t_price_l FROM orders AS o LEFT OUTER JOIN order_items AS oi ON o.id = oi.order_id"
 				+ " JOIN items AS i ON oi.item_id = i.id JOIN order_toppings AS ot ON oi.id = ot.order_item_id JOIN toppings AS t ON t.id = ot.topping_id"
-				+ " WHERE user_id = :userId AND status = :status ORDER BY o.id;";
+				+ " WHERE user_id = :userId AND status = :status ORDER BY o.id DESC;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId).addValue("status", status);
 		List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
 		if (orderList.size() == 0) {
@@ -164,10 +164,16 @@ public class OrderRepository {
 	 */
 	public Order findById(Integer id) {
 		// SQL文作成
-		String findByIdSql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, destination_tel, delivery_time, payment_method FROM orders WHERE id=:id ORDER BY id;";
+		String findByIdSql = "SELECT o.id, o.user_id, o.status, o.total_price, o.order_date, o.destination_name, o.destination_email, o.destination_zipcode, "
+				+ "o.destination_address, o.destination_tel, o.delivery_time, o.payment_method, oi.id oi_id, oi.item_id oi_item_id, oi.order_id oi_order_id,"
+				+ " oi.quantity oi_quantity, oi.size oi_size, i.id i_id, i.name i_name, i.description i_desctiption, i.price_m i_price_m, i.price_l i_price_l,"
+				+ " i.image_path i_image_path, i.deleted i_deleted,  ot.id ot_id, ot.topping_id ot_topping_id, ot.order_item_id ot_order_item_id, t.id t_id,"
+				+ " t.name t_name, t.price_m t_price_m, t.price_l t_price_l FROM orders AS o LEFT OUTER JOIN order_items AS oi ON o.id = oi.order_id"
+				+ " JOIN items AS i ON oi.item_id = i.id JOIN order_toppings AS ot ON oi.id = ot.order_item_id JOIN toppings AS t ON t.id = ot.topping_id"
+				+ " WHERE o.id = :id ORDER BY oi.id DESC;";
 
 		// プレースホルダー埋め込み
-		SqlParameterSource params = new MapSqlParameterSource().addValue("id", 1);
+		SqlParameterSource params = new MapSqlParameterSource().addValue("id", id);
 
 		// 実行
 		List<Order> orderList = template.query(findByIdSql, params, ORDER_ROW_MAPPER);
@@ -183,36 +189,14 @@ public class OrderRepository {
 	public void upDate(Order order) {
 		// SQL文作成
 		String upDateSql = "UPDATE orders SET "
-				+ "destination_name=:destination_name, destination_email=:destination_email, destination_zipcode=:destination_zipcode, destination_address=:destination_address, "
-				+ "destination_tel=:destination_tel, delivery_time=:delivery_time, payment_method=:payment_method;";
+				+ "user_id=:userId, status=:status, total_price=:totalPrice, order_date=:orderDate, "
+				+ "destination_name=:destinationName, destination_email=:destinationEmail, destination_zipcode=:destinationZipcode, destination_address=:destinationAddress, "
+				+ "destination_tel=:destinationTel, delivery_time=:deliveryTime, payment_method=:paymentMethod WHERE id = :id;";
 
 		// プレースホルダー埋め込み
 		SqlParameterSource params = new BeanPropertySqlParameterSource(order);
 
 		// 実行
 		template.update(upDateSql, params);
-	}
-
-	/** 以下、削除の可能性あり */
-	/**
-	 * Order_statusを1(未入金)にする.
-	 */
-	public void upDateStatus1() {
-		// SQL文作成
-		String upDateStatus1Sql = "UPDATE orders SET status = 1;";
-
-		// 実行
-		template.query(upDateStatus1Sql, ORDER_ROW_MAPPER);
-	}
-
-	/**
-	 * Order_statusを2(入金済)にする.
-	 */
-	public void upDateStatus2() {
-		// SQL文作成
-		String upDateStatus1Sql = "UPDATE orders SET status = 2;";
-
-		// 実行
-		template.query(upDateStatus1Sql, ORDER_ROW_MAPPER);
 	}
 }

@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.Topping;
@@ -47,5 +49,25 @@ public class ToppingRepository {
 		toppingList = template.query(sql, TOPPING_ROW_MAPPER);
 
 		return toppingList;
+	}
+
+	/**
+	 * ToppingItemを全取得.
+	 * 
+	 * @return
+	 */
+	public Topping findById(Integer id) {
+		Topping topping = new Topping();
+
+		// SQL文作成
+		String sql = "SELECT id, name, price_m, price_l FROM toppings WHERE id = :id;";
+
+		// プレースホルダー埋め込み
+		SqlParameterSource params = new MapSqlParameterSource().addValue("id", id);
+
+		// 実行
+		topping = template.queryForObject(sql, params, TOPPING_ROW_MAPPER);
+
+		return topping;
 	}
 }
