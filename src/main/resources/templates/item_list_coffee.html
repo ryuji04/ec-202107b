@@ -115,9 +115,10 @@
 									th:src="@{/img_coffee/} + ${item.imagePath}"
 									class="img-responsive img-rounded item-img-center" width="200"
 									height="600">
+									<!-- 商品名にクラスを付けました -->
 							</a><br> <a href="item_detail.html"
 								th:href="@{/show-item-detail/detail?id=} + ${item.id}"
-								th:text="${item.name}">じゃがバターベーコン</a><br> <span
+								th:text="${item.name}" class="itemName">じゃがバターベーコン</a><br> <span
 								class="price">&nbsp;М&nbsp;</span>&nbsp;<span
 								th:text="${item.priceM}">&nbsp;&nbsp;1,380円(税抜)</span>&nbsp;円(税抜)<br>
 								<span class="price">&nbsp;Ｌ</span>&nbsp;<span

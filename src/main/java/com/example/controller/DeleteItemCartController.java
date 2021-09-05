@@ -15,10 +15,10 @@ import com.example.service.DeleteItemCartService;
 @Controller
 @RequestMapping("/delete-item-cart")
 public class DeleteItemCartController {
-	
+
 	@Autowired
 	private DeleteItemCartService deleteItemCartService;
-	
+
 	/**
 	 * カートの商品を削除する.
 	 * 
@@ -26,8 +26,8 @@ public class DeleteItemCartController {
 	 * @return カート内商品一覧表示画面
 	 */
 	@RequestMapping("/delete-item")
-	public String deleteById(Integer orderItemId) {
-		deleteItemCartService.deleteById(orderItemId);
-		return "redirect:/show-item/all";
+	public String deleteById(Integer id) {
+		deleteItemCartService.deleteById(id);
+		return "redirect:/show-item-cart/cart";
 	}
 }

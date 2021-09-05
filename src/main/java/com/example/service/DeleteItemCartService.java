@@ -18,31 +18,32 @@ import com.example.repository.OrderToppingRepository;
 @Service
 @Transactional
 public class DeleteItemCartService {
-	
+
 	@Autowired
 	private OrderRepository orderRepository;
-	
+
 	@Autowired
 	private OrderItemRepository orderItemRepository;
-	
+
 	@Autowired
 	private OrderToppingRepository orderToppingRepository;
-	
+
 	/**
 	 * カートの中の商品を削除する.
 	 * 
 	 * @param orderItemId 削除する注文商品情報
 	 */
 	public void deleteById(Integer orderItemId) {
-		//依存関係があるためorderItemIdをorderItemIdカラムとしてもつOrderToppingから削除する
+		// 依存関係があるためorderItemIdをorderItemIdカラムとしてもつOrderToppingから削除する
 		orderToppingRepository.deleteById(orderItemId);
+
 		orderItemRepository.deleteById(orderItemId);
-		
-		//削除したOrderItemを親にもつOrderのOrderItemListが空だったらOrderも削除する
-		int orderId = orderItemRepository.findById(orderItemId).getOrderId();
-		Order order = orderRepository.findById(orderId);
-		if( order.getOrderItemList().size() == 0 ) {
-			orderRepository.deleteById(orderId);
-		}
+
+		// 削除したOrderItemを親にもつOrderのOrderItemListが空だったらOrderも削除する
+//		int orderId = orderItemRepository.findById(orderItemId).getOrderId();
+//		Order order = orderRepository.findById(orderId);
+//		if (order.getOrderItemList().size() == 0) {
+//			orderRepository.deleteById(orderId);
+//		}
 	}
 }

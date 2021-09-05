@@ -11,6 +11,10 @@ html {
       -ms-text-size-adjust: 100%;
 }
 
+
+
+
+
 /* ここからsortBottonについての記述します */
 button.sortButton{
   display: block;
@@ -6355,6 +6359,32 @@ button.close {
     display: none !important;
   }
 }
+
+/* ここから商品名にカーソルをあてた時に生じる下線を消す記述をすます */
+a.itemName{
+	text-decoration: none;
+}
+/* ここまで */
+
+/* ここから商品名にデザインを変える記述をします */
+
+a.itemName{
+	display: block;
+font-family: 'Noto Sans JP', sans-serif;  
+  margin: 40px auto 0;
+  color:#770000;
+  background:#FFCC99;
+  box-shadow: 0px 5px 0 #000;
+  transition: .3s;
+}
+
+.itemName:hover {
+  color: #770000;
+  box-shadow: none;
+  background:white;
+  transform: translate3d(0, 5px, 0);
+} 
+/* ここまで */
 
 
 
