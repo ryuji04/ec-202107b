@@ -28,6 +28,9 @@ public class OrderController {
 	 * 
 	 * @return フォーム
 	 */
+	@Autowired
+	private OrderService orderService;
+	
 	@ModelAttribute
 	public OrderForm setUpOrderForm() {
 		return new OrderForm();
@@ -37,7 +40,7 @@ public class OrderController {
 	private OrderService service;
 
 	@RequestMapping("/index")
-	public String index() {
+	public String index(Model model) {
 		return "order_confirm.html";
 	}
 
@@ -54,20 +57,20 @@ public class OrderController {
 
 		//ユーザー配達希望日時
 		Date deliveryDate = form.getDeliveryDate();
-		int hour = form.getDeliveryTime();
-		deliveryDate.setHours(hour);
-		deliveryDate.setMinutes(0);
-		deliveryDate.setSeconds(0);
+//		int hour = (int)form.getDeliveryTime();
+//		deliveryDate.setHours(hour);
+//		deliveryDate.setMinutes(0);
+//		deliveryDate.setSeconds(0);
 		
 		//日時のエラー追加
 		if( (deliveryDate.getTime() - date.getTime()) < 10800000 ) {
 			result.rejectValue("deliveryDate", "", "今から3時間後の日時をご入力ください");
 		}
 		if(result.hasErrors()) {
-			return index();
+			return index(model);
 		}
 		// orderに情報変更後のorderを格納
-		Order order = service.upDateOrder(form);
+		Order order = orderService.upDateOrder(form);
 		model.addAttribute(order);
 		return finishedOrder();
 	}

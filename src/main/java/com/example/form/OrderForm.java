@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -34,10 +33,8 @@ public class OrderForm {
 	@NotBlank(message = "電話番号を入力してください")
 	private String destinationTel;
 	/** 配達日時 */
-	@NotNull(message = "配達日時を入力して下さい")
 	private Date deliveryDate;
 	/** 配達時間 */
-	@NotNull(message = "配達時間を入力してください")
 	private Integer deliveryTime;
 	/** 支払方法 */
 	private Integer paymentMethod;
