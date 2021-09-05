@@ -48,7 +48,6 @@ public class OrderController {
 		// orderに情報変更後のorderを格納
 		Order order = service.upDateOrder(form);
 		model.addAttribute(order);
-		//後で注文完了画面にいけるようなメソッドにredirectする
 		return "redirect:/order-item/finished-order";
 	}
 	

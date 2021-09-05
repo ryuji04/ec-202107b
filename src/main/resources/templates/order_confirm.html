@@ -180,31 +180,47 @@
 							<tr>
 								<td>
 									<div class="text-center">
-										お名前
+										<label for="inputName">お名前</label>
 									</div>
 								</td>
 								<td>
-									<input type="text" name="destinationName">
+									<div class="row">
+										<div class="col-sm-12">
+											<label class="control-label" style="color: red" for="inputPeriod">名前を入力してください</label>
+										</div>
+									</div>
+									<input type="text" name="destinationName" id="inputName" class="form-control" placeholder="Name">
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<div class="text-center">
-										メールアドレス
+										<label for="inputEmail">メールアドレス</label>
 									</div>
 								</td>
 								<td>
-									<input type="text" name="destinationEmail">
+									<div class="row">
+										<div class="col-sm-12">
+											<label class="control-label" style="color: red" for="inputPeriod">メールアドレスを入力してください</label>
+										</div>
+									</div>
+									<input type="text" name="destinationEmail" id="inputEmail" class="form-control" placeholder="Email">
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<div class="text-center">
-										郵便番号
+										<label for="inputZipcode">郵便番号</label>
 									</div>
 								</td>
 								<td>
-									<input type="text" name="destinationZipcode">&nbsp;&nbsp;<button>住所検索</button>
+									<div class="row">
+										<div class="col-sm-12">
+											<label class="control-label" style="color: red" for="inputPeriod">郵便番号を入力してください</label>
+										</div>
+									</div>
+									<input id="get_address_btn" type="button" value="住所検索">
+									<input type="text" id="inputZipcode" name="destinationZipcode" class="form-control" placeholder="Zipcode">
 								</td>
 							</tr>
 							<tr>
@@ -214,7 +230,12 @@
 									</div>
 								</td>
 								<td>
-									<input type="text" name="destinationAddress">
+									<div class="row">
+										<div class="col-sm-12">
+											<label class="control-label" style="color: red" for="inputPeriod">住所を入力してください</label>
+										</div>
+									</div>
+									<input type="text" name="destinationAddress" id="inputAddress" class="form-control">
 								</td>
 							</tr>
 							<tr>
@@ -224,6 +245,11 @@
 									</div>
 								</td>
 								<td>
+									<div class="row">
+										<div class="col-sm-12">
+											<label class="control-label" style="color: red" for="inputPeriod">電話番号を入力してください</label>
+										</div>
+									</div>
 									<input type="text" name="destinationTel">
 								</td>
 							</tr>
@@ -362,5 +388,7 @@
 	<!-- end container -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="../static/js/get_address.js" th:src="@{/js/get_address.js}"></script>
 </body>
 </html>
