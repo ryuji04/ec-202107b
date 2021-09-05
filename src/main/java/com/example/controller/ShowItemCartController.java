@@ -25,7 +25,12 @@ public class ShowItemCartController {
 
 	@RequestMapping("/cart")
 	public String showItemCart(Model model, @AuthenticationPrincipal LoginUser loginUser) {
-		User user = loginUser.getUser();
+		User user;
+		if( loginUser.getUser() != null ) {
+			user = loginUser.getUser();
+		} else {
+			return "/login-user/to-login";
+		}
 
 		// status=0の商品を取得
 		Order order = service.showItemCart(user.getId(), 0);
