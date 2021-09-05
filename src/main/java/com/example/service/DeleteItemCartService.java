@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.domain.Order;
 import com.example.repository.OrderItemRepository;
-import com.example.repository.OrderRepository;
 import com.example.repository.OrderToppingRepository;
 
 /**
@@ -18,9 +16,6 @@ import com.example.repository.OrderToppingRepository;
 @Service
 @Transactional
 public class DeleteItemCartService {
-
-	@Autowired
-	private OrderRepository orderRepository;
 
 	@Autowired
 	private OrderItemRepository orderItemRepository;
