@@ -48,33 +48,23 @@ public class ShowitemCartService {
 	 */
 	public Order showItemCart(Integer userId, Integer status) {
 		Order order = new Order();
-
 		order = repository.findByUserIdAndStatus(userId, status);
+		if( order != null ) {
+			List<OrderItem> orderItemList = orderItemRepository.findByOrderId(order.getId());
+			List<OrderTopping> orderToppingList = new ArrayList<>();
+		
+			for (OrderItem orderItem : orderItemList) {
+				orderToppingList = orderToppingRepository.findByOrderItemId(orderItem.getId());
+				orderItem.setItem(itemRepository.findById(orderItem.getItemId()));
+				orderItem.setOrderToppingList(orderToppingList);
 
-		List<OrderItem> orderItemList = orderItemRepository.findByOrderId(order.getId());
-
-		List<OrderTopping> orderToppingList = new ArrayList<>();
-
-		for (OrderItem orderItem : orderItemList) {
-
-			orderToppingList = orderToppingRepository.findByOrderItemId(orderItem.getId());
-
-			orderItem.setItem(itemRepository.findById(orderItem.getItemId()));
-
-			orderItem.setOrderToppingList(orderToppingList);
-
-			for (OrderTopping orderTopping : orderItem.getOrderToppingList()) {
-				Topping topping = toppingRepository.findById(orderTopping.getToppingId());
-
-				orderTopping.setTopping(topping);
+				for (OrderTopping orderTopping : orderItem.getOrderToppingList()) {
+					Topping topping = toppingRepository.findById(orderTopping.getToppingId());
+					orderTopping.setTopping(topping);
+				}
 			}
+			order.setOrderItemList(orderItemList);
 		}
-
-		order.setOrderItemList(orderItemList);
-
 		return order;
 	}
-
-	/** 合計金額を計算するメソッドも必要…？ */
-
 }
