@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +23,18 @@ import com.example.service.OrderService;
 @RequestMapping("/order-item")
 public class OrderController {
 	
-	@Autowired
-	private OrderService service;
-	
+	/**
+	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
+	 * 
+	 * @return フォーム
+	 */
 	@ModelAttribute
-	public OrderForm setUpForm() {
+	public OrderForm setUpOrderForm() {
 		return new OrderForm();
 	}
+	
+	@Autowired
+	private OrderService service;
 
 	@RequestMapping("/index")
 	public String index() {
@@ -38,17 +45,31 @@ public class OrderController {
 	 * 注文をする.
 	 * 
 	 * @param form
-	 * @return
+	 * @return 注文完了画面
 	 */
 	@RequestMapping("/order")
-	public String order(@Validated OrderForm form ,BindingResult result, Model model) {
+	public String order(@Validated OrderForm form, BindingResult result, Model model) {
+		//注文をするボタンを押された日時
+		Date date = new Date();
+
+		//ユーザー配達希望日時
+		Date deliveryDate = form.getDeliveryDate();
+		int hour = form.getDeliveryTime();
+		deliveryDate.setHours(hour);
+		deliveryDate.setMinutes(0);
+		deliveryDate.setSeconds(0);
+		
+		//日時のエラー追加
+		if( (deliveryDate.getTime() - date.getTime()) < 10800000 ) {
+			result.rejectValue("deliveryDate", "", "今から3時間後の日時をご入力ください");
+		}
 		if(result.hasErrors()) {
 			return index();
 		}
 		// orderに情報変更後のorderを格納
 		Order order = service.upDateOrder(form);
 		model.addAttribute(order);
-		return "redirect:/order-item/finished-order";
+		return finishedOrder();
 	}
 	
 	/**

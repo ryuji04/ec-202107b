@@ -1,6 +1,5 @@
 package com.example.form;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.validation.constraints.Email;
@@ -39,7 +38,7 @@ public class OrderForm {
 	private Date deliveryDate;
 	/** 配達時間 */
 	@NotNull(message = "配達時間を入力してください")
-	private Timestamp deliveryTime;
+	private Integer deliveryTime;
 	/** 支払方法 */
 	private Integer paymentMethod;
 
@@ -91,11 +90,11 @@ public class OrderForm {
 		this.destinationTel = destinationTel;
 	}
 
-	public Timestamp getDeliveryTime() {
+	public Integer getDeliveryTime() {
 		return deliveryTime;
 	}
 
-	public void setDeliveryTime(Timestamp deliveryTime) {
+	public void setDeliveryTime(Integer deliveryTime) {
 		this.deliveryTime = deliveryTime;
 	}
 

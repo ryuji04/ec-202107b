@@ -130,7 +130,8 @@
 		</div>
 
 		<!-- table -->
-		<form action="order_finished.html" th:action="@{/order-item/order}" th:object="${orderForm}" method="post">
+		<form action="order_finished.html" th:action="@{/order-item/order}" method="post" th:object="${orderForm}">
+		<input type="hidden" name="id" th:value="${order.id}">
 			<div class="row">
 				<div
 					class="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
@@ -146,7 +147,9 @@
 								<td>
 									<div class="row">
 										<div class="col-sm-12">
-											<label class="control-label" style="color: red" for="inputPeriod">名前を入力してください</label>
+											<label class="control-label" style="color: red" for="inputError">
+												名前を入力してください
+											</label>
 										</div>
 									</div>
 									<input type="text" name="destinationName" id="inputName" class="form-control" placeholder="Name">
@@ -235,47 +238,47 @@
 											<div class="col-sm-12">
 												<label class="radio-inline">
 													<input type="radio"
-														name="deliveryTime" value="10:00:00" checked="checked">
+														name="deliveryTime" value="10" checked="checked">
 													10時
 												</label>
 												<label class="radio-inline">
 													<input type="radio"
-														name="deliveryTime" value="11:00:00">
+														name="deliveryTime" value="11">
 													11時
 												</label>
 												<label class="radio-inline">
 													<input type="radio"
-														name="deliveryTime" value="12:00:00">
+														name="deliveryTime" value="12">
 													12時
 												</label><br>
 												<label class="radio-inline">
 													<input type="radio"
-														name="deliveryTime" value="13:00:00">
+														name="deliveryTime" value="13">
 													13時
 												</label>
 												<label class="radio-inline">
 													<input type="radio"
-														name="deliveryTime" value="14:00:00">
+														name="deliveryTime" value="14">
 													14時
 												</label>
 												<label class="radio-inline">
 													<input type="radio"
-														name="deliveryTime" value="15:00:00">
+														name="deliveryTime" value="15">
 													15時
 												</label><br>
 												<label class="radio-inline">
 													<input type="radio"
-														name="deliveryTime" value="16:00:00">
+														name="deliveryTime" value="16">
 													16時
 												</label>
 												<label class="radio-inline">
 													<input type="radio"
-														name="deliveryTime" value="17:00:00">
+														name="deliveryTime" value="17">
 													17時
 												</label>
 												<label class="radio-inline">
 													<input type="radio"
-														name="deliveryTime" value="18:00:00">
+														name="deliveryTime" value="18">
 													18時
 												</label><br>
 											</div>

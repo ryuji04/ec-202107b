@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +31,6 @@ public class OrderService {
 	public Order upDateOrder(OrderForm form) {
 		Order order = repository.findById(form.getId());
 		BeanUtils.copyProperties(form, order);
-		//
-		
 		// 支払い方法によってstatusを変更
 		if (form.getPaymentMethod() == 1) {
 			order.setStatus(1);
