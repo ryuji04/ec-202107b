@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,7 +8,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.domain.LoginUser;
 import com.example.domain.Order;
 import com.example.form.OrderForm;
 import com.example.service.OrderService;
@@ -23,11 +21,16 @@ import com.example.service.OrderService;
 @RequestMapping("/order-item")
 public class OrderController {
 	
+	/**
+	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
+	 * 
+	 * @return フォーム
+	 */
 	@Autowired
 	private OrderService orderService;
 	
 	@ModelAttribute
-	public OrderForm setUpForm() {
+	public OrderForm setUpOrderForm() {
 		return new OrderForm();
 	}
 
@@ -40,18 +43,20 @@ public class OrderController {
 	 * 注文をする.
 	 * 
 	 * @param form
-	 * @return
+	 * @return 注文完了画面
 	 */
 	@RequestMapping("/order")
-	public String order(@Validated OrderForm form ,BindingResult result, Model model, @AuthenticationPrincipal LoginUser loginUser) {
+	public String order(@Validated OrderForm form, BindingResult result, Model model) {
+		Order order = orderService.findById(form.getId());
+		
 		if(result.hasErrors()) {
 			return index(model);
 		}
+		
 		// orderに情報変更後のorderを格納
-		Order order = orderService.upDateOrder(form);
+		order = orderService.upDateOrder(form);
 		model.addAttribute(order);
-		//後で注文完了画面にいけるようなメソッドにredirectする
-		return "redirect:/order-item/finished-order";
+		return finishedOrder();
 	}
 	
 	/**
