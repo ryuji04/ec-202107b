@@ -34,7 +34,6 @@ public class ShowItemCartController {
 
 		// status=0の商品を取得
 		Order order = service.showItemCart(user.getId(), 0);
-		System.out.println(order);
 		if (order == null) {
 			model.addAttribute("blankMessage", "商品が1件もありません");
 		} else {

@@ -25,8 +25,9 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="item_list_pizza.html" th:href="@{/show-item/all}"> <!-- 企業ロゴ -->
-						<img alt="main log" src="../static/img_pizza/header_logo.png"
+					<a class="navbar-brand" href="item_list_pizza.html"
+						th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+						src="../static/img_pizza/header_logo.png"
 						th:src="@{/img_coffee/header_logo.png}" height="35">
 					</a>
 				</div>
@@ -53,10 +54,12 @@
 						<fieldset>
 							<legend> ログイン </legend>
 							<div class="alert alert-danger" th:if="${errorMessage}">
-									<p th:text="${errorMessage}">メールアドレスまたはパスワードが間違っています</p>
+								<p th:text="${errorMessage}">メールアドレスまたはパスワードが間違っています</p>
 							</div>
-							<label class="control-label"><!-- style="color: red" for="inputError"
-								th:text="${error}">メールアドレス、またはパスワードが間違っています --></label>
+							<label class="control-label">
+								<!-- style="color: red" for="inputError"
+								th:text="${error}">メールアドレス、またはパスワードが間違っています -->
+							</label>
 							<div class="form-group">
 								<label for="inputEmail">メールアドレス:</label> <input name="email"
 									type="text" id="inputEmail" class="form-control"
@@ -79,8 +82,8 @@
 		<div class="row">
 			<div class="text-center">
 
-			<!-- ユーザー登録画面へ遷移するように記述 -->
-				<a href="register_user.html" th:href="@{/register-user/to-insert}" >ユーザ登録はこちら</a>
+				<!-- ユーザー登録画面へ遷移するように記述 -->
+				<a href="register_user.html" th:href="@{/register-user/to-insert}">ユーザ登録はこちら</a>
 			</div>
 		</div>
 
@@ -89,5 +92,6 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
+	
 </body>
 </html>
