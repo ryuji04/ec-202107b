@@ -32,13 +32,5 @@ public class DeleteItemCartService {
 		// 依存関係があるためorderItemIdをorderItemIdカラムとしてもつOrderToppingから削除する
 		orderToppingRepository.deleteById(orderItemId);
 
-		orderItemRepository.deleteById(orderItemId);
-
-		// 削除したOrderItemを親にもつOrderのOrderItemListが空だったらOrderも削除する
-//		int orderId = orderItemRepository.findById(orderItemId).getOrderId();
-//		Order order = orderRepository.findById(orderId);
-//		if (order.getOrderItemList().size() == 0) {
-//			orderRepository.deleteById(orderId);
-//		}
-	}
+		orderItemRepository.deleteById(orderItemId);	}
 }

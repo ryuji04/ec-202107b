@@ -21,16 +21,21 @@ import com.example.service.OrderService;
 @RequestMapping("/order-item")
 public class OrderController {
 	
+	/**
+	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
+	 * 
+	 * @return フォーム
+	 */
 	@Autowired
-	private OrderService service;
+	private OrderService orderService;
 	
 	@ModelAttribute
-	public OrderForm setUpForm() {
+	public OrderForm setUpOrderForm() {
 		return new OrderForm();
 	}
 
 	@RequestMapping("/index")
-	public String index() {
+	public String index(Model model) {
 		return "order_confirm.html";
 	}
 
@@ -38,18 +43,20 @@ public class OrderController {
 	 * 注文をする.
 	 * 
 	 * @param form
-	 * @return
+	 * @return 注文完了画面
 	 */
 	@RequestMapping("/order")
-	public String order(@Validated OrderForm form ,BindingResult result, Model model) {
+	public String order(@Validated OrderForm form, BindingResult result, Model model) {
+		Order order = orderService.findById(form.getId());
+		
 		if(result.hasErrors()) {
-			return index();
+			return index(model);
 		}
+		
 		// orderに情報変更後のorderを格納
-		Order order = service.upDateOrder(form);
+		order = orderService.upDateOrder(form);
 		model.addAttribute(order);
-		//後で注文完了画面にいけるようなメソッドにredirectする
-		return "redirect:/order-item/finished-order";
+		return finishedOrder();
 	}
 	
 	/**
