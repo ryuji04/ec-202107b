@@ -29,7 +29,7 @@
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="item_list_pizza.html"
-						th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+						th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 						src="../static/img_pizza/header_logo.png"
 						th:src="@{/img_coffee/header_logo.png}" height="35">
 					</a>
@@ -126,9 +126,9 @@
 		<div class="row">
 			<div class="col-xs-offset-2 col-xs-8">
 				<div class="form-group text-center">
-					消費税:<span id="total-price" th:text="${order.getTax()}">消費税：8,000円</span>円<br>
+					消費税:<span id="total-price" th:text="${#numbers.formatInteger(order.getTax(),0,'COMMA')}">消費税：8,000円</span>円<br>
 					ご注文金額合計:<span id="total-price"
-						th:text="${order.getCalcTotalPrice()}">ご注文金額合計：38,000円 (税込)</span>円(税込)
+						th:text="${#numbers.formatInteger(order.getCalcTotalPrice(),0,'COMMA')}">ご注文金額合計：38,000円 (税込)</span>円(税込)
 				</div>
 			</div>
 		</div>
@@ -242,7 +242,7 @@
 													</label>
 											</div>
 											<div class="col-sm-5">
-												<input type="date" name="deliveryDate" id="inputDeliveryDateTime" th:field="*{deliveryDate}" class="form-control input-sm" />
+												<input type="date" style="width: 140px;" name="deliveryDate" id="inputDeliveryDateTime" th:field="*{deliveryDate}" class="form-control input-sm" />
 											</div>
 
 										</div>
@@ -365,7 +365,7 @@
 		th:src="@{/js/get_address.js}"></script>
 	<div class="footer">
 		<a class="navbar-brand" href="item_list_pizza.html"
-			th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+			th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 			src="../static/img_coffee/header_logo.png"
 			th:src="@{/img_coffee/header_logo.png}" height="35">
 
