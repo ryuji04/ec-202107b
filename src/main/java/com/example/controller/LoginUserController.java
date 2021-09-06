@@ -56,7 +56,7 @@ public class LoginUserController {
 		if ("http://localhost:8080/show-item-cart/cart".equals(url)) {
 			return "redirect:/order/confirm";
 		} else {
-			return "redirect:/show-item/all";
+			return "redirect:/";
 		}
 	}
 	// spring securityにログイン処理を任せるため以下をコメントアウト

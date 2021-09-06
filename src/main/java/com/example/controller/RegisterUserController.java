@@ -43,7 +43,7 @@ public class RegisterUserController {
 	 * 管理者情報を登録します.
 	 * 
 	 * @param form ユーザー登録情報フォーム
-	 * @return ログイン画面へリダイレクト
+	 * @return 商品一覧画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
 	public String insert(@Validated RegisterUserForm form, BindingResult result) {
@@ -71,7 +71,7 @@ public class RegisterUserController {
 		
 		// 登録処理
 		registerUserService.insert(user);
-		return "redirect:/login-user";
+		return "redirect:/";
 	}
 	
 	
