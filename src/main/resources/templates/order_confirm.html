@@ -154,7 +154,7 @@
 												名前を入力してください
 											</label>
 										</div>
-									<input type="text" name="destinationName" id="inputName" class="form-control" placeholder="Name" th:field="*{destinationName}">
+									<input type="text" name="destinationName" id="inputName" class="form-control" placeholder="Name" th:value="${user.name}" th:field="*{destinationName}">
 								</td>
 							</tr>
 							<tr>
@@ -171,7 +171,7 @@
 											</label>
 										</div>
 									</div>
-									<input type="text" name="destinationEmail" id="inputEmail" class="form-control" placeholder="Email" th:field="*{destinationEmail}">
+									<input type="text" name="destinationEmail" id="inputEmail" class="form-control" placeholder="Email" th:value="${user.email}" th:field="*{destinationEmail}">
 								</td>
 							</tr>
 							<tr>
