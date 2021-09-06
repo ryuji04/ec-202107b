@@ -92,13 +92,17 @@
 
 						<!-- 商品を並び変えるコードを記述 -->
 						<form method="post" action="item_list_coffee"
-							th:action="@{/show-item/sort-item}" class="form-horizontal">
+							th:action="@{/sort-item}" class="form-horizontal">
 							<button class="sortButton">並替え</button>
-							<br> <select name="arrangeItem">
+							<br> <select class="select" name="arrangeItem">
+								<option value="---">---</option>
 								<option value="1">料金：高い順</option>
 								<option value="2">料金：安い順</option>
 							</select>
 						</form>
+						<!-- 並び替えについてのJavaScriptを記述 -->
+						<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="../static/js/sortItem.js" th:src="@{/js/sortItem.js}"></script>
 
 					</div>
 				</div>
@@ -252,6 +256,9 @@
 			</ul>
 		</div>
 	</div>
+	
+	
+	
 </body>
 
 </html>
