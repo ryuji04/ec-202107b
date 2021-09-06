@@ -35,7 +35,6 @@ public class ShowOrderHistoryController {
 	@RequestMapping("/showDetail")
 	public String showOrderDetail(Model model, Integer id) {
 		Order order = showOrderHistoryService.searchOrderHistoryDetail(id);
-		System.out.println(order);
 		model.addAttribute("order", order);
 		
 		return "order_history_detail";
