@@ -43,7 +43,7 @@ public class AddItemCartService {
 		OrderItem orderItem = new OrderItem();
 		
 		Order returnOrder = orderRepository.findByUserIdAndStatus(userId, status);
-		
+		System.out.println(returnOrder + "userId:" + userId + "status:" +  status);
 		// もしfindByUserIdAndStatus()メソッドでOrderが見つからなかったらOrderインスタンス化してinsertする
 		if( returnOrder == null) {
 			//Orderのinsert
@@ -63,11 +63,13 @@ public class AddItemCartService {
 			
 			//OrderToppingのinsert
 			List<Integer> toppingList = form.getToppingList();
-			for( Integer topping : toppingList ) {
-				OrderTopping orderTopping = new OrderTopping();
-				orderTopping.setOrderItemId(returnOrderItem.getId());
-				orderTopping.setToppingId(topping);
-				orderToppingRepository.insert(orderTopping);
+			if( toppingList != null ) {
+				for( Integer topping : toppingList ) {
+					OrderTopping orderTopping = new OrderTopping();
+					orderTopping.setOrderItemId(returnOrderItem.getId());
+					orderTopping.setToppingId(topping);
+					orderToppingRepository.insert(orderTopping);
+				}
 			}
 			
 		} else {
@@ -82,11 +84,13 @@ public class AddItemCartService {
 			
 			//OrderToppingのinsert
 			List<Integer> toppingList = form.getToppingList();
-			for( Integer topping : toppingList ) {
-				OrderTopping orderTopping = new OrderTopping();
-				orderTopping.setOrderItemId(returnOrderItem.getId());
-				orderTopping.setToppingId(topping);
-				orderToppingRepository.insert(orderTopping);
+			if( toppingList != null ) {
+				for( Integer topping : toppingList ) {
+					OrderTopping orderTopping = new OrderTopping();
+					orderTopping.setOrderItemId(returnOrderItem.getId());
+					orderTopping.setToppingId(topping);
+					orderToppingRepository.insert(orderTopping);
+				}
 			}
 		}
 	}
