@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>お問い合わせフォーム</title>
+</head>
+<body>
+
+<h1>お問い合わせフォーム</h1>
+
+<form action="inquery_finished" th:action="@{/inquery/inquerySubmit}" method="post" th:object="${inqueryForm}">
+
+<span th:errors="*{name}" style="color:red;"></span><br>
+<label for="name">
+1.氏名:
+</label>
+<input name="name" type="text" id="name" th:field="*{name}"><br>
+<br>
+
+<span th:errors="*{mail}" style="color:red;"></span><br>
+<label for="mail">
+2.メールアドレス:
+</label>
+<input name="mail" type="email" id="mail" th:field="*{mail}"><br>
+<br>
+
+<span th:errors="*{tell}" style="color:red;"></span><br>
+<label for="tell">
+3.電話番号:
+</label>
+<input name="tell" type="text" id="tell" th:field="*{tell}"><br>
+<br>
+
+<span th:errors="*{inquery}" style="color:red;"></span><br>
+<label for="inquery">
+4.お問い合わせ内容:
+</label><br>
+<textarea name="inquery" id="inquery" rows="10" cols="35" th:field="*{inquery}"></textarea><br>
+
+<button>送信</button>
+
+</form>
+</body>
+</html>

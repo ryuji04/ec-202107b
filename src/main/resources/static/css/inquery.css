@@ -1,0 +1,37 @@
+/*@charset "UTF-8";
+
+h1{
+	color:red;
+}
+
+.image {
+  position: relative;
+  width:80%;
+  }
+
+.title{
+	position:absolute;
+	 top: 15%;
+  left: 20%;
+  line-height: 1.4;
+	 color: #010079;
+	 font-size:50%;
+}
+
+.name1{
+	position:absolute;
+	 top: 23%;
+  left: 20%;
+  line-height: 1.4;
+	 color: #010079;
+	 font-size:15px;
+}
+
+.name2{
+	position:absolute;
+	 top: 23%;
+  left: 25%;
+  line-height: 1.4;
+	 color: #010079;
+	 font-size:15px;
+}*/
