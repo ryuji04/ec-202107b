@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,8 +23,11 @@ public class ShowOrderHistoryController {
 	public String showOrderHistory(Model model, @AuthenticationPrincipal LoginUser loginUser) {
 		int userId = loginUser.getUser().getId();
 		
-		Order order = showOrderHistoryService.searchOrderHistory(userId);
-		model.addAttribute("order", order);
+		List<Order> orderList = showOrderHistoryService.searchOrderHistory(userId);
+		for(Order order : orderList) {
+			System.out.println(order);
+		}
+		model.addAttribute("orderList", orderList);
 		
 		return "order_history";
 	}
