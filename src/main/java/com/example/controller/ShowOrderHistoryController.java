@@ -24,6 +24,9 @@ public class ShowOrderHistoryController {
 		int userId = loginUser.getUser().getId();
 		
 		List<Order> orderList = showOrderHistoryService.searchOrderHistory(userId);
+		if(orderList.size() == 0) {
+			model.addAttribute("blankMessage", "注文履歴が1件もありません");
+		}
 		model.addAttribute("orderList", orderList);
 		
 		return "order_history";

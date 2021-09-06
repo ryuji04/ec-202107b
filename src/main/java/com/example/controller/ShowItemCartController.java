@@ -11,6 +11,7 @@ import com.example.domain.Order;
 import com.example.domain.OrderItem;
 import com.example.domain.User;
 import com.example.service.ShowitemCartService;
+
 /**
  * カート内表示機能を操作するcontroller.
  * 
@@ -22,11 +23,10 @@ public class ShowItemCartController {
 	@Autowired
 	private ShowitemCartService service;
 
-
 	@RequestMapping("/cart")
 	public String showItemCart(Model model, @AuthenticationPrincipal LoginUser loginUser) {
 		User user;
-		if( loginUser.getUser() != null ) {
+		if (loginUser.getUser() != null) {
 			user = loginUser.getUser();
 		} else {
 			return "/login-user/to-login";
@@ -34,13 +34,18 @@ public class ShowItemCartController {
 
 		// status=0の商品を取得
 		Order order = service.showItemCart(user.getId(), 0);
-		// orderのtotalPriceを取得
-		int totalPrice = 0;
-		for( OrderItem item : order.getOrderItemList()) {
-			totalPrice += item.getSubTotal();
+		System.out.println(order);
+		if (order == null) {
+			model.addAttribute("blankMessage", "商品が1件もありません");
+		} else {
+			int totalPrice = 0;
+			for (OrderItem item : order.getOrderItemList()) {
+				totalPrice += item.getSubTotal();
+			}
+			order.setTotalPrice(totalPrice);
+			model.addAttribute("order", order);
 		}
-		order.setTotalPrice(totalPrice);
-		model.addAttribute("order", order);
+		// orderのtotalPriceを取得
 
 		return "cart_list.html";
 	}

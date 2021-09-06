@@ -56,8 +56,11 @@
 			<div
 				class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
 				<h3 class="text-center">注文履歴</h3>
+				<div class="alert alert-danger text-center" th:if="${blankMessage}">
+					<p th:text="${blankMessage}"></p>
+				</div>
 				<table class="table table-striped item-list-table">
-					<tbody>
+					<tbody th:if="${order}">
 						<tr>
 							<th>
 								<div class="text-center">
