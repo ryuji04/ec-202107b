@@ -12,11 +12,8 @@ import org.springframework.ui.Model;
 
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
-import com.example.domain.OrderTopping;
 import com.example.form.OrderForm;
-import com.example.repository.ItemRepository;
 import com.example.repository.OrderRepository;
-import com.example.repository.ToppingRepository;
 
 /**
  * ordersテーブルを操作するService.
@@ -28,12 +25,6 @@ import com.example.repository.ToppingRepository;
 public class OrderService {
 	@Autowired
 	private OrderRepository repository;
-	
-	@Autowired
-	private ItemRepository itemRepository;
-	
-	@Autowired
-	private ToppingRepository toppingRepository;
 
 	/**
 	 * order情報を変更するメソッド.
