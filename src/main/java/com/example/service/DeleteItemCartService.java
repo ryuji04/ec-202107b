@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.domain.Order;
 import com.example.repository.OrderItemRepository;
-import com.example.repository.OrderRepository;
 import com.example.repository.OrderToppingRepository;
 
 /**
@@ -18,9 +16,6 @@ import com.example.repository.OrderToppingRepository;
 @Service
 @Transactional
 public class DeleteItemCartService {
-
-	@Autowired
-	private OrderRepository orderRepository;
 
 	@Autowired
 	private OrderItemRepository orderItemRepository;
@@ -37,13 +32,5 @@ public class DeleteItemCartService {
 		// 依存関係があるためorderItemIdをorderItemIdカラムとしてもつOrderToppingから削除する
 		orderToppingRepository.deleteById(orderItemId);
 
-		orderItemRepository.deleteById(orderItemId);
-
-		// 削除したOrderItemを親にもつOrderのOrderItemListが空だったらOrderも削除する
-//		int orderId = orderItemRepository.findById(orderItemId).getOrderId();
-//		Order order = orderRepository.findById(orderId);
-//		if (order.getOrderItemList().size() == 0) {
-//			orderRepository.deleteById(orderId);
-//		}
-	}
+		orderItemRepository.deleteById(orderItemId);	}
 }

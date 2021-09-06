@@ -157,7 +157,7 @@ public class OrderRepository {
 	}
 
 	/**
-	 * 注文前のOrderを取得するメソッド.
+	 * Orderを取得するメソッド.
 	 * 
 	 * @param id ID
 	 * @return 注文前のOrder
