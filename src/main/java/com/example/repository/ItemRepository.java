@@ -50,7 +50,7 @@ public class ItemRepository {
 	 * @return アイテム情報のリスト
 	 */
 	public List<Item> findByLikeName(String name) {
-		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name LIKE :name ORDER BY id;";
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name ILIKE :name ORDER BY id;";
 
 		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
 
