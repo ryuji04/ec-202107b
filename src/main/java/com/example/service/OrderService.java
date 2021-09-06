@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
@@ -40,23 +41,17 @@ public class OrderService {
 	 * @param form
 	 * @return 宛先名や宛先住所、状態の情報変更後のorder
 	 */
-	public Order upDateOrder(OrderForm form) {
+	public Order upDateOrder(OrderForm form, Model model) {
 		Order order = repository.findById(form.getId());
 		BeanUtils.copyProperties(form, order);
 		
 		//注文日時
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		String orderStrDate = dateFormat.format(date);
-//		System.out.println(orderStrDate);
-//		try {
-//			//注文日時をDate型に変換
-//			date = dateFormat.parse(orderStrDate);
-//			System.out.println(date + "testdate");
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
 		order.setOrderDate(date);
+		
+		//注文日時用のtimestampオブジェクトを用意
+		Timestamp orderTime = new Timestamp(date.getTime());
 		
 		//ユーザー配達希望日時
 		String deliveryStrDate = form.getDeliveryDate();
@@ -74,20 +69,18 @@ public class OrderService {
 		order.setDeliveryTime(timestamp);
 		
 		//日時のエラー追加
-		if( (timestamp.getTime() - date.getTime()) < 10800000 ) {
-			//result.rejectValue("deliveryDate", "", "今から3時間後の日時をご入力ください");
+		System.out.println(timestamp.getTime() - orderTime.getTime() + "testtesttest");
+		if( (timestamp.getTime() - orderTime.getTime() ) < 10800000 ) {
+			model.addAttribute("deliveryDateError", "今から3時間後の日時をご入力ください");
 		}
 		
 		//注文合計金額の格納
 		int totalPrice = 0;
-		for( OrderItem item : order.getOrderItemList()) {
-			item.setItem(itemRepository.findById(item.getItemId()));
-			for(OrderTopping orderTopping : item.getOrderToppingList()) {
-				orderTopping.setTopping(toppingRepository.findById(orderTopping.getToppingId()));
-			}
-			totalPrice += item.getSubTotal();
+		for( OrderItem orderItem : order.getOrderItemList()) {
+			totalPrice += orderItem.getSubTotal();
 		}
-		order.setTotalPrice(totalPrice);
+		int tax = (int)(totalPrice * 0.1);
+		order.setTotalPrice(totalPrice + tax);
 
 		// 支払い方法によってstatusを変更
 		if (form.getPaymentMethod() == 1) {

@@ -70,17 +70,6 @@ public class OrderRepository {
 				orderToppingList = new ArrayList<>();
 				orderItem.setOrderToppingList(orderToppingList);
 				orderItemList.add(orderItem);
-			}
-			
-			if(rs.getInt("ot_id") != 0 ) {
-				OrderTopping orderTopping = new OrderTopping();
-				orderTopping.setId(rs.getInt("ot_id"));
-				orderTopping.setToppingId(rs.getInt("ot_topping_id"));
-				orderTopping.setOrderItemId(rs.getInt("ot_order_item_id"));
-				orderToppingList.add(orderTopping);
-			}
-			
-			if(rs.getInt("i_id") != 0) {
 				Item item = new Item();
 				item.setId(rs.getInt("i_id"));
 				item.setName(rs.getString("i_name"));
@@ -89,9 +78,15 @@ public class OrderRepository {
 				item.setPriceL(rs.getInt("i_price_l"));
 				item.setImagePath(rs.getString("i_image_path"));
 				item.setDeleted(rs.getBoolean("i_deleted"));
+				orderItem.setItem(item);
 			}
 			
-			if(rs.getInt("t_id") != 0) {
+			if(rs.getInt("ot_id") != 0 ) {
+				OrderTopping orderTopping = new OrderTopping();
+				orderTopping.setId(rs.getInt("ot_id"));
+				orderTopping.setToppingId(rs.getInt("ot_topping_id"));
+				orderTopping.setOrderItemId(rs.getInt("ot_order_item_id"));
+				orderToppingList.add(orderTopping);
 				Topping topping = new Topping();
 				topping.setId(rs.getInt("t_id"));
 				topping.setName(rs.getString("t_name"));
@@ -99,6 +94,7 @@ public class OrderRepository {
 				topping.setPriceL(rs.getInt("t_price_l"));
 				toppingList = new ArrayList<>();
 				toppingList.add(topping);
+				orderTopping.setTopping(topping);
 			}
 			idNumber = nowIdNumber;
 		}
