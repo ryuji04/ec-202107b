@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>お問い合わせを受け付けました</title>
+</head>
+<body>
+<h1>下記のお問い合わせを受け付けました</h1>
+氏名:
+<span th:text="${name}"></span><br>
+
+メールアドレス:
+<span th:text="${mail}"></span><br>
+
+電話番号:
+<span th:text="${tell}"></span><br>
+
+お問い合わせ内容:
+<span th:text="${inquery}"></span><br>
+</body>
+</html>
