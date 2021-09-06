@@ -123,7 +123,7 @@
 		<div class="row">
 			<div class="col-xs-offset-2 col-xs-8">
 				<div class="form-group text-center">
-					ご注文金額合計:<span id="total-price" th:text="${order.totalPrice}">ご注文金額合計：38,000円 (税込)</span>円(税込)
+					ご注文金額合計:<span id="total-price" th:text="${#numbers.formatInteger(order.getCalcTotalPrice(), 1, 'COMMA')}">ご注文金額合計：38,000円 (税込)</span>円(税込)
 				</div>
 			</div>
 		</div>
