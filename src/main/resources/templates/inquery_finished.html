@@ -3,22 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>お問い合わせを受け付けました</title>
+<link href="../static/css/inquery.css" th:href="@{/css/inquery.css}"
+	rel="stylesheet">
 </head>
 <body>
-<h1>下記のお問い合わせを受け付けました</h1>
-氏名:
-<span th:text="${name}"></span><br>
-
-メールアドレス:
-<span th:text="${mail}"></span><br>
-
-電話番号:
-<span th:text="${tell}"></span><br>
-
-お問い合わせ内容:
-<span th:text="${inquery}"></span><br>
-
-<a href="item_list_coffee" th:href="@{/show-item/all}">商品一覧へ</a>
-
+<div class="finished">
+<!-- <img class="image" src="static/img_coffee/coffee.jpeg" th:src="@{/img_coffee/coffee.jpeg}"> -->
+<h1 class="title">下記のお問い合わせを受け付けました</h1>
+<span class="name1">氏名:</span>
+<span class="name2" th:text="${name}"></span><br>
+<br>
+<span class="mi">メールアドレス:</span>
+<span class="letter" th:text="${mail}"></span><br>
+<br>
+<span class="letter">電話番号:</span>
+<span class="letter" th:text="${tell}"></span><br>
+<br>
+<span class="letter">お問い合わせ内容:</span>
+<span class="letter" th:text="${inquery}"></span><br>
+<br>
+<a class="letter" href="item_list_coffee" th:href="@{/show-item/all}">商品一覧へ</a>
+</div>
 </body>
 </html>

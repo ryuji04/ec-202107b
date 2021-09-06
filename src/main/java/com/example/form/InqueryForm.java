@@ -1,4 +1,9 @@
 package com.example.form;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 /**
  * お問い合わせ内容のフォームクラス
  * 
@@ -8,12 +13,18 @@ package com.example.form;
 public class InqueryForm {
 	
 	/** 名前 */
+	@NotBlank(message="名前は必須です")
 	private String name;
 	/**　メールアドレス */
+	@NotBlank(message="メールアドレスは必須です")
+	@Email(message="Eメールの形式が不正です")
 	private String mail;
 	/**　電話番号 */
+	@NotBlank(message="電話番号は必須です")
+	@Pattern(regexp = "^0\\d{2,3}-\\d{1,4}-\\d{4}$", message = "電話番号はXXXX-XXXX-XXXXの形式で入力してください")
 	private String tell;
 	/**　お問い合わせ内容 */
+	@NotBlank(message="お問い合わせ内容は必須です")
 	private String inquery;
 	public String getName() {
 		return name;
