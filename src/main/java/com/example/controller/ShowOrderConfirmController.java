@@ -1,16 +1,17 @@
 package com.example.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.LoginUser;
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
 import com.example.domain.User;
+import com.example.form.OrderForm;
 import com.example.service.ShowitemCartService;
 
 /**
@@ -21,6 +22,15 @@ import com.example.service.ShowitemCartService;
 @Controller
 @RequestMapping("/order-confirm")
 public class ShowOrderConfirmController {
+	
+	@ModelAttribute
+	public OrderForm setUpOrderForm() {
+		OrderForm orderForm = new OrderForm();
+		orderForm.setDeliveryTime("10");
+		orderForm.setPaymentMethod(1);
+		orderForm.setDeliveryDate("2021-09-10");
+		return orderForm;
+	}
 
 	@Autowired
 	private ShowitemCartService showitemCartService;

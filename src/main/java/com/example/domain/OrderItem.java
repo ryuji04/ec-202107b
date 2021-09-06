@@ -99,7 +99,7 @@ public class OrderItem {
 				totalToppingPrice += topping.getPriceL();
 			}
 		}
-		return itemPrice + totalToppingPrice;
+		return (itemPrice + totalToppingPrice) * quantity;
 	}
 
 	@Override
