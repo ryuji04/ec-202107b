@@ -27,6 +27,12 @@ public class ShowItemDetailService {
 	@Autowired
 	private ItemRepository itemRepository;
 
+	/**
+	 * idから商品の詳細情報を取得するメソッド.
+	 * 
+	 * @param id
+	 * @return アイテム詳細情報
+	 */
 	public Item showItemDetailService(Integer id) {
 		// アイテムを取得
 		Item item = itemRepository.findById(id);
