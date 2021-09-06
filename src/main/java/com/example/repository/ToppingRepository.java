@@ -43,7 +43,7 @@ public class ToppingRepository {
 		List<Topping> toppingList = new ArrayList<>();
 
 		// SQL文作成
-		String sql = "SELECT id, name, price_m, price_l FROM toppings;";
+		String sql = "SELECT id, name, price_m, price_l FROM toppings ORDER BY id;";
 
 		// 実行
 		toppingList = template.query(sql, TOPPING_ROW_MAPPER);
@@ -52,7 +52,7 @@ public class ToppingRepository {
 	}
 
 	/**
-	 * ToppingItemを全取得.
+	 * idからトッピングを取得.
 	 * 
 	 * @return
 	 */
