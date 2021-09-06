@@ -112,7 +112,7 @@ public class OrderController {
 		// orderに情報変更後のorderを格納
 		order = orderService.upDateOrder(form, model);
 		model.addAttribute(order);
-		return finishedOrder();
+		return "redirect:/order-item/finished-order";
 	}
 
 	/**

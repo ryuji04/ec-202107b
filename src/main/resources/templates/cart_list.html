@@ -139,9 +139,10 @@
 		<div class="row" th:if="${order}">
 			<div class="col-xs-offset-2 col-xs-8">
 				<div class="form-group text-center">
-					消費税:<span id="total-price" th:text="${order.getTax()}">消費税：8,000円</span>円<br>
+				<!-- 3桁毎にカンマ区切りになるように記述 -->
+					消費税:<span  id="total-price" th:text="${#numbers.formatInteger(order.getTax(),0,'COMMA')}">消費税：8,000円</span>円<br>
 					ご注文金額合計:<span id="total-price"
-						th:text="${order.getCalcTotalPrice()}">ご注文金額合計：38,000円 (税込)</span>円(税込)
+						th:text="${#numbers.formatInteger(order.getCalcTotalPrice(),0,'COMMA')}">ご注文金額合計：38,000円 (税込)</span>円(税込)
 				</div>
 			</div>
 		</div>
