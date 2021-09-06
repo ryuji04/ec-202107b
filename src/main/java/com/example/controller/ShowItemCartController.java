@@ -23,6 +23,11 @@ public class ShowItemCartController {
 	@Autowired
 	private ShowitemCartService service;
 
+	/**
+	 * @param model
+	 * @param loginUser
+	 * @return
+	 */
 	@RequestMapping("/cart")
 	public String showItemCart(Model model, @AuthenticationPrincipal LoginUser loginUser) {
 		User user;
