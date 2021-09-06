@@ -73,8 +73,8 @@
 							<div class="form-group">
 								<label for="inputZipcode">郵便番号(ハイフンあり):</label> <label
 									class="control-label" style="color: red" for="inputError"
-									th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">
-									郵便番号を入力してください </label> <input id="get_address_btn" type="button"
+									th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}"></label>
+									<input id="get_address_btn" type="button"
 									value="住所検索"> <input type="text" th:field="*{zipcode}"
 									id="inputZipcode" class="form-control" placeholder="123-4567">
 							</div>
@@ -91,7 +91,7 @@
 								<label for="inputTel">電話番号(ハイフンあり):</label> <label class="control-label"
 									style="color: red" for="inputError"
 									th:if="${#fields.hasErrors('telephone')}"
-									th:errors="*{telephone}">電話番号を入力してください</label> <input
+									th:errors="*{telephone}"></label> <input
 									type="text" th:field="*{telephone}" id="inputTel"
 									class="form-control" placeholder="090-1234-5678">
 							</div>
