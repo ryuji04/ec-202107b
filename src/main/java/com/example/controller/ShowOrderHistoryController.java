@@ -24,11 +24,17 @@ public class ShowOrderHistoryController {
 		int userId = loginUser.getUser().getId();
 		
 		List<Order> orderList = showOrderHistoryService.searchOrderHistory(userId);
-		for(Order order : orderList) {
-			System.out.println(order);
-		}
 		model.addAttribute("orderList", orderList);
 		
 		return "order_history";
+	}
+	
+	@RequestMapping("/showDetail")
+	public String showOrderDetail(Model model, Integer id) {
+		Order order = showOrderHistoryService.searchOrderHistoryDetail(id);
+		System.out.println(order);
+		model.addAttribute("order", order);
+		
+		return "order_history_detail";
 	}
 }

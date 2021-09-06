@@ -11,8 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
+import com.example.domain.OrderTopping;
 import com.example.form.OrderForm;
+import com.example.repository.ItemRepository;
 import com.example.repository.OrderRepository;
+import com.example.repository.ToppingRepository;
 
 /**
  * ordersテーブルを操作するService.
@@ -24,6 +27,12 @@ import com.example.repository.OrderRepository;
 public class OrderService {
 	@Autowired
 	private OrderRepository repository;
+	
+	@Autowired
+	private ItemRepository itemRepository;
+	
+	@Autowired
+	private ToppingRepository toppingRepository;
 
 	/**
 	 * order情報を変更するメソッド.
@@ -72,7 +81,11 @@ public class OrderService {
 		//注文合計金額の格納
 		int totalPrice = 0;
 		for( OrderItem item : order.getOrderItemList()) {
-			System.out.println(item);
+			item.setItem(itemRepository.findById(item.getItemId()));
+			for(OrderTopping orderTopping : item.getOrderToppingList()) {
+				orderTopping.setTopping(toppingRepository.findById(orderTopping.getToppingId()));
+			}
+			totalPrice += item.getSubTotal();
 		}
 		order.setTotalPrice(totalPrice);
 
