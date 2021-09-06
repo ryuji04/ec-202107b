@@ -11,6 +11,12 @@ import com.example.domain.Item;
 import com.example.domain.LoginUser;
 import com.example.service.ShowItemService;
 
+/**
+ * 商品一覧の情報を操作するコントローラ.
+ * 
+ * @author hayato.saishu
+ *
+ */
 @Controller
 @RequestMapping("/show-item")
 public class ShowItemController {
