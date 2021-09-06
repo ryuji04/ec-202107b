@@ -195,4 +195,22 @@ public class OrderRepository {
 		// 実行
 		template.update(upDateSql, params);
 	}
+	
+	public List<Order> findByIdAndStatusHistory(Integer userId, Integer status1, Integer status2, Integer status3, Integer status4) {
+		String sql = "SELECT o.id, o.user_id, o.status, o.total_price, o.order_date, o.destination_name, o.destination_email, o.destination_zipcode, "
+				+ "o.destination_address, o.destination_tel, o.delivery_time, o.payment_method, oi.id oi_id, oi.item_id oi_item_id, oi.order_id oi_order_id,"
+				+ " oi.quantity oi_quantity, oi.size oi_size, i.id i_id, i.name i_name, i.description i_desctiption, i.price_m i_price_m, i.price_l i_price_l,"
+				+ " i.image_path i_image_path, i.deleted i_deleted,  ot.id ot_id, ot.topping_id ot_topping_id, ot.order_item_id ot_order_item_id, t.id t_id,"
+				+ " t.name t_name, t.price_m t_price_m, t.price_l t_price_l FROM orders AS o LEFT OUTER JOIN order_items AS oi ON o.id = oi.order_id"
+				+ " JOIN items AS i ON oi.item_id = i.id JOIN order_toppings AS ot ON oi.id = ot.order_item_id JOIN toppings AS t ON t.id = ot.topping_id"
+				+ " WHERE user_id = :userId AND status = :status1 OR status = :status2 OR status = :status3 OR status = :status4 ORDER BY o.id DESC;";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId).addValue("status1", status1).addValue("status2", status2).addValue("status3", status3).addValue("status4", status4);
+		List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
+		if (orderList.size() == 0) {
+			return null;
+		}
+		return orderList;
+	}
 }
+
+
