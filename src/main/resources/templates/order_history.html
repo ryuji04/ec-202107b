@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>コーヒー屋のネット注文</title>
-<link th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet">
+<link  th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet">
 <link th:href="@{/css/piza.css}" href="../static/css/piza.css" rel="stylesheet">
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -26,8 +26,8 @@
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="item_list_pizza.html" th:href="@{/show-item/all}">
-					<!-- 企業ロゴ -->
-					<img alt="main log" src="../static/img_pizza/header_logo.png" th:src="@{/img_coffee/header_logo.png}" height="35">
+						 <!-- 企業ロゴ -->
+						<img alt="main log" src="../static/../static/img_pizza/header_logo.png" th:src="@{/img_coffee/header_logo.png}" height="35">
 					</a>
 				</div>
 
@@ -55,24 +55,58 @@
 		<div class="row">
 			<div
 				class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
-				<h3 class="text-center">決済が完了しました！</h3>
-				<div class="text-center">
-					<p>この度はご注文ありがとうございます。</p>
-					<p>お支払い先は、お送りしたメールに記載してありますのでご確認ください。</p>
-					<p>メールが届かない場合は「注文履歴」からご確認ください。</p>
+				<h3 class="text-center">注文履歴</h3>
+				<div class="alert alert-danger text-center" th:if="${blankMessage}">
+					<p th:text="${blankMessage}"></p>
 				</div>
-			</div>
-		</div>
-
-		<br><br>
-		<div class="row">
-			<div class="col-xs-offset-5 col-xs-2">
-				<div class="form-group">
-					<form action="order_finished.html" th:action="@{/show-item/all}">
-						<input class="form-control btn btn-warning btn-block"
-							type="submit" value="トップ画面を表示する">
-					</form>
-				</div>
+				<table class="table table-striped item-list-table">
+					<tbody th:if="${orderList}">
+						<tr>
+							<th>
+								<div class="text-center">
+									注文日
+								</div>
+							</th>
+							<th>
+								<div class="text-center">
+									注文内容
+								</div>
+							</th>
+							<th>
+								<div class="text-center">
+									宛先氏名
+								</div>
+							</th>
+							<th>
+								<div class="text-center">
+									合計金額
+								</div>
+							</th>
+						</tr>
+						<tr th:each="order:${orderList}">
+							<td>
+								<div class="text-center">
+									<span th:text="${#dates.format(order.orderDate, 'yyyy年MM月dd日')}"></span>
+								</div>
+							</td>
+							<td>
+								<div class="text-center">
+									<a th:href="@{/order-history/showDetail?id=} + ${order.id}">注文詳細</a>
+								</div>	
+							</td>
+							<td>
+								<div class="text-center">
+									<span th:text="${order.destinationName}"></span>
+								</div>
+							</td>
+							<td>
+								<div class="text-center">
+									<span th:text="${#numbers.formatInteger(order.getCalcTotalPrice(), 1, 'COMMA')}"></span>円
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
