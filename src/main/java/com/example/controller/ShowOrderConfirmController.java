@@ -59,9 +59,7 @@ public class ShowOrderConfirmController {
 			totalPrice += item.getSubTotal();
 		}
 		order.setTotalPrice(totalPrice);
-		System.out.println(user);
 		model.addAttribute("order", order);
-		model.addAttribute("user", user);
 
 		return "order_confirm";
 	}
