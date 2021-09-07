@@ -39,7 +39,7 @@ public class ShowItemCartController {
 
 		// status=0の商品を取得
 		Order order = service.showItemCart(user.getId(), 0);
-		if (order.getOrderItemList().size() == 0) {
+		if (order == null) {
 			model.addAttribute("blankMessage", "商品が1件もありません");
 		} else {
 			int totalPrice = 0;
