@@ -72,6 +72,9 @@ public class ShowItemController {
 		} else if ("2".equals(arrangeItem)) {
 			itemList = showItemService.arrangeInAsc();
 			model.addAttribute("itemList", itemList);
+		} else if("0".equals(arrangeItem)){
+			 itemList = showItemService.showList();
+			model.addAttribute("itemList", itemList);
 		}
 
 		return "item_list_coffee";
