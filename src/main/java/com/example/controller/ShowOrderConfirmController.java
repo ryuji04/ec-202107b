@@ -24,17 +24,28 @@ import com.example.service.ShowitemCartService;
 public class ShowOrderConfirmController {
 	
 	@ModelAttribute
-	public OrderForm setUpOrderForm() {
+	public OrderForm setUpOrderForm(@AuthenticationPrincipal LoginUser loginUser) {
 		OrderForm orderForm = new OrderForm();
+		User user = loginUser.getUser();
 		orderForm.setDeliveryTime("10");
 		orderForm.setPaymentMethod(1);
 		orderForm.setDeliveryDate("2021-09-10");
+		orderForm.setDestinationName(user.getName());
+		orderForm.setDestinationEmail(user.getEmail());
+		orderForm.setDestinationAddress(user.getAddress());
 		return orderForm;
 	}
 
 	@Autowired
 	private ShowitemCartService showitemCartService;
 	
+	/**
+	 * 注文確認画面を表示する.
+	 * 
+	 * @param model モデル
+	 * @param loginUser　ログインユーザー
+	 * @return 注文確認ページ
+	 */
 	@RequestMapping("")
 	public String searchById(Model model, @AuthenticationPrincipal LoginUser loginUser) {
 		User user = loginUser.getUser();
@@ -48,7 +59,6 @@ public class ShowOrderConfirmController {
 			totalPrice += item.getSubTotal();
 		}
 		order.setTotalPrice(totalPrice);
-
 		model.addAttribute("order", order);
 
 		return "order_confirm";

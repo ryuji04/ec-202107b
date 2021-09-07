@@ -23,6 +23,11 @@ public class ShowItemCartController {
 	@Autowired
 	private ShowitemCartService service;
 
+	/**
+	 * @param model
+	 * @param loginUser
+	 * @return
+	 */
 	@RequestMapping("/cart")
 	public String showItemCart(Model model, @AuthenticationPrincipal LoginUser loginUser) {
 		User user;
@@ -34,7 +39,7 @@ public class ShowItemCartController {
 
 		// status=0の商品を取得
 		Order order = service.showItemCart(user.getId(), 0);
-		if (order == null) {
+		if (order.getOrderItemList().size() == 0) {
 			model.addAttribute("blankMessage", "商品が1件もありません");
 		} else {
 			int totalPrice = 0;

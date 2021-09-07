@@ -30,7 +30,7 @@
 					</button>
 
 					<a class="navbar-brand" href="item_list_pizza.html"
-						th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+						th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 						src="../static/img_coffee/header_logo.png"
 						th:src="@{/img_coffee/header_logo.png}" height="35">
 
@@ -70,7 +70,7 @@
 						<p th:text="${blankMessage}"></p>
 					</div>
 					<div class="panel-body">
-						<form method="post" action="#" th:action="@{/show-item/like-name}"
+						<form method="post" action="#" th:action="@{/like-name}"
 							class="form-horizontal">
 							<div class="form-group">
 								<label for="code" class="control-label col-sm-2">商品名</label>
@@ -92,7 +92,7 @@
 
 						<!-- 商品を並び変えるコードを記述 -->
 						<form method="post" action="item_list_coffee"
-							th:action="@{/show-item/sort-item}" class="form-horizontal">
+							th:action="@{/sort-item}" class="form-horizontal">
 							<button class="sortButton">並替え</button>
 							<br> <select name="arrangeItem">
 								<option value="1">料金：高い順</option>
@@ -238,7 +238,7 @@
 	<script src="../static/js/bootstrap.min.js"></script>
 	<div class="footer">
 		<a class="navbar-brand" href="item_list_pizza.html"
-			th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+			th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 			src="../static/img_coffee/header_logo.png"
 			th:src="@{/img_coffee/header_logo.png}" height="35">
 

@@ -26,7 +26,7 @@
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="item_list_pizza.html"
-						th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+						th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 						src="../static/img_pizza/header_logo.png"
 						th:src="@{/img_coffee/header_logo.png}" height="35">
 					</a>
@@ -59,24 +59,24 @@
 									style="color: red" for="inputError"
 									th:if="${#fields.hasErrors('name')}" th:errors="*{name}">名前を入力してください</label>
 								<input type="text" th:field="*{name}" id="inputName"
-									class="form-control" placeholder="Name">
+									class="form-control" placeholder="山田太郎">
 							</div>
 							<div class="form-group">
 								<label for="inputEmail">メールアドレス:</label><label
 									class="control-label" style="color: red" for="inputError"
 									th:if="${#fields.hasErrors('email')}" th:errors="*{email}">メールアドレスを入力してください</label>
 								<input type="text" th:field="*{email}" id="inputEmail"
-									class="form-control" placeholder="Email">
+									class="form-control" placeholder="sample@gmail.com">
 							</div>
 
 
 							<div class="form-group">
-								<label for="inputZipcode">郵便番号:</label> <label
+								<label for="inputZipcode">郵便番号(ハイフンあり):</label> <label
 									class="control-label" style="color: red" for="inputError"
-									th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">
-									郵便番号を入力してください </label> <input id="get_address_btn" type="button"
+									th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}"></label>
+									<input id="get_address_btn" type="button"
 									value="住所検索"> <input type="text" th:field="*{zipcode}"
-									id="inputZipcode" class="form-control" placeholder="Zipcode">
+									id="inputZipcode" class="form-control" placeholder="123-4567">
 							</div>
 
 
@@ -85,23 +85,23 @@
 									class="control-label" style="color: red" for="inputError"
 									th:if="${#fields.hasErrors('address')}" th:errors="*{address}">住所を入力してください</label>
 								<input type="text" th:field="*{address}" id="inputAddress"
-									class="form-control" placeholder="Address">
+									class="form-control" placeholder="東京都板橋区南常盤台">
 							</div>
 							<div class="form-group">
-								<label for="inputTel">電話番号:</label> <label class="control-label"
+								<label for="inputTel">電話番号(ハイフンあり):</label> <label class="control-label"
 									style="color: red" for="inputError"
 									th:if="${#fields.hasErrors('telephone')}"
-									th:errors="*{telephone}">電話番号を入力してください</label> <input
+									th:errors="*{telephone}"></label> <input
 									type="text" th:field="*{telephone}" id="inputTel"
-									class="form-control" placeholder="Tel">
+									class="form-control" placeholder="090-1234-5678">
 							</div>
 							<div class="form-group">
-								<label for="inputPassword">パスワード:</label> <label
+								<label for="inputPassword">パスワード(8文字以上16文字以下):</label> <label
 									class="control-label" style="color: red" for="inputError"
 									th:if="${#fields.hasErrors('password')}"
 									th:errors="*{password}">パスワードを入力してください</label> <input
 									type="password" th:field="*{password}" id="inputPassword"
-									class="form-control" placeholder="Password">
+									class="form-control" placeholder="">
 							</div>
 							<div class="form-group">
 								<label for="inputConfirmationPassword">確認用パスワード:</label> <label
@@ -110,7 +110,7 @@
 									th:errors="*{confirmPassword}">確認用パスワードを入力してください</label> <input
 									type="password" th:field="*{confirmPassword}"
 									id="inputConfirmationPassword" class="form-control"
-									placeholder="Confirmation Password">
+									placeholder="確認用パスワード">
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary">登録</button>
@@ -131,7 +131,7 @@
 		th:src="@{/js/get_address.js}"></script>
 	<div class="footer">
 		<a class="navbar-brand" href="item_list_pizza.html"
-			th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+			th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 			src="../static/img_coffee/header_logo.png"
 			th:src="@{/img_coffee/header_logo.png}" height="35">
 

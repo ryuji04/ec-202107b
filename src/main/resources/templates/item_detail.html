@@ -29,7 +29,7 @@
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="item_list_pizza.html"
-						th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+						th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 						src="../static/img_pizza/header_logo.png"
 						th:src="@{/img_coffee/header_logo.png}" height="35">
 					</a>
@@ -119,7 +119,28 @@
 										</label>
 									</div>								
 								</div>
-									
+										<!-- 									<label class="checkbox-inline">
+										<input type="checkbox" value="">チーズ
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" value="">ピーマン
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" value="">ロースハム
+									</label><br>
+									<label class="checkbox-inline">
+										<input type="checkbox" value="">ほうれん草
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" value="">ぺパロに
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" value="">グリルナス
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" value="">あらびきソーセージ
+									</label> -->
+									</div>
 								</div>
 							</div>
 						</div>
@@ -154,7 +175,7 @@
 				<div class="row">
 					<div class="col-xs-offset-2 col-xs-10">
 						<div class="form-group">
-							<span id="total-price">この商品金額：38,000 円(税抜)</span>円(税抜)
+							<span id="total-price">この商品金額：38,000 円(税抜)</span> 円(税抜)
 						</div>
 					</div>
 				</div> 
@@ -165,14 +186,11 @@
 									<input class="form-control btn btn-warning btn-block"
 										type="submit" value="カートに入れる">
 								</p>
-
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 		</form>
-
 	</div>
 	<!-- end container -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -180,7 +198,7 @@
 	<script th:src="@{/js/auto_sum_price.js}"></script>	
 	<div class="footer">
 		<a class="navbar-brand" href="item_list_pizza.html"
-			th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+			th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 			src="../static/img_coffee/header_logo.png"
 			th:src="@{/img_coffee/header_logo.png}" height="35">
 

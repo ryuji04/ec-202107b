@@ -29,7 +29,7 @@
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="item_list_pizza.html"
-						th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+						th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 						src="../static/img_pizza/header_logo.png"
 						th:src="@{/img_coffee/header_logo.png}" height="35">
 					</a>
@@ -126,9 +126,9 @@
 		<div class="row">
 			<div class="col-xs-offset-2 col-xs-8">
 				<div class="form-group text-center">
-					消費税:<span id="total-price" th:text="${order.getTax()}">消費税：8,000円</span>円<br>
+					消費税:<span id="total-price" th:text="${#numbers.formatInteger(order.getTax(),0,'COMMA')}">消費税：8,000円</span>円<br>
 					ご注文金額合計:<span id="total-price"
-						th:text="${order.getCalcTotalPrice()}">ご注文金額合計：38,000円 (税込)</span>円(税込)
+						th:text="${#numbers.formatInteger(order.getCalcTotalPrice(),0,'COMMA')}">ご注文金額合計：38,000円 (税込)</span>円(税込)
 				</div>
 			</div>
 		</div>
@@ -150,21 +150,11 @@
 								</td>
 								<td>
 									<div class="row">
-										<div class="col-sm-12">
-<<<<<<< HEAD
-											<label class="control-label" style="color: red"
-												for="inputError"> 名前を入力してください </label>
-										</div>
-									</div> <input type="text" name="destinationName" id="inputName"
-									class="form-control" placeholder="Name">
-=======
 											<label class="control-label" style="color: red" for="inputError" th:errors="*{destinationName}">
 												名前を入力してください
 											</label>
 										</div>
-									</div>
 									<input type="text" name="destinationName" id="inputName" class="form-control" placeholder="Name" th:field="*{destinationName}">
->>>>>>> develop
 								</td>
 							</tr>
 							<tr>
@@ -176,39 +166,23 @@
 								<td>
 									<div class="row">
 										<div class="col-sm-12">
-<<<<<<< HEAD
-											<label class="control-label" style="color: red"
-												for="inputPeriod">メールアドレスを入力してください</label>
-										</div>
-									</div> <input type="text" name="destinationEmail" id="inputEmail"
-									class="form-control" placeholder="Email">
-=======
 											<label class="control-label" style="color: red" for="inputPeriod" th:errors="*{destinationEmail}">
 												メールアドレスを入力してください
 											</label>
 										</div>
 									</div>
 									<input type="text" name="destinationEmail" id="inputEmail" class="form-control" placeholder="Email" th:field="*{destinationEmail}">
->>>>>>> develop
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<div class="text-center">
-										<label for="inputZipcode">郵便番号</label>
+										<label for="inputZipcode">郵便番号(ハイフンあり)</label>
 									</div>
 								</td>
 								<td>
 									<div class="row">
 										<div class="col-sm-12">
-<<<<<<< HEAD
-											<label class="control-label" style="color: red"
-												for="inputPeriod">郵便番号を入力してください</label>
-										</div>
-									</div> <input id="get_address_btn" type="button" value="住所検索">
-									<input type="text" id="inputZipcode" name="destinationZipcode"
-									class="form-control" placeholder="Zipcode">
-=======
 											<label class="control-label" style="color: red" for="inputPeriod" th:errors="*{destinationZipcode}">
 												郵便番号を入力してください
 											</label>
@@ -216,7 +190,6 @@
 									</div>
 									<input id="get_address_btn" type="button" value="住所検索">
 									<input type="text" id="inputZipcode" name="destinationZipcode" class="form-control" placeholder="Zipcode" th:field="*{destinationZipcode}">
->>>>>>> develop
 								</td>
 							</tr>
 							<tr>
@@ -228,45 +201,29 @@
 								<td>
 									<div class="row">
 										<div class="col-sm-12">
-<<<<<<< HEAD
-											<label class="control-label" style="color: red"
-												for="inputPeriod">住所を入力してください</label>
-										</div>
-									</div> <input type="text" name="destinationAddress" id="inputAddress"
-									class="form-control" placeholder="Address">
-=======
 											<label class="control-label" style="color: red" for="inputPeriod" th:errors="*{destinationAddress}">
 												住所を入力してください
 											</label>
 										</div>
 									</div>
 									<input type="text" name="destinationAddress" id="inputAddress" class="form-control" placeholder="Address" th:field="*{destinationAddress}">
->>>>>>> develop
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<div class="text-center">
-										<label for="inputTel">電話番号</label>
+										<label for="inputTel">電話番号(ハイフンあり)</label>
 									</div>
 								</td>
 								<td>
 									<div class="row">
 										<div class="col-sm-12">
-<<<<<<< HEAD
-											<label class="control-label" style="color: red"
-												for="inputPeriod">電話番号を入力してください</label>
-										</div>
-									</div> <input type="text" name="destinationTel" id="inputTel"
-									class="form-control" placeholder="TelNumber">
-=======
 											<label class="control-label" style="color: red" for="inputPeriod" th:errors="*{destinationTel}">
 												電話番号を入力してください
 											</label>
 										</div>
 									</div>
 									<input type="text" name="destinationTel" id="inputTel" class="form-control" placeholder="TelNumber" th:field="*{destinationTel}">
->>>>>>> develop
 								</td>
 							</tr>
 							<tr>
@@ -279,48 +236,18 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-12">
-<<<<<<< HEAD
-												<label class="control-label" style="color: red"
-													for="inputPeriod">配達日時を入力してください</label>
-											</div>
-											<div class="col-sm-5">
-												<input type="date" name="deliveryDate"
-													id="inputDeliveryDateTime" class="form-control input-sm" />
-=======
 												<label
 													class="control-label" style="color: red" for="inputPeriod" th:errors="*{deliveryDate}">
 														配達日時を入力してください
 													</label>
 											</div>
 											<div class="col-sm-5">
-												<input type="date" name="deliveryDate" id="inputDeliveryDateTime" th:field="*{deliveryDate}" class="form-control input-sm" />
->>>>>>> develop
+												<input type="date" style="width: 140px;" name="deliveryDate" id="inputDeliveryDateTime" th:field="*{deliveryDate}" class="form-control input-sm" />
 											</div>
 
 										</div>
 										<div class="row">
 											<div class="col-sm-12">
-<<<<<<< HEAD
-												<label class="radio-inline"> <input type="radio"
-													name="deliveryTime" value="10" checked="checked">
-													10時
-												</label> <label class="radio-inline"> <input type="radio"
-													name="deliveryTime" value="11"> 11時
-												</label> <label class="radio-inline"> <input type="radio"
-													name="deliveryTime" value="12"> 12時
-												</label><br> <label class="radio-inline"> <input
-													type="radio" name="deliveryTime" value="13"> 13時
-												</label> <label class="radio-inline"> <input type="radio"
-													name="deliveryTime" value="14"> 14時
-												</label> <label class="radio-inline"> <input type="radio"
-													name="deliveryTime" value="15"> 15時
-												</label><br> <label class="radio-inline"> <input
-													type="radio" name="deliveryTime" value="16"> 16時
-												</label> <label class="radio-inline"> <input type="radio"
-													name="deliveryTime" value="17"> 17時
-												</label> <label class="radio-inline"> <input type="radio"
-													name="deliveryTime" value="18"> 18時
-=======
 												<label class="radio-inline">
 													<input type="radio"
 														 th:field="*{deliveryTime}" value="10" th:value="10">
@@ -365,7 +292,6 @@
 													<input type="radio"
 														 th:field="*{deliveryTime}" value="18">
 													18時
->>>>>>> develop
 												</label><br>
 											</div>
 										</div>
@@ -393,14 +319,8 @@
 								<td>
 									<div class="row">
 										<div class="col-sm-12">
-<<<<<<< HEAD
-											<label class="radio-inline"> <input type="radio"
-												name="paymentMethod" id="inputCash" checked="checked"
-												value="1">代金引換
-=======
 											<label class="radio-inline">
 												<input type="radio" name="paymentMethod" th:field="*{paymentMethod}" id="inputCash" checked="checked" value="1">代金引換
->>>>>>> develop
 											</label>
 										</div>
 									</div>
@@ -415,17 +335,9 @@
 								<td align="center">
 									<div class="row">
 										<div class="col-sm-12">
-<<<<<<< HEAD
-											<label class="radio-inline"> <input type="radio"
-												name="paymentMethod" id="inputCard" checked="checked"
-												value="2">クレジットカード
-											</label><br>
-											<br>
-=======
 											<label class="radio-inline">
 												<input type="radio" name="paymentMethod" th:field="*{paymentMethod}" id="inputCard" checked="checked" value="2">クレジットカード
 											</label><br><br>
->>>>>>> develop
 										</div>
 									</div>
 								</td>
@@ -453,7 +365,7 @@
 		th:src="@{/js/get_address.js}"></script>
 	<div class="footer">
 		<a class="navbar-brand" href="item_list_pizza.html"
-			th:href="@{/show-item/all}"> <!-- 企業ロゴ --> <img alt="main log"
+			th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
 			src="../static/img_coffee/header_logo.png"
 			th:src="@{/img_coffee/header_logo.png}" height="35">
 
