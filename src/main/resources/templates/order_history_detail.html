@@ -79,7 +79,11 @@
 									小計
 								</div>
 							</th>
-
+							<th>
+								<div class="text-center">
+									再び注文
+								</div>
+							</th>
 						</tr>
 						<tr th:each="orderItem:${order.orderItemList}">
 							<td>
@@ -97,8 +101,8 @@
 								</div>
 								<div th:unless="${orderItem.size} == M" >
 									&nbsp;<span class="price" th:text="${orderItem.size}" ></span>&nbsp;&nbsp;
-									<span th:text="${orderItem.item.priceL}"></span>&nbsp;&nbsp;円
-									<span th:text="${orderItem.quantity}"></span>&nbsp;&nbsp;個
+									<span th:text="${orderItem.item.priceL}"></span>円&nbsp;&nbsp;
+									<span th:text="${orderItem.quantity}"></span>個&nbsp;&nbsp;
 								</div>
 							</td>
 							<td>
@@ -113,6 +117,14 @@
 								<div class="text-center">
 									<span th:text="${orderItem.getSubTotal()}">3,280円</span>円
 								</div>
+							</td>
+								<td>
+								<form action="" th:action="@{/restore/add-item}">
+									<div class="text-center">
+										<button type="submit" name="itemId" th:value="${orderItem.id}"
+											class="btn btn-warning">購入</button>
+									</div>
+								</form>
 							</td>
 						</tr>
 					</tbody>
@@ -130,6 +142,6 @@
 	</div>
 	<!-- end container -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>	
 </body>
 </html>

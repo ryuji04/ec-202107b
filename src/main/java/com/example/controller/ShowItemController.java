@@ -15,6 +15,12 @@ import com.example.domain.LoginUser;
 import com.example.form.SortItemForm;
 import com.example.service.ShowItemService;
 
+/**
+ * 商品一覧の情報を操作するコントローラ.
+ * 
+ * @author hayato.saishu
+ *
+ */
 @Controller
 @RequestMapping("/")
 public class ShowItemController {

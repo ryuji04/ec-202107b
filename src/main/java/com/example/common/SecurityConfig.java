@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/login-user/to-login", "/register-user/to-insert", "/",
-							"/show-item-detail/detail**", "/register-user/insert", "/show-item-cart/cart**").permitAll()
+							"/show-item-detail/detail**", "/register-user/insert").permitAll()
 //			.antMatchers("/user/**").hasRole("USER")
 			.anyRequest().authenticated();
 		
@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))
-			.logoutSuccessUrl("/show-item/all")
+			.logoutSuccessUrl("/")
 			.deleteCookies("JSESSIONID")
 			.invalidateHttpSession(false);
 	}
