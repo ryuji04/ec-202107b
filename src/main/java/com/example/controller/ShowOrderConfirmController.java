@@ -33,6 +33,8 @@ public class ShowOrderConfirmController {
 		orderForm.setDestinationName(user.getName());
 		orderForm.setDestinationEmail(user.getEmail());
 		orderForm.setDestinationAddress(user.getAddress());
+		orderForm.setDestinationTel(user.getTelephone());
+		orderForm.setDestinationZipcode(user.getZipcode());
 		return orderForm;
 	}
 

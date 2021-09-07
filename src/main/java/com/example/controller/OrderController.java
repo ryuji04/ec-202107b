@@ -62,7 +62,6 @@ public class OrderController {
 	public String order(@Validated OrderForm form, BindingResult result, RedirectAttributes redirectAttributes, Model model,
 			@AuthenticationPrincipal LoginUser loginUser) {
 		Order order = orderService.findById(form.getId());
-
 		// 注文日時
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -102,7 +101,8 @@ public class OrderController {
 			for( OrderItem orderItem : returnOrder.getOrderItemList()) {
 				totalPrice += orderItem.getSubTotal();
 			}
-			returnOrder.setTotalPrice(totalPrice);
+			int tax = (int)(totalPrice * 0.1);
+			returnOrder.setTotalPrice(totalPrice + tax);
 
 			model.addAttribute("order", returnOrder);
 

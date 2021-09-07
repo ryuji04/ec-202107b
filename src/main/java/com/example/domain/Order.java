@@ -157,8 +157,18 @@ public class Order {
 		return (int)(totalPrice * 0.1);
 	}
 	
-	public int getCalcTotalPrice() {
+	public int showCalcTotalPrice() {
 		return getTax() + totalPrice;
+	}
+	
+	public int getCalcTotalPrice() {
+		int total = 0;
+		for(int i = 0; i < getOrderItemList().size(); i++) {
+			total += getOrderItemList().get(i).getSubTotal();
+		}
+		int includeTaxPrice = (int) (total * 1.1);
+		totalPrice = includeTaxPrice;
+		return totalPrice;
 	}
 
 	@Override
