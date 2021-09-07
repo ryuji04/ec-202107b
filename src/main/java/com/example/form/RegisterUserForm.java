@@ -20,8 +20,9 @@ public class RegisterUserForm {
 	@NotBlank(message = "メールアドレスを入力してください")
 	@Email(message = "メールアドレスの形式が不正です")
 	private String email;
-	/** パスワード */
-	@Size(min = 8, max = 16, message = "パスワードは８文字以上１６文字以内で設定してください")
+	/** パスワード (Pattern/Matcherで確認済み) */
+	@Size(min=8, max=16, message = "8文字以上16文字以内のパスワードにしてください。")
+	@Pattern(regexp="^[0-9].*[a-z].*[A-Z]|[0-9].*[A-Z].*[a-z]|[a-z].*[0-9].*[A-Z]|[a-z].*[A-Z].*[0-9]|[A-Z].*[0-9].*[a-z]|[A-Z].*[a-z].*[0-9]$", message = "パスワードは半角数字、半角英字大文字、半角英字小文字を合わせてください。")
 	private String password;
 	/** 確認用パスワード */
 	@NotBlank(message = "確認用パスワードを入力してください")

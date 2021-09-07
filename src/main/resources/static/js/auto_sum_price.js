@@ -60,6 +60,5 @@ $(function() {
 
 		// 合計金額をセット
 		$("#total-price").text(total_price);
-
 	}
 });
