@@ -68,37 +68,6 @@ public class OrderService {
 
 //		注文合計金額の格納
 		order.setTotalPrice(order.getCalcTotalPrice());
-		System.out.println(order.getCalcTotalPrice());
-//		int totalPrice = 0;
-//		for( OrderItem orderItem : order.getOrderItemList()) {
-//			totalPrice += orderItem.getSubTotal();
-//			System.out.println("orderItem: " + orderItem);
-//			System.out.println("totalPrice: " + totalPrice);
-//		}
-//		int itemPrice = 0;
-//		int totalToppingPrice = 0;
-//		for (OrderItem orderItem : order.getOrderItemList()) {
-//			if (orderItem.getSize() == 'M') {
-//				itemPrice = orderItem.getItem().getPriceM();
-//			}
-//			if (orderItem.getSize() == 'L') {
-//				itemPrice = orderItem.getItem().getPriceL();
-//			}
-//			for (OrderTopping orderTopping : orderItem.getOrderToppingList()) {
-//				Topping topping = orderTopping.getTopping();
-//				if (orderItem.getSize() == 'M') {
-//					totalToppingPrice += topping.getPriceM();
-//				}
-//				if (orderItem.getSize() == 'L') {
-//					totalToppingPrice += topping.getPriceL();
-//				}
-//			}
-//			totalPrice += (itemPrice + totalToppingPrice) * orderItem.getQuantity();
-//			System.out.println("totalPrice: " + totalPrice);
-//		}
-
-//		int tax = (int) (totalPrice * 0.1);
-//		order.setTotalPrice(totalPrice + tax);
 
 		// 支払い方法によってstatusを変更
 		if (form.getPaymentMethod() == 1) {

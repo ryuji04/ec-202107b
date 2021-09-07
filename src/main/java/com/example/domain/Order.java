@@ -157,10 +157,6 @@ public class Order {
 		return (int)(totalPrice * 0.1);
 	}
 	
-	public int showCalcTotalPrice() {
-		return getTax() + totalPrice;
-	}
-	
 	public int getCalcTotalPrice() {
 		int total = 0;
 		for(int i = 0; i < getOrderItemList().size(); i++) {
