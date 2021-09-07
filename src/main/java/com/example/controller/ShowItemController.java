@@ -57,8 +57,6 @@ public class ShowItemController {
 
 		model.addAttribute("itemMap", itemMap);
 
-		System.out.println("itemMap" + itemMap);
-
 		if ("1".equals(form.getArrangeItem())) {
 			itemList = showItemService.arrangeInDesc();
 			model.addAttribute("itemList", itemList);
@@ -69,7 +67,6 @@ public class ShowItemController {
 			itemList = showItemService.showList();
 			model.addAttribute("itemList", itemList);
 		}
-		System.out.println("itemMap" + itemMap);
 		return "item_list_coffee";
 	}
 
@@ -81,14 +78,36 @@ public class ShowItemController {
 	 * @return 商品情報のリスト
 	 */
 	@RequestMapping("/like-name")
-	public String searchByLikeName(String name, Model model) {
+	public String searchByLikeName(String name, Model model, SortItemForm form) {
 		List<List<Item>> itemList = showItemService.searchByLikeName(name);
+		
+		// 並び替えに機能を実装する為の記述をします
+		Map<Integer, String> itemMap = new LinkedHashMap<>();
+		itemMap.put(0, "---");
+		itemMap.put(1, "料金の高い順");
+		itemMap.put(2, "料金の安い順");
+
+		model.addAttribute("itemMap", itemMap);
+
+		if ("1".equals(form.getArrangeItem())) {
+			itemList = showItemService.arrangeInDescByName(name);
+			model.addAttribute("itemList", itemList);
+		} else if ("2".equals(form.getArrangeItem())) {
+			itemList = showItemService.arrangeInAscByName(name);
+			model.addAttribute("itemList", itemList);
+		} else {
+			itemList = showItemService.searchByLikeName(name);
+			model.addAttribute("itemList", itemList);
+		}
+		
 		if (itemList.size() == 0) {
 			model.addAttribute("blankMessage", "該当する商品がありません");
 			itemList = showItemService.showList();
 		}
+
 		model.addAttribute("itemList", itemList);
 		return "item_list_coffee";
+
 	}
 
 }

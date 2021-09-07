@@ -74,6 +74,34 @@ public class ShowItemService {
 		return totalItemList;
 	}
 	
+	/**
+	 * アイテム商品を降順に並び替える.
+	 * 
+	 * @return 並び替え後のアイテム商品リスト
+	 */
+	public List<List<Item>> arrangeInDescByName(String name) {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
+		List<Item> itemList = itemRepository.arrangeInDescByName(name);
+		
+		listItem(totalItemList, divideItemList, itemList);
+		return totalItemList;
+	}
+	
+	/**
+	 * アイテム商品を昇順に並び替える.
+	 * 
+	 * @return 並び替え後のアイテム商品リスト
+	 */
+	public List<List<Item>> arrangeInAscByName(String name) {
+		List<List<Item>> totalItemList = new ArrayList<>();
+		List<Item> divideItemList = new ArrayList<>();
+		List<Item> itemList = itemRepository.arrangeInAscByName(name);
+		
+		listItem(totalItemList, divideItemList, itemList);
+		return totalItemList;
+	}
+	
 	
 	//商品を3つずつリストに格納するメソッド
 	public void listItem(List<List<Item>> totalItemList, List<Item> divideItemList, List<Item> itemList) {

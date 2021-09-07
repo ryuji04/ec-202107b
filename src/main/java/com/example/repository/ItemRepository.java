@@ -107,4 +107,35 @@ public class ItemRepository {
 		return itemList;
 	}
 
+	/**
+	 * アイテム情報を降順(価格)に並べ替える.
+	 * 
+	 * @return 降順(価格)に並んだアイテム情報リスト
+	 */
+
+	public List<Item> arrangeInDescByName(String name) {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name ILIKE :name  ORDER BY price_m desc;";
+
+		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
+
+		List<Item> itemList = template.query(sql, param, ITEM_ROW_MAPPER);
+
+		return itemList;
+	}
+
+	/**
+	 * アイテム情報を昇順(価格)に並べ替える.
+	 * 
+	 * @return 昇順(価格)に並んだアイテム情報リスト
+	 */
+	public List<Item> arrangeInAscByName(String name) {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name ILIKE :name  ORDER BY price_m;";
+
+		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
+
+		List<Item> itemList = template.query(sql, param, ITEM_ROW_MAPPER);
+
+		return itemList;
+	}
+
 }

@@ -114,7 +114,7 @@
 							</td>
 							<td>
 								<div class="text-center">
-									<span th:text="${orderItem.getSubTotal()}">3,280円</span>円
+									<span th:text="${#numbers.formatInteger(orderItem.getSubTotal(),0,'COMMA')}">3,280円</span>円
 								</div>
 							</td>
 						</tr>
