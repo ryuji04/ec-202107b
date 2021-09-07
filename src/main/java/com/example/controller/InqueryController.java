@@ -21,16 +21,34 @@ import com.example.form.InqueryForm;
 @RequestMapping("inquery")
 public class InqueryController {
 	
+	/**
+	 * パスが呼ばれる前にお問い合わせ情報のフォームを作成する.
+	 * 
+	 * @return お問い合わせ情報のフォーム
+	 */
 	@ModelAttribute
 	public InqueryForm setUpForm() {
 		return new InqueryForm();
 	}
 	
+	/**
+	 * お問い合わせ画面へ遷移.
+	 * 
+	 * @return お問い合わせ画面
+	 */
 	@RequestMapping("")
 	public String index() {
 		return "inquery";
 	}
 	
+	/**
+	 * お問い合わせ情報を入力するメソッド.
+	 * 
+	 * @param form お問い合わせ情報フォーム
+	 * @param result　エラーを格納する
+	 * @param model　リクエストスコープ
+	 * @return　お問い合わせ完了画面表示
+	 */
 	@RequestMapping("inquerySubmit")
 	public String inquerySubmit(@Validated InqueryForm form,BindingResult result,Model model) {
 		
