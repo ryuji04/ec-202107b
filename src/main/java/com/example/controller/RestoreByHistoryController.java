@@ -41,7 +41,6 @@ public class RestoreByHistoryController {
 		User user = loginUser.getUser();
 		OrderItem orderItem = orderItemRepository.findById(itemId);
 		orderItem.setOrderToppingList(orderToppingRepository.findByOrderItemId(itemId));
-		System.out.println(orderItem);
 		
 		form.setItemId(orderItem.getItemId());
 		form.setQuantity(orderItem.getQuantity());
@@ -51,7 +50,6 @@ public class RestoreByHistoryController {
 			toppingList.add(orderTopping.getToppingId());
 		}
 		form.setToppingList(toppingList);
-		System.out.println("form:" + form);
 		
 		if (user == null) {
 			// sessionにuser情報が入っていなかったら仮のsessionIDを発行してuseridとしてセットする
