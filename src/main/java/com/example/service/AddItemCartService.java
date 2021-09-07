@@ -43,7 +43,6 @@ public class AddItemCartService {
 		OrderItem orderItem = new OrderItem();
 		
 		Order returnOrder = orderRepository.findByUserIdAndStatus(userId, status);
-		System.out.println(returnOrder + "userId:" + userId + "status:" +  status);
 		// もしfindByUserIdAndStatus()メソッドでOrderが見つからなかったらOrderインスタンス化してinsertする
 		if( returnOrder == null) {
 			//Orderのinsert
