@@ -29,8 +29,8 @@
 							class="icon-bar"></span>
 					</button>
 
-					<a class="navbar-brand" href="item_list_pizza.html"
-						th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
+					<a class="navbar-brand" href="item_list_pizza.html" th:href="@{/}">
+						<!-- 企業ロゴ --> <img alt="main log"
 						src="../static/img_coffee/header_logo.png"
 						th:src="@{/img_coffee/header_logo.png}" height="35">
 
@@ -42,8 +42,10 @@
 					id="bs-example-navbar-collapse-1">
 					<p class="navbar-text navbar-right">
 						<span sec:authorize="isAuthenticated" th:text="${userName}"></span>
-						<a href="cart_list.html" class="navbar-link" th:href="@{/show-item-cart/cart}">ショッピングカート</a>&nbsp;&nbsp;
-						<a href="order_history.html" th:href="@{/order-history/showList}" class="navbar-link">注文履歴</a>&nbsp;&nbsp;
+						<a href="cart_list.html" class="navbar-link"
+							th:href="@{/show-item-cart/cart}">ショッピングカート</a>&nbsp;&nbsp; <a
+							href="order_history.html" th:href="@{/order-history/showList}"
+							class="navbar-link">注文履歴</a>&nbsp;&nbsp;
 						<!-- ログイン後、「ログイン」ボタンを非表示にする -->
 						<span sec:authorize="!isAuthenticated"><a href="login.html"
 							class="navbar-link">ログイン</a></span>&nbsp;&nbsp;
@@ -92,16 +94,19 @@
 
 						<!-- 商品を並び変えるコードを記述 -->
 						<form method="post" action="item_list_coffee"
-							th:action="@{/sort-item}" class="form-horizontal">
-							<br> <select class="select" name="arrangeItem" onChange="submit(this.form)" >
-								<option value="0">---</option>
-								<option value="1" >料金：高い順</option>
-								<option value="2" >料金：安い順</option>
+							th:action="@{/}" class="form-horizontal"
+							th:object="${sortItemForm}">
+
+							<select class="select" name="arrangeItem"
+								th:onChange="submit(this.form)" th:field="*{arrangeItem}">
+
+								<option  th:each="sort:${itemMap}" th:value="${sort.key}"
+									th:text="${sort.value}">---</option>
+
 							</select>
+
 						</form>
-						<!-- 並び替えについてのJavaScriptを記述 -->
-						<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="../static/js/sortItem.js" th:src="@{/js/sortItem.js}"></script>
+						
 
 					</div>
 				</div>
@@ -240,8 +245,8 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
 	<div class="footer">
-		<a class="navbar-brand" href="item_list_pizza.html"
-			th:href="@{/}"> <!-- 企業ロゴ --> <img alt="main log"
+		<a class="navbar-brand" href="item_list_pizza.html" th:href="@{/}">
+			<!-- 企業ロゴ --> <img alt="main log"
 			src="../static/img_coffee/header_logo.png"
 			th:src="@{/img_coffee/header_logo.png}" height="35">
 
@@ -255,9 +260,9 @@
 			</ul>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 </body>
 
 </html>
