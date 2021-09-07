@@ -58,7 +58,16 @@ $(function() {
 		/** 合計金額 */
 		let total_price = (item_price + topping_price) * item_count;
 
+		/** 三桁ごとにカンマ表示 */
+		let total_price_int = Number(total_price);
+
+		function comma(num) {
+			return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+		}
+
+		let comma_total_price = comma(total_price_int);
+
 		// 合計金額をセット
-		$("#total-price").text(total_price);
+		$("#total-price").text(comma_total_price);
 	}
 });
