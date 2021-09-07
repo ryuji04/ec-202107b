@@ -18,6 +18,12 @@ import com.example.repository.OrderItemRepository;
 import com.example.repository.OrderToppingRepository;
 import com.example.service.AddItemCartService;
 
+/**
+ * 注文履歴から商品を購入するコントローラ.
+ * 
+ * @author hayato.saishu
+ *
+ */
 @Controller
 @RequestMapping("/restore")
 public class RestoreByHistoryController {
@@ -36,6 +42,14 @@ public class RestoreByHistoryController {
 		return new AddItemCartForm();
 	}
 	
+	/**
+	 * 注文履歴から再度商品を注文する.
+	 * 
+	 * @param itemId 注文商品ID
+	 * @param form　フォーム
+	 * @param loginUser　ログインユーザー
+	 * @return
+	 */
 	@RequestMapping("/add-item")
 	public String add(Integer itemId, AddItemCartForm form, @AuthenticationPrincipal LoginUser loginUser) {
 		User user = loginUser.getUser();
