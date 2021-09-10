@@ -118,9 +118,9 @@
 
 						<!-- 商品を並び変えるコードを記述 -->
 						<form method="post" action="item_list_coffee" th:action="@{/}" class="form-horizontal" th:object="${sortItemForm}">
-							<select class="select" name="arrangeItem" th:onChange="submit(this.form)" th:field="*{arrangeItem}">
-								<option th:each="sort:${itemMap}" th:value="${sort.key}" th:text="${sort.value}">---</option>
-							</select>
+							<!-- <select class="select" name="arrangeItem" th:onChange="submit(this.form)" th:field="*{arrangeItem}">
+								<option th:each="sort:${itemMap}" th:value="${sort.key}" th:text="${sort.value}">---</option> 
+							</select>-->
 						</form>
 					</div>
 				</div>
