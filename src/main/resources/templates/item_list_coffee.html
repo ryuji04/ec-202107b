@@ -115,6 +115,13 @@
 								<button type="reset" value="クリア" class="btn btn-default">クリア</button>
 							</div>
 						</form>
+						<form th:action="@{/badge}" method="post">
+						<button>DBにインサート</button>
+						</form>
+						<form th:action="@{/badge/test}" method="post">
+						<button>CSVファイルをアップデート</button>
+						</form>
+						
 
 						<!-- 商品を並び変えるコードを記述 -->
 						<form method="post" action="item_list_coffee" th:action="@{/}" class="form-horizontal" th:object="${sortItemForm}">
