@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,10 +19,8 @@ import com.example.domain.UserAndOrder;
 import com.example.repository.ItemRepository;
 import com.example.repository.UserAndOrderRepository;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-
-@Controller
 @RequestMapping("badge")
+@EnableScheduling
 public class UserAndOrderController {
 	@Autowired
 	public UserAndOrderRepository repository;
@@ -29,6 +29,7 @@ public class UserAndOrderController {
 	public ItemRepository itemRepository;
 	
 	@RequestMapping("")
+	@Scheduled(cron="0 * * * * *",zone="Asia/Tokyo")
 	public String index() {
 		// 入力値のバイト(容量)を取得するクラス
 		FileInputStream fi = null;
