@@ -44,6 +44,7 @@ public class AddItemCartController {
 	@RequestMapping("/add-item")
 	public String add(AddItemCartForm form, @AuthenticationPrincipal LoginUser loginUser) {
 		// sessionからUser情報とってきてuserのidを取り出す
+		System.out.println("AdditemCartForm:"+form);
 		User user = loginUser.getUser();
 		if (user == null) {
 			// sessionにuser情報が入っていなかったら仮のsessionIDを発行してuseridとしてセットする

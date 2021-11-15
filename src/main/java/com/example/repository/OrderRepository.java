@@ -118,6 +118,7 @@ public class OrderRepository {
 		String[] keyColumnNames = {"id"};
 		template.update(sql, param, keyHolder, keyColumnNames);
 		order.setId(keyHolder.getKey().intValue());
+		
 		return order;
 	}
 	
